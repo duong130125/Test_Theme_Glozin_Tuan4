@@ -3,7 +3,8 @@ var map;
 var BlsCreateMapStoreLocation = (function () {
   return {
     init: function () {
-      mapboxgl.accessToken = "";
+      mapboxgl.accessToken =
+        "pk.eyJ1Ijoia2hpZW1waGFtIiwiYSI6ImNsam01eHhnaTAyNmczZmxzcnQ1MTVqN3gifQ.WVqIQlSk52FSN8W7G5gsnw";
       map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v12",
