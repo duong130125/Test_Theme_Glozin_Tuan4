@@ -8,7 +8,7 @@
   assign sticky_header_type = section_st.sticky_header_type
   assign sticky_mobile = section_st.sticky_header_mobile
   assign color_scheme = section_st.color_scheme
-  assign logo_position = 'center'
+  assign logo_position = 'left'
   assign top_search = section_st.show_search
   assign my_account = section_st.show_account_icon
   assign recently_viewed = section_st.show_recently_viewed
@@ -58,6 +58,175 @@
     }
   {%- endstyle -%}
 {% endif %}
+{%- style -%}
+  @media screen and (min-width: 1025px) {
+    .header {
+      height: 176px !important;
+      background-color: #FFFFFF !important;
+      display: flex !important;
+      flex-direction: column !important;
+      box-sizing: border-box !important;
+    }
+    .header__topbar {
+      height: 40px !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      background-color: #FFFFFF !important;
+      border-bottom: 1px solid #ebebeb;
+    }
+    .header__inner {
+      height: 86px !important;
+      display: flex !important;
+      align-items: center !important;
+      background-color: #FFFFFF !important;
+    }
+    .header__menu {
+      height: 50px !important;
+      min-height: 50px !important;
+      display: flex !important;
+      align-items: center !important;
+      background-color: #FFFFFF !important;
+      border-top: 1px solid #ebebeb;
+    }
+    /* Đảm bảo container bên trong chiếm đủ chiều cao để căn giữa */
+    .header__topbar > .fluid_container,
+    .header__topbar > .container,
+    .header__inner > .fluid_container,
+    .header__inner > .container,
+    .header__menu > .fluid_container,
+    .header__menu > .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      width: 100% !important;
+      max-width: 1410px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    .header__topbar {
+      font-family: 'Bai Jamjuree', sans-serif !important;
+      font-size: 13px !important;
+      line-height: 100% !important;
+    }
+    .header__topbar-left span {
+      font-weight: 500 !important;
+    }
+    .header__topbar-left a {
+      font-weight: 600 !important;
+      text-decoration: underline !important;
+    }
+    .topbar-separator {
+      display: inline-block !important;
+      width: 1px !important;
+      height: 14px !important;
+      background-color: #ebebeb !important;
+      vertical-align: middle;
+      font-size: 0 !important; /* Hide pipe character */
+    }
+    /* Part 3: Main Header Styles */
+    .header__inner .fluid_container,
+    .header__inner .container {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+    }
+    .header__logo {
+      flex: 0 0 141px !important;
+    }
+    .header__logo img {
+      width: 141px !important;
+      height: 43px !important;
+      object-fit: contain;
+    }
+    .header-search__mega {
+      flex: 0 0 782px !important;
+      height: 45px !important;
+      border: 1px solid #ebebeb;
+      border-radius: 6px;
+      display: flex !important;
+      align-items: center !important;
+    }
+    .header__action {
+      flex: 0 0 auto !important;
+      display: flex !important;
+      gap: 20px !important;
+      align-items: center !important;
+    }
+    .header__account-link, .header-account-popup {
+      width: 90px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+    .header__wishlist-wrapper {
+      width: 36px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .header__minicart-wrapper {
+      width: 102px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+    /* Fixes for Grid layout, Labels, Badges and Padding */
+    .header-middle {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      width: 100% !important;
+      padding: 0 !important;
+    }
+    .header__account-link {
+      display: flex !important;
+    }
+    .header__account-link .flex-column,
+    .header__minicart-wrapper .text-icons {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      line-height: 1.2 !important;
+    }
+    .text-icons-top {
+      font-size: 11px !important;
+      color: #888888 !important;
+      font-weight: 400 !important;
+    }
+    .menu-cart {
+      font-size: 13px !important;
+      color: #111111 !important;
+      font-weight: 600 !important;
+    }
+    .h-count {
+      background-color: #E52E2E !important;
+      color: #FFFFFF !important;
+    }
+    .header__inner, .header__menu, .header__topbar {
+      padding: 0 !important;
+    }
+    /* Part 4: Navigation Bar Styles */
+    .header__menu .flex-1 {
+      flex: 0 0 623px !important;
+    }
+    .level0 {
+      display: flex !important;
+      gap: 30px !important;
+      align-items: center !important;
+    }
+    .header__menu-promo {
+      flex: 0 0 227px !important;
+      display: flex !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
+    }
+    .level0 > menu-item:last-child > a {
+      color: #E52E2E !important;
+    }
+  }
+{%- endstyle -%}
 {% if transparent %}
   {%- style -%}
     .section-header:not(.shopify-section-header-sticky) .transparent,
@@ -98,6 +267,42 @@
   data-sticky-mobile="{{ sticky_mobile }}"
   style="{{ style | strip | strip_newlines }}{% if transparent %}{% endif %}--transparent-color: {{ transparent_color }};"
 >
+  <div class="header__topbar">
+    <div class="{{ section_width }}">
+      <div class="flex justify-between align-center gap-20 text-xs font-weight-500">
+        <div class="header__topbar-left">
+          <span>You are a student and students get 20% discount. </span>
+          <a
+            href="/pages/student-discount"
+            class="text-decoration-underline font-weight-600 heading-color transition-color"
+            style="text-decoration: underline !important;"
+            >Learn More</a
+          >
+        </div>
+        <div class="header__topbar-right flex gap-20 align-center">
+          <div class="hidden flex-1025 gap-20">
+            <a href="/pages/store-locator" class="text-decoration-none heading-color transition-color">Store Locator</a>
+            <a href="/pages/order-tracking" class="text-decoration-none heading-color transition-color"
+              >Order Tracking</a
+            >
+            <a href="/pages/faq" class="text-decoration-none heading-color transition-color">FAQs</a>
+          </div>
+          {% if show_language or show_country %}
+            <span class="topbar-separator hidden flex-1025"></span>
+          {% endif %}
+          <div class="flex gap-15 align-center">
+            {% if show_language %}
+              {% render 'language-switcher' %}
+            {% endif %}
+            {% if show_country %}
+              {% render 'country-switcher' %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="header__inner header__layout-2" id="header-sticky">
     <div class="{{ section_width }}">
       <header-inner>
@@ -140,6 +345,36 @@
           <div class="header__logo text-center text-left-1025 inline-flex align-center">
             {%- render 'logo', isTransparent: transparent -%}
           </div>
+          {% if top_search %}
+            <div class="header-search header-search__mega color-default flex-1 flex align-center gap-0">
+              <!-- Categories Dropdown -->
+              <div class="header-search__categories relative">
+                <button
+                  class="categories-toggle btn-reset px-12 py-10 bg-light border-right heading-color font-weight-500 text-sm flex align-center gap-8"
+                  aria-label="Categories"
+                  aria-expanded="false"
+                >
+                  <span>All Categories</span>
+                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                    <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+              <!-- Search Input -->
+              <div class="header-search__input-wrapper flex-1">
+                {%- render 'top-search-header' | type: 'header_mega' -%}
+              </div>
+              <!-- Search Button -->
+              <button
+                type="submit"
+                form="search_mini_form"
+                class="search-btn-primary btn-reset px-20 py-10 bg-primary color-white font-weight-600 text-sm transition-all"
+                aria-label="Search"
+              >
+                Search
+              </button>
+            </div>
+          {% endif %}
           <div class="header__action flex flex-end align-center">
             <svg hidden>
               <symbol id="icon-wishlist-header">
@@ -148,49 +383,55 @@
               <symbol id="icon-recently-view">
                 <path d="M16.99 8.495C16.99 7.91538 16.9357 7.34784 16.827 6.79238C16.7062 6.23691 16.5372 5.7056 16.3198 5.19843C16.1145 4.69127 15.8549 4.20826 15.541 3.74939C15.2391 3.29053 14.8949 2.86789 14.5085 2.48148C14.1221 2.10715 13.6995 1.763 13.2406 1.44904C12.7938 1.14716 12.3168 0.887537 11.8097 0.670181C11.3025 0.452825 10.7712 0.289808 10.2157 0.18113C9.66027 0.0603767 9.08669 0 8.495 0C7.90331 0 7.32973 0.0603767 6.77426 0.18113C6.2188 0.289808 5.68748 0.452825 5.18032 0.670181C4.67316 0.887537 4.19618 1.14716 3.74939 1.44904C3.29053 1.763 2.86789 2.10715 2.48148 2.48148C2.09507 2.86789 1.75092 3.29053 1.44904 3.74939C1.13508 4.20826 0.869424 4.69127 0.652068 5.19843C0.446787 5.7056 0.28377 6.23691 0.163017 6.79238C0.054339 7.34784 0 7.91538 0 8.495C0 9.08669 0.054339 9.66027 0.163017 10.2157C0.28377 10.7712 0.446787 11.3025 0.652068 11.8097C0.869424 12.3168 1.13508 12.7999 1.44904 13.2587C1.75092 13.7055 2.09507 14.1221 2.48148 14.5085C2.86789 14.8949 3.29053 15.2391 3.74939 15.541C4.19618 15.8549 4.67316 16.1206 5.18032 16.3379C5.68748 16.5553 6.2188 16.7183 6.77426 16.827C7.32973 16.9477 7.90331 17.0081 8.495 17.0081C9.08669 17.0081 9.66027 16.9477 10.2157 16.827C10.7712 16.7183 11.3025 16.5553 11.8097 16.3379C12.3168 16.1206 12.7938 15.8549 13.2406 15.541C13.6995 15.2391 14.1221 14.8949 14.5085 14.5085C14.8949 14.1221 15.2391 13.7055 15.541 13.2587C15.8549 12.7999 16.1145 12.3168 16.3198 11.8097C16.5372 11.3025 16.7062 10.7712 16.827 10.2157C16.9357 9.66027 16.99 9.08669 16.99 8.495ZM15.4504 8.495C15.4504 9.46103 15.2693 10.3667 14.907 11.212C14.5447 12.0572 14.0497 12.7938 13.4217 13.4217C12.7817 14.0497 12.0391 14.5447 11.1938 14.907C10.3606 15.2693 9.46103 15.4504 8.495 15.4504C7.52897 15.4504 6.62332 15.2693 5.77805 14.907C4.94485 14.5447 4.20826 14.0497 3.56826 13.4217C2.94034 12.7938 2.44526 12.0572 2.083 11.212C1.72074 10.3667 1.53961 9.46103 1.53961 8.495C1.53961 7.54105 1.72074 6.64144 2.083 5.79616C2.44526 4.95089 2.94034 4.21429 3.56826 3.58638C4.20826 2.95846 4.94485 2.46337 5.77805 2.10111C6.62332 1.72677 7.52897 1.53961 8.495 1.53961C9.46103 1.53961 10.3606 1.72677 11.1938 2.10111C12.0391 2.46337 12.7817 2.95846 13.4217 3.58638C14.0497 4.21429 14.5447 4.95089 14.907 5.79616C15.2693 6.64144 15.4504 7.54105 15.4504 8.495ZM7.71614 3.85807V8.495C7.71614 8.65198 7.75237 8.79085 7.82482 8.9116C7.90935 9.03235 8.01802 9.12292 8.15085 9.1833L11.2482 10.741C11.4293 10.8376 11.6225 10.8557 11.8278 10.7954C12.0331 10.7229 12.184 10.5901 12.2806 10.3969C12.3772 10.2037 12.3893 10.0044 12.3168 9.79914C12.2565 9.59386 12.1297 9.44291 11.9365 9.34631L9.27386 8.02406V3.85807C9.27386 3.65279 9.19537 3.4777 9.03839 3.33279C8.89349 3.17581 8.71236 3.09732 8.495 3.09732C8.27764 3.09732 8.09048 3.17581 7.9335 3.33279C7.78859 3.4777 7.71614 3.65279 7.71614 3.85807Z"/>
               </symbol>
-              <symbol id="icon-search">
-                <path d="M11.9 11.731C11.8 11.731 11.8 11.731 11.9 11.731C11.8 11.8304 11.8 11.8304 11.8 11.8304C11.3 12.3275 10.7 12.7251 9.9 13.0234C9.2 13.3216 8.4 13.4211 7.6 13.4211C6.8 13.4211 6 13.2222 5.3 12.924C4.6 12.6257 4 12.2281 3.4 11.6316C2.9 11.1345 2.4 10.4386 2.1 9.74269C1.8 9.1462 1.7 8.45029 1.7 7.65497C1.7 6.85965 1.9 6.06433 2.2 5.36842C2.5 4.5731 2.9 3.97661 3.4 3.38012C4 2.88304 4.6 2.48538 5.3 2.18713C6 1.88889 6.8 1.69006 7.6 1.69006C8.4 1.69006 9.2 1.88889 9.9 2.18713C10.6 2.48538 11.3 2.88304 11.8 3.47953C12.3 3.97661 12.7 4.67251 13.1 5.36842C13.4 6.06433 13.6 6.76023 13.6 7.65497C13.6 8.45029 13.4 9.24561 13.1 9.94152C12.8 10.538 12.4 11.1345 11.9 11.731ZM16.7 15.4094L13.6 12.3275C14.1 11.6316 14.5 10.9357 14.8 10.1404C15.1 9.34503 15.2 8.45029 15.2 7.55556C15.2 6.46199 15 5.46784 14.6 4.5731C14.2 3.67836 13.7 2.88304 13 2.18713C12.3 1.49123 11.5 0.994152 10.6 0.596491C9.7 0.19883 8.7 0 7.6 0C6.6 0 5.6 0.19883 4.6 0.596491C3.7 0.994152 2.9 1.49123 2.2 2.18713C1.5 2.88304 1 3.67836 0.6 4.67251C0.2 5.56725 0 6.5614 0 7.65497C0 8.64912 0.2 9.64327 0.6 10.6374C1 11.5322 1.6 12.3275 2.3 13.0234C3 13.7193 3.8 14.2164 4.7 14.7134C5.6 15.0117 6.6 15.2105 7.6 15.2105C8.5 15.2105 9.4 15.1111 10.2 14.8129C11 14.5146 11.8 14.117 12.4 13.6199L15.5 16.7018C15.7 16.9006 15.9 17 16.1 17C16.3 17 16.5 16.9006 16.7 16.7018C16.9 16.5029 17 16.3041 17 16.1053C17 15.807 16.9 15.6082 16.7 15.4094Z"/>
-              </symbol>
               <symbol id="icon-account">
-              <path fill="currentColor" d="M15.899 14.84a9.143 9.143 0 0 0-3.35-3.292 9.203 9.203 0 0 0-9.101 0 9.143 9.143 0 0 0-3.35 3.293.773.773 0 0 0 .067.855c.064.08.145.146.238.193a.784.784 0 0 0 .39.101.737.737 0 0 0 .671-.373 7.57 7.57 0 0 1 2.774-2.727 7.619 7.619 0 0 1 7.537 0 7.57 7.57 0 0 1 2.773 2.727.78.78 0 0 0 1.062.28.716.716 0 0 0 .36-.458.772.772 0 0 0-.071-.598ZM8 9.6a4.777 4.777 0 0 0 3.363-1.387A4.866 4.866 0 0 0 12.8 4.844a4.867 4.867 0 0 0-1.406-3.425A4.778 4.778 0 0 0 8 0C6.727 0 5.506.51 4.606 1.419A4.867 4.867 0 0 0 3.2 4.844a4.866 4.866 0 0 0 1.436 3.369A4.777 4.777 0 0 0 8 9.6ZM4.8 4.844c0-.856.337-1.678.937-2.283A3.185 3.185 0 0 1 8 1.615c.848 0 1.662.34 2.262.946a3.245 3.245 0 0 1 0 4.567c-.6.606-1.414.946-2.262.946-.849 0-1.663-.34-2.263-.946A3.245 3.245 0 0 1 4.8 4.844Z"/>
-                </symbol>
+                <path fill="currentColor" d="M15.899 14.84a9.143 9.143 0 0 0-3.35-3.292 9.203 9.203 0 0 0-9.101 0 9.143 9.143 0 0 0-3.35 3.293.773.773 0 0 0 .067.855c.064.08.145.146.238.193a.784.784 0 0 0 .39.101.737.737 0 0 0 .671-.373 7.57 7.57 0 0 1 2.774-2.727 7.619 7.619 0 0 1 7.537 0 7.57 7.57 0 0 1 2.773 2.727.78.78 0 0 0 1.062.28.716.716 0 0 0 .36-.458.772.772 0 0 0-.071-.598ZM8 9.6a4.777 4.777 0 0 0 3.363-1.387A4.866 4.866 0 0 0 12.8 4.844a4.867 4.867 0 0 0-1.406-3.425A4.778 4.778 0 0 0 8 0C6.727 0 5.506.51 4.606 1.419A4.867 4.867 0 0 0 3.2 4.844a4.866 4.866 0 0 0 1.436 3.369A4.777 4.777 0 0 0 8 9.6ZM4.8 4.844c0-.856.337-1.678.937-2.283A3.185 3.185 0 0 1 8 1.615c.848 0 1.662.34 2.262.946a3.245 3.245 0 0 1 0 4.567c-.6.606-1.414.946-2.262.946-.849 0-1.663-.34-2.263-.946A3.245 3.245 0 0 1 4.8 4.844Z"/>
+              </symbol>
             </svg>
-            {% if show_language or show_country %}
-              <div class="lang__currency-desktop me-20 hidden flex-1025 gap-15">
-                {% if show_language %}
-                  {% render 'language-switcher' %}
-                {% endif %}
-                {% if show_country %}
-                  {% render 'country-switcher' %}
-                {% endif %}
-              </div>
-            {% endif %}
-
-            {% if top_search %}
-              {% render 'top-search-header' %}
-            {% endif -%}
             {% if my_account %}
               {%- if show_account_popup -%}
                 <div class="hidden flex-1025">
-                  <div class="header-account-popup header__icon heading-color transparent-color wh-44">
+                  <div
+                    class="header-account-popup header__icon heading-color transparent-color flex align-center"
+                    style="gap: 10px !important; cursor: pointer !important;"
+                  >
                     <shopify-account menu="{{ account_menu }}">
                       <span
                         slot="signed-out-avatar"
                         class="header-account-popup__avatar align-center flex justify-center"
                         aria-hidden="true"
+                        style="width: 24px; height: 24px;"
                       >
                         {{ account_icon }}
                       </span>
                     </shopify-account>
+                    <div class="flex flex-column align-start" style="line-height: 1.2 !important;">
+                      <span style="font-size: 11px !important; color: #888888 !important; font-weight: 400 !important; display: block !important;">
+                        {% if customer %}{{ customer.first_name }}{% else %}Login{% endif %}
+                      </span>
+                      <span style="font-size: 13px !important; color: #111111 !important; font-weight: 600 !important; display: block !important; margin-top: 1px !important;"
+                        >Account</span
+                      >
+                    </div>
                   </div>
                 </div>
               {%- else -%}
                 <a
                   href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-                  class="content-center hidden flex-1025 header__icon heading-color transparent-color w-44 h-44 content-center"
+                  class="header__account-link flex align-center hidden flex-1025 text-decoration-none transition-color"
                   aria-label="{{ 'customer.account_fallback' | t }}"
+                  style="gap: 10px !important;"
                 >
-                  {{ account_icon }}
+                  <span class="align-center flex justify-center" style="width: 24px; height: 24px;">
+                    {{ account_icon }}
+                  </span>
+                  <div class="flex flex-column align-start" style="line-height: 1.2 !important;">
+                    <span style="font-size: 11px !important; color: #888888 !important; font-weight: 400 !important; display: block !important;">
+                      {% if customer %}{{ customer.first_name }}{% else %}Login{% endif %}
+                    </span>
+                    <span style="font-size: 13px !important; color: #111111 !important; font-weight: 600 !important; display: block !important; margin-top: 1px !important;"
+                      >Account</span
+                    >
+                  </div>
                 </a>
               {%- endif -%}
             {% endif -%}
@@ -198,17 +439,39 @@
               {% render 'recently-viewed' %}
             {% endif %}
             {% if wishlist -%}
-              {% render 'wishlist' %}
+              <div class="header__wishlist-wrapper flex align-center hidden flex-1025">
+                {% render 'wishlist' %}
+              </div>
             {% endif %}
             {% if minicart and theme_st.enable_catalog_mode == false %}
-              {% render 'minicart_header' %}
+              <div class="header__minicart-wrapper flex align-center hidden flex-1025">
+                {% render 'minicart_header', type: 'header_mega' %}
+              </div>
             {% endif %}
           </div>
         </div>
-        <div class="header__menu border-top-1025 flex justify-center" style="--section-pt: 0; --section-pb: 0;">
-          {%- liquid
-            render 'horizontal-menu' | show_language : show_language
-          -%}
+        <div
+          class="header__menu border-top-1025 flex justify-between align-center"
+          style="--section-pt: 0; --section-pb: 0; min-height: 48px !important; width: 100% !important;"
+        >
+          <div class="flex align-center flex-1">
+            {%- liquid
+              render 'horizontal-menu' | show_language : show_language
+            -%}
+          </div>
+          <div class="header__menu-promo flex align-center" style="white-space: nowrap !important;">
+            <span
+              class="menu-promo-text"
+              style="color: #111111 !important; font-weight: 600 !important; font-size: 13px !important; display: inline-flex !important; align-items: center !important; gap: 8px !important;"
+            >
+              <span
+                class="menu-promo-icon"
+                style="background: #d0473e; color: #fff; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 10px; font-weight: 700; transform: translateY(-0.5px);"
+                >%</span
+              >
+              Sale $20 Off Your First Order.
+            </span>
+          </div>
         </div>
       </header-inner>
     </div>

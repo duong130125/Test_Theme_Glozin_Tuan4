@@ -52,7 +52,7 @@
       }
     },
     "header": {
-      "type": "header",
+      "type": "header-layout2",
       "blocks": {
         "menu_promotion_EeqGGC": {
           "type": "menu_promotion",
@@ -174,16 +174,17 @@
         "show_account_icon": true,
         "show_wishlist_icon": true,
         "show_shopping_cart": true,
-        "show_currency": false,
-        "show_language": false,
+        "show_currency": true,
+        "show_language": true,
         "show_recently_viewed": false,
         "padding_top": 10,
-        "padding_bottom": 10
+        "padding_bottom": 10,
+        "show_email": false,
+        "show_phone": false
       }
     }
   },
   "order": [
-    "top_bar_CbXNYj",
     "header"
   ]
 }

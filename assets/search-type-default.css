@@ -100,3 +100,50 @@ header-inner.show-search-form {
     max-width: 100%;
   }
 }
+
+/* Responsive mobile search width and spacing */
+@media screen and (max-width: 991.98px) {
+  .header_search .search__input {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+  }
+  .header_search .field {
+    width: 100%;
+    align-items: center;
+    gap: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .popup-search-form,
+  .popup-search-form .content-search-form,
+  .header_search .search-modal__content {
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .content-search-form {
+    padding: 1rem 1rem 1.25rem;
+  }
+  .header_search .search__button {
+    left: 0.75rem;
+  }
+  .header_search .top-search-toggle {
+    margin-left: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .popup-search-form {
+    left: 0 !important;
+    right: 0 !important;
+  }
+  .content-search-form {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
