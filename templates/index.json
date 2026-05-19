@@ -9,109 +9,117 @@
  */
  {
   "sections": {
+    "top_bar": {
+      "type": "top-bar",
+      "blocks": {
+        "text_block": {
+          "type": "text",
+          "settings": {
+            "text": "You are a student and students get 20% discount. <a href='/pages/student-discount' style='text-decoration: underline !important;'>Learn More</a>",
+            "hidden_on_mobile": false
+          }
+        },
+        "cur_lang_block": {
+          "type": "cur_lang",
+          "settings": {
+            "menu_link": "top-bar-menu",
+            "show_currency": true,
+            "show_language": true,
+            "show_our_store": false,
+            "hidden_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "text_block",
+        "cur_lang_block"
+      ],
+      "settings": {
+        "section_width": "fluid_container",
+        "color_scheme": "",
+        "show_mobile": true,
+        "show_separator_line": true,
+        "uppercase": false,
+        "font_size": 13,
+        "font_weight": "body_weight",
+        "padding_top": 10,
+        "padding_bottom": 10
+      }
+    },
+    "announcement_bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Sale $20 Off Your First Order."
+          }
+        }
+      },
+      "block_order": [
+        "announcement_1"
+      ],
+      "settings": {
+        "section_width": "fluid_container",
+        "color_scheme": "",
+        "announcement_actions": "slide",
+        "show_close": true,
+        "homepage_only": true,
+        "show_mobile": true,
+        "show_separator_line": true,
+        "uppercase": false,
+        "font_size": 12,
+        "font_weight": "subheading_weight",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
     "slideshow_8KKtNU": {
       "type": "slideshow",
       "blocks": {
-        "slider_item_YipJd4": {
+        "slider_item_f1Pq9K": {
           "type": "slider_item",
           "settings": {
             "image": "shopify://shop_images/main-slider1.jpg",
             "image_mobile": "shopify://shop_images/main-slider-mobi1.jpg",
-            "overlay_opacity": 0,
+            "overlay_opacity": 30,
             "slider_effect": "effect_fadeinup",
-            "subheading": "Sweater Collection",
-            "heading": "Cozy Crew<br>\nOnline Exclusive",
+            "subheading": "<span style='color: #FFC107;'>GAMEPAD CONSOLE</span>",
+            "heading": "Today's Offer <span style='color: #39FF14;'>Skin Gamepad</span> 2022",
             "description": "",
-            "first_button_label": "Shop Collection",
-            "first_button_link": "shopify://collections/sweaters",
-            "first_button_style": false,
-            "second_button_label": "",
-            "second_button_link": "",
-            "second_button_style": false,
-            "content_alignment": "left",
-            "content_position": "middle-left",
-            "content_width": "full_width",
-            "content_max_width": 100,
-            "content_padding_block": 60,
-            "content_padding_inline": 120,
-            "show_content_background": false,
-            "content_background": "#ffffff",
-            "content_box_opacity": 100,
-            "content_alignment_mobile": "center"
-          }
-        },
-        "slider_item_jiLA39": {
-          "type": "slider_item",
-          "settings": {
-            "image": "shopify://shop_images/main-slider2.jpg",
-            "image_mobile": "shopify://shop_images/main-slider-mobi2.jpg",
-            "overlay_opacity": 0,
-            "slider_effect": "effect_fadeinup",
-            "subheading": "Season Collection",
-            "heading": "Pure Ease<br>\nAll-Day Cool",
-            "description": "",
-            "first_button_label": "Shop Collection",
+            "first_button_label": "SHOP NOW",
             "first_button_link": "shopify://collections/best-seller",
             "first_button_style": false,
             "second_button_label": "",
             "second_button_link": "",
-            "second_button_style": false,
+            "second_button_style": true,
             "content_alignment": "left",
             "content_position": "middle-left",
             "content_width": "full_width",
-            "content_max_width": 100,
-            "content_padding_block": 60,
-            "content_padding_inline": 120,
+            "content_max_width": 45,
+            "content_padding_block": 80,
+            "content_padding_inline": 80,
             "show_content_background": false,
-            "content_background": "#ffffff",
-            "content_box_opacity": 100,
-            "content_alignment_mobile": "center"
-          }
-        },
-        "slider_item_iAiXpe": {
-          "type": "slider_item",
-          "settings": {
-            "image": "shopify://shop_images/main-slider3.jpg",
-            "image_mobile": "shopify://shop_images/main-slider-mobi3.jpg",
-            "overlay_opacity": 0,
-            "slider_effect": "effect_fadeinup",
-            "subheading": "Look Exclusive",
-            "heading": "Clean Look<br>\nSuper Comfort",
-            "description": "",
-            "first_button_label": "Shop Collection",
-            "first_button_link": "shopify://collections/crop-top",
-            "first_button_style": false,
-            "second_button_label": "",
-            "second_button_link": "",
-            "second_button_style": false,
-            "content_alignment": "left",
-            "content_position": "middle-left",
-            "content_width": "full_width",
-            "content_max_width": 100,
-            "content_padding_block": 60,
-            "content_padding_inline": 120,
-            "show_content_background": false,
-            "content_background": "#ffffff",
-            "content_box_opacity": 100,
+            "content_background": "#000000",
+            "content_box_opacity": 40,
             "content_alignment_mobile": "center"
           }
         }
       },
       "block_order": [
-        "slider_item_YipJd4",
-        "slider_item_jiLA39",
-        "slider_item_iAiXpe"
+        "slider_item_f1Pq9K"
       ],
       "custom_css": [
         ".h-full_screen {--height-topbar: 41px;}",
-        "@media (max-width: 767.988px) {.sec__content {align-items: end; padding-bottom: 30px; }}"
+        "@media (max-width: 767.988px) {.sec__content {align-items: end; padding-bottom: 30px; }}",
+        ".btn-primary { background: #ffffff !important; color: #111111 !important; text-transform: uppercase; border: none; }"
       ],
       "settings": {
         "section_width": "full_width",
         "slide_height": "full_screen",
-        "desktop_height": 800,
-        "mobile_height": 300,
-        "color_scheme": "scheme-c4fa9b2e-e94e-477a-a1f0-ab1da4f2a676",
+        "desktop_height": 760,
+        "mobile_height": 380,
+        "color_scheme": "",
         "slide_effect": "fade",
         "reveal_slideshow": false,
         "show_arrow": true,
@@ -119,16 +127,16 @@
         "pagination_position": "center",
         "autoplay": false,
         "autorotate_speed": 5,
-        "subheading_font_size": 18,
+        "subheading_font_size": 16,
         "subheading_font_weight": "subheading_weight",
-        "subheading_spacing_bottom": 15,
+        "subheading_spacing_bottom": 16,
         "heading_font_size": 60,
         "heading_font_weight": "heading_weight",
         "heading_uppercase": false,
-        "heading_spacing_bottom": 40,
-        "des_font_size": 19,
-        "des_font_weight": "heading_weight",
-        "des_spacing_bottom": 60,
+        "heading_spacing_bottom": 20,
+        "des_font_size": 16,
+        "des_font_weight": "body_weight",
+        "des_spacing_bottom": 30,
         "content_below_image": false,
         "padding_top": 0,
         "padding_bottom": 0,
@@ -141,96 +149,76 @@
         "collection_r7aTxN": {
           "type": "collection",
           "settings": {
-            "collection": "crop-top",
+            "collection": "smartphone",
             "collection_image": "shopify://shop_images/collection_img_1.jpg",
-            "collection_title": "Crop—Top"
+            "collection_title": "Trending New Phone Pro"
           }
         },
         "collection_FUAzK4": {
           "type": "collection",
           "settings": {
-            "collection": "t-shirts",
+            "collection": "laptop-accessories",
             "collection_image": "shopify://shop_images/collection_img_2.jpg",
-            "collection_title": ""
+            "collection_title": "Top Product MacBook Pro 2022"
           }
         },
         "collection_kUA3MH": {
           "type": "collection",
           "settings": {
-            "collection": "blazers",
-            "collection_image": "shopify://shop_images/blazer.jpg",
-            "collection_title": ""
-          }
-        },
-        "collection_ctTBpd": {
-          "type": "collection",
-          "settings": {
-            "collection": "coats",
-            "collection_image": "shopify://shop_images/img.jpg",
-            "collection_title": ""
-          }
-        },
-        "collection_fyfMEN": {
-          "type": "collection",
-          "settings": {
-            "collection": "sweaters",
-            "collection_image": "shopify://shop_images/collection_img_5.jpg",
-            "collection_title": ""
-          }
-        },
-        "collection_qdMHYe": {
-          "type": "collection",
-          "settings": {
-            "collection": "hoodies",
-            "collection_image": "shopify://shop_images/collection_img_6.jpg",
-            "collection_title": ""
+            "collection": "wearable-tech",
+            "collection_image": "shopify://shop_images/collection_img_3.jpg",
+            "collection_title": "iPad Pro Up to 20% Off"
           }
         }
       },
       "block_order": [
         "collection_r7aTxN",
         "collection_FUAzK4",
-        "collection_kUA3MH",
-        "collection_ctTBpd",
-        "collection_fyfMEN",
-        "collection_qdMHYe"
+        "collection_kUA3MH"
       ],
       "settings": {
         "section_width": "fluid_container",
         "color_scheme": "",
-        "heading": "Top Collections",
-        "description": "<p>Express your style with our standout collection—fashion meets sophistication.</p>",
+        "heading": "",
+        "description": "",
         "show_view_all_button": false,
         "header_size": "medium",
-        "header_alignment": "center",
-        "display_mode": "carousel",
+        "header_alignment": "left",
+        "display_mode": "grid",
         "image_ratio": "square",
         "custom_ratio": "",
-        "items_per_row": 6,
+        "items_per_row": 3,
         "column_gap": 30,
         "show_arrow": false,
-        "carousel_pagination": "show_dots",
+        "carousel_pagination": "show_dots_on_mobile",
         "infinite": false,
         "autoplay": false,
         "autorotate_speed": 5,
         "reveal": false,
-        "items_per_row_mobile": 3,
+        "items_per_row_mobile": 1,
         "design": "default",
         "collection_information_position": "below_image",
         "text_alignment": "center",
         "show_product_count": false,
         "show_icon": false,
-        "show_description": false,
-        "font_size": 16,
+        "show_description": true,
+        "font_size": 20,
         "font_weight": "heading_weight",
         "information_spacing": 12,
         "rounded_image": true,
         "image_custom_width": true,
-        "image_width": 185,
-        "padding_top": 0,
-        "padding_bottom": 0,
+        "image_width": 300,
+        "padding_top": 30,
+        "padding_bottom": 20,
         "reset_spacing": false
-      }
+      },
+      "custom_css": [
+        ".collection-item:nth-child(1) .collection-item__media { background-color: #D2D8F9 !important; border-radius: 12px; }",
+        ".collection-item:nth-child(2) .collection-item__media { background-color: #F6D3D3 !important; border-radius: 12px; }",
+        ".collection-item:nth-child(3) .collection-item__media { background-color: #C9D6F3 !important; border-radius: 12px; }",
+        ".collection-item__media { padding: 30px; }",
+        ".collection-item__title { font-weight: 700; }"
+      ]
     },
     "featured_collection_TCP844": {
       "type": "featured-collection",
@@ -238,25 +226,25 @@
       "settings": {
         "section_width": "fluid_container",
         "color_scheme": "",
-        "heading": "Best Selling",
-        "description": "Unmatched design—superior performance and customer satisfaction in one.",
+        "heading": "TODAY'S OFFER",
+        "description": "",
         "show_view_all_button": false,
         "space_between_header": true,
         "header_size": "medium",
         "header_alignment": "center",
-        "enable_collection_deal": false,
+        "enable_collection_deal": true,
         "messages": "Hurry up! Offer ends in:",
         "end_time": "09-22-2026",
         "timer_style": "default",
-        "collections_type": "carousel",
+        "collections_type": "grid",
         "collection": "best-seller",
-        "items_to_show": 8,
-        "items_per_row": 4,
+        "items_to_show": 9,
+        "items_per_row": 5,
         "rows_on_desktop": 2,
         "enable_load_more": false,
         "button_label": "Load more",
-        "column_gap": 30,
-        "show_arrow": true,
+        "column_gap": 20,
+        "show_arrow": false,
         "carousel_pagination": "show_dots_on_mobile",
         "infinite": false,
         "autoplay": false,
@@ -268,8 +256,186 @@
         "block_position": "left",
         "carousel_on_mobile": false,
         "items_per_row_mobile": 2,
-        "padding_top": 0,
-        "padding_bottom": 10,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "reset_spacing": false
+      },
+      "custom_css": [
+        "@media(min-width: 1025px) { .sec__products-carousel .grid-custom { display: grid !important; grid-template-columns: 1fr 1fr 2fr 1fr 1fr !important; grid-template-rows: auto auto !important; gap: 20px !important; } .sec__products-carousel .grid-custom-item { width: 100% !important; margin: 0 !important; max-width: none !important; flex: none !important; } .sec__products-carousel .grid-custom-item:nth-child(1) { grid-area: 1 / 1 / 2 / 2; } .sec__products-carousel .grid-custom-item:nth-child(2) { grid-area: 1 / 2 / 2 / 3; } .sec__products-carousel .grid-custom-item:nth-child(3) { grid-area: 2 / 1 / 3 / 2; } .sec__products-carousel .grid-custom-item:nth-child(4) { grid-area: 2 / 2 / 3 / 3; } .sec__products-carousel .grid-custom-item:nth-child(5) { grid-area: 1 / 3 / 3 / 4; border: 1px solid #E52E2E; border-radius: 8px; padding: 15px; } .sec__products-carousel .grid-custom-item:nth-child(6) { grid-area: 1 / 4 / 2 / 5; } .sec__products-carousel .grid-custom-item:nth-child(7) { grid-area: 1 / 5 / 2 / 6; } .sec__products-carousel .grid-custom-item:nth-child(8) { grid-area: 2 / 4 / 3 / 5; } .sec__products-carousel .grid-custom-item:nth-child(9) { grid-area: 2 / 5 / 3 / 6; } }"
+      ]
+    },
+    "image_with_text_overlay_B7Q8Ux": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Craft your perfect setup",
+            "font_size": 42,
+            "font_weight": "heading_weight",
+            "uppercase": false,
+            "spacing_bottom": 20
+          },
+          "blocks": {}
+        },
+        "description_1": {
+          "type": "description",
+          "settings": {
+            "text": "<p>Find premium devices, curated bundles, and pro-grade accessories built for productivity, play, and everyday style.</p>",
+            "font_size": 16,
+            "font_weight": "body_weight",
+            "spacing_bottom": 30
+          },
+          "blocks": {}
+        },
+        "button_1": {
+          "type": "button",
+          "settings": {
+            "button_label": "Browse Collections",
+            "button_link": "shopify://collections/all",
+            "button_style": false,
+            "button_alignment": "left"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "description_1",
+        "button_1"
+      ],
+      "settings": {
+        "section_width": "full_width",
+        "color_scheme": "",
+        "image": "shopify://shop_images/img.jpg",
+        "image_mobile": "shopify://shop_images/collection_img_5.jpg",
+        "image_behavior": "none",
+        "overlay_opacity": 30,
+        "image_height": "adapt",
+        "desktop_height": 620,
+        "mobile_height": 420,
+        "content_position": "middle-left",
+        "content_alignment": "left",
+        "content_alignment_mobile": "center",
+        "content_width": "45",
+        "content_max_width": 45,
+        "content_padding_inline": 40,
+        "content_padding_block": 40,
+        "show_content_background": true,
+        "content_background": "#ffffff",
+        "content_box_opacity": 95,
+        "content_below_image": false,
+        "padding_top": 30,
+        "padding_bottom": 40,
+        "reset_spacing": false
+      }
+    },
+    "icon_box_R7P9eG": {
+      "type": "icon-box",
+      "blocks": {
+        "icon_box_ACjiqA": {
+          "type": "icon_box",
+          "settings": {
+            "icon_svg": "truck",
+            "heading": "Fast delivery",
+            "description": "<p>Get quick shipping on every order, with tracking and easy returns.</p>"
+          }
+        },
+        "icon_box_RLNr9a": {
+          "type": "icon_box",
+          "settings": {
+            "icon_svg": "support",
+            "heading": "24/7 support",
+            "description": "<p>Expert help whenever you need it, from setup advice to product support.</p>"
+          }
+        },
+        "icon_box_tj4DJd": {
+          "type": "icon_box",
+          "settings": {
+            "icon_svg": "check_badge",
+            "heading": "Quality guaranteed",
+            "description": "<p>Premium gear tested for performance, durability, and modern style.</p>"
+          }
+        },
+        "icon_box_P3nG2M": {
+          "type": "icon_box",
+          "settings": {
+            "icon_svg": "payment",
+            "heading": "Flexible payment",
+            "description": "<p>Checkout securely with multiple payment options and easy financing.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "icon_box_ACjiqA",
+        "icon_box_RLNr9a",
+        "icon_box_tj4DJd",
+        "icon_box_P3nG2M"
+      ],
+      "settings": {
+        "section_width": "fluid_container",
+        "color_scheme": "",
+        "type": "default",
+        "column_gap": 30,
+        "icon_position": "top",
+        "icon_size": 40,
+        "spacing": 18,
+        "show_border": false,
+        "enable_background": false,
+        "background": "#ffffff",
+        "content_alignment": "center",
+        "heading_font_size": 17,
+        "heading_font_weight": "heading_weight",
+        "heading_uppercase": false,
+        "heading_spacing_bottom": 10,
+        "des_font_size": 15,
+        "des_font_weight": "body_weight",
+        "carousel_on_mobile": true,
+        "items_per_row_mobile": "1",
+        "padding_top": 40,
+        "padding_bottom": 60,
+        "reset_spacing": false
+      }
+    },
+    "rich_text_EcBgbR": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_j3PNaT": {
+          "type": "heading",
+          "settings": {
+            "heading": "Design-led electronics for modern living",
+            "font_size": 36,
+            "font_weight": "heading_weight",
+            "uppercase": false,
+            "spacing_bottom": 24
+          },
+          "blocks": {}
+        },
+        "description_P9ehdd": {
+          "type": "description",
+          "settings": {
+            "text": "<p>Shop the latest headphones, monitors, work-from-home essentials, and next-level gadgets from a store built around premium design and usability.</p>",
+            "font_size": 15,
+            "font_weight": "body_weight",
+            "spacing_bottom": 10
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading_j3PNaT",
+        "description_P9ehdd"
+      ],
+      "settings": {
+        "section_width": "container",
+        "color_scheme": "",
+        "content_alignment": "center",
+        "content_max_width": 77,
+        "enable_expand_content": false,
+        "expand_content_button": "See all Information",
+        "content_max_height": 150,
+        "padding_top": 30,
+        "padding_bottom": 40,
         "reset_spacing": false
       }
     },
@@ -581,48 +747,6 @@
         "reset_spacing": false
       }
     },
-    "rich_text_EcBgbR": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_j3PNaT": {
-          "type": "heading",
-          "settings": {
-            "heading": "Hello! Everyday for Women's",
-            "font_size": 36,
-            "font_weight": "heading_weight",
-            "uppercase": false,
-            "spacing_bottom": 24
-          },
-          "blocks": {}
-        },
-        "description_P9ehdd": {
-          "type": "description",
-          "settings": {
-            "text": "<p>Discover a collection of timeless wardrobe essentials, seamlessly transitioning from work to weekend. Inspired by travel, our America-designed pieces prioritize sustainability with natural fibers and mindful practices. Explore a range of <span style=\"text-decoration:underline\"><strong>tops</strong></span>, <span style=\"text-decoration:underline\"><strong>bottoms</strong></span>, <span style=\"text-decoration:underline\"><strong>sweaters</strong></span>, and accessories in versatile styles, featuring high-quality materials like cotton, linen, tencel, and wool. </p><p>Each piece is crafted with meticulous attention to detail, ensuring a perfect blend of comfort and elegance. Our designs emphasize clean lines and sophisticated silhouettes, making them suitable for any occasion. Whether you’re dressing up for a night out or keeping it casual, our collection offers endless styling possibilities. Embrace the essence of effortless chic with our thoughtfully designed wardrobe staples, and experience the harmony of style, quality, and sustainability. Join us in redefining modern fashion with a conscience.</p>",
-            "font_size": 15,
-            "font_weight": "body_weight",
-            "spacing_bottom": 10
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "heading_j3PNaT",
-        "description_P9ehdd"
-      ],
-      "settings": {
-        "section_width": "container",
-        "color_scheme": "",
-        "content_alignment": "center",
-        "content_max_width": 77,
-        "enable_expand_content": true,
-        "expand_content_button": "See all Information",
-        "content_max_height": 150,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "reset_spacing": false
-      }
-    },
     "instagram_shop_nrVWcV": {
       "type": "instagram-shop",
       "blocks": {
@@ -866,16 +990,20 @@
     }
   },
   "order": [
+    "top_bar",
+    "announcement_bar",
     "slideshow_8KKtNU",
     "collection_list_VmEYkJ",
     "featured_collection_TCP844",
+    "image_with_text_overlay_B7Q8Ux",
+    "icon_box_R7P9eG",
+    "rich_text_EcBgbR",
     "outfit_idea_kakiyq",
     "divider_FcGgzn",
     "scrolling_text_U3mttg",
     "divider_xPQYgr",
     "featured_collection_nTcT4V",
     "product_testimonials_KNN6XE",
-    "rich_text_EcBgbR",
     "instagram_shop_nrVWcV",
     "icon_box_TRwJBD"
   ]
