@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
@@ -30,7 +30,7 @@
           "type": "link_list",
           "settings": {
             "heading": "INFOMATION",
-            "menu": "our-company",
+            "menu": "footer",
             "content_width": "16%"
           }
         },
@@ -38,7 +38,7 @@
           "type": "link_list",
           "settings": {
             "heading": "QUICK LINKS",
-            "menu": "shop-categories",
+            "menu": "quick-links",
             "content_width": "16%"
           }
         },
@@ -71,9 +71,9 @@
         "menu_store_policies": "footer",
         "show_social": true,
         "payment_enable": true,
-        "payment_image": "shopify://shop_images/payment.png",
         "payment_width": 340,
         "copyright_text": "Copyright &copy; Uminex all rights reserved. Powered by Blueskytechco.",
+        "same_line_with_country_language": false,
         "footer_heading_size": 16,
         "padding_top": 60,
         "padding_bottom": 45,
