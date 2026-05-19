@@ -42,7 +42,7 @@
       "settings": {
         "section_width": "stretch_width",
         "color_scheme": "default",
-        "show_mobile": true,
+        "show_mobile": false,
         "show_separator_line": false,
         "uppercase": false,
         "font_size": 13,
@@ -134,9 +134,10 @@
       "settings": {
         "section_width": "stretch_width",
         "color_scheme": "",
-        "logo_position": "left",
-        "separator_line": "inner_page",
+        "show_email": false,
+        "show_phone": false,
         "enable_login_popup": true,
+        "separator_line": "inner_page",
         "sticky_header_type": "always",
         "sticky_header_mobile": true,
         "transparent_header": false,
@@ -178,9 +179,7 @@
         "show_language": true,
         "show_recently_viewed": false,
         "padding_top": 10,
-        "padding_bottom": 10,
-        "show_email": false,
-        "show_phone": false
+        "padding_bottom": 10
       }
     }
   },
