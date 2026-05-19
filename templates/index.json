@@ -140,6 +140,7 @@
           "type": "collection",
           "settings": {
             "collection": "smartphone",
+            "collection_image": "shopify://shop_images/banner-1.png",
             "collection_title": "Trending New Phone Pro"
           }
         },
@@ -147,6 +148,7 @@
           "type": "collection",
           "settings": {
             "collection": "laptop-accessories",
+            "collection_image": "shopify://shop_images/banner-2.png",
             "collection_title": "Top Product MacBook Pro 2022"
           }
         },
@@ -154,6 +156,7 @@
           "type": "collection",
           "settings": {
             "collection": "wearable-tech",
+            "collection_image": "shopify://shop_images/banner-3.png",
             "collection_title": "iPad Pro Up to 20% Off"
           }
         }
