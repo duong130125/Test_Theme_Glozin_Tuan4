@@ -2229,3 +2229,36 @@ minicart-item-edit.loading .edit-icon {
   }
 }
 
+/* ===== UMINEX Footer Styling ===== */
+.footer_store-infor {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.footer_store-infor > .footer__block-info {
+  order: 2 !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  line-height: 1.6 !important;
+  color: #444444 !important;
+}
+.footer_store-infor > .footer__store-info:first-of-type {
+  order: 1 !important;
+}
+.footer_store-infor > .footer__store-info:first-of-type a {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  color: #1A42F4 !important;
+  text-decoration: none !important;
+  display: block !important;
+  margin: 5px 0 10px 0 !important;
+}
+.footer_store-infor > .footer__store-info:last-of-type {
+  order: 3 !important;
+}
+.footer_store-infor > .footer__store-info:last-of-type a::after {
+  content: " / Info@example.com";
+  color: #444444;
+  pointer-events: none;
+}
+
+

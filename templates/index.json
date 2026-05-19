@@ -39,10 +39,68 @@
             "content_box_opacity": 40,
             "content_alignment_mobile": "center"
           }
+        },
+        "slider_item_iphone": {
+          "type": "slider_item",
+          "settings": {
+            "image": "shopify://shop_images/main-slider2.jpg",
+            "image_mobile": "shopify://shop_images/main-slider-mobi2.jpg",
+            "overlay_opacity": 30,
+            "slider_effect": "effect_fadeinup",
+            "subheading": "<span style='color: #FFC107;'>IPHONE PRO</span>",
+            "heading": "New Brand <span style='color: #39FF14;'>iPhone 13 Pro</span> 2022",
+            "description": "",
+            "first_button_label": "SHOP NOW",
+            "first_button_link": "shopify://collections/best-seller",
+            "first_button_style": false,
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_button_style": true,
+            "content_alignment": "left",
+            "content_position": "middle-left",
+            "content_width": "full_width",
+            "content_max_width": 45,
+            "content_padding_block": 80,
+            "content_padding_inline": 80,
+            "show_content_background": false,
+            "content_background": "#000000",
+            "content_box_opacity": 40,
+            "content_alignment_mobile": "center"
+          }
+        },
+        "slider_item_laptop": {
+          "type": "slider_item",
+          "settings": {
+            "image": "shopify://shop_images/main-slider3.jpg",
+            "image_mobile": "shopify://shop_images/main-slider-mobi3.jpg",
+            "overlay_opacity": 30,
+            "slider_effect": "effect_fadeinup",
+            "subheading": "<span style='color: #FFC107;'>LAPTOP PRO</span>",
+            "heading": "Top Quality <span style='color: #39FF14;'>MacBook Pro</span> 2022",
+            "description": "",
+            "first_button_label": "SHOP NOW",
+            "first_button_link": "shopify://collections/best-seller",
+            "first_button_style": false,
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_button_style": true,
+            "content_alignment": "left",
+            "content_position": "middle-left",
+            "content_width": "full_width",
+            "content_max_width": 45,
+            "content_padding_block": 80,
+            "content_padding_inline": 80,
+            "show_content_background": false,
+            "content_background": "#000000",
+            "content_box_opacity": 40,
+            "content_alignment_mobile": "center"
+          }
         }
       },
       "block_order": [
-        "slider_item_f1Pq9K"
+        "slider_item_f1Pq9K",
+        "slider_item_iphone",
+        "slider_item_laptop"
       ],
       "custom_css": [
         ".h-full_screen {--height-topbar: 41px;}",
@@ -60,7 +118,7 @@
         "show_arrow": true,
         "carousel_pagination": "show_dots",
         "pagination_position": "center",
-        "autoplay": false,
+        "autoplay": true,
         "autorotate_speed": 5,
         "subheading_font_size": 16,
         "subheading_font_weight": "subheading_weight",

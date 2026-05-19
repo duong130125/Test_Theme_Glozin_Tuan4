@@ -182,7 +182,7 @@
                           class="{{ animate }} sec__content-subheading  {% if block_st.slider_effect == 'effect_fadeinup' %} {{ slider_effect }}  {% endif %}  block heading{% if section_st.subheading_spacing_bottom > 41 %} mb-big{% elsif section_st.subheading_spacing_bottom > 30 %} mb-medium {% else %} mb-custom{% endif %} fs-custom {{ section_st.subheading_font_weight }}"
                           style="--font-size: {{ section_st.subheading_font_size }};--space-bottom: {{ section_st.subheading_spacing_bottom }}"
                         >
-                          {{ block_st.subheading | escape }}
+                          {{ block_st.subheading }}
                         </motion-element>
                       {% endif %}
                       {% if block_st.heading != blank %}
