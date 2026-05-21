@@ -1,0 +1,162 @@
+{%- liquid
+  assign section_st = section.settings
+  assign main_collection = collections[section_st.collection]
+  assign featured_prod = all_products[section_st.featured_product]
+  
+  # Accumulate products from collection, skipping the featured product if it is in the collection
+  assign small_products = ""
+  assign count = 0
+  for prod in main_collection.products
+    if prod.id != featured_prod.id
+      if count < 8
+        if small_products != ""
+          assign small_products = small_products | append: ","
+        endif
+        assign small_products = small_products | append: prod.handle
+        assign count = count | plus: 1
+      endif
+    endif
+  endfor
+  
+  assign small_product_handles = small_products | split: ","
+-%}
+
+<div class="homepage-container homepage-section-spacing">
+  <!-- Section Title -->
+  <div class="deal-section-header">
+    <h2 class="deal-section-title">{{ section_st.title | escape }}</h2>
+  </div>
+
+  <div class="deal-grid">
+    <!-- Left Column: 4 Small Cards (2x2 Grid) -->
+    <div class="deal-column-side-left">
+      {%- for i in (0..3) -%}
+        {%- liquid
+          assign prod_handle = small_product_handles[i]
+          assign prod = all_products[prod_handle]
+        -%}
+        {%- if prod != blank -%}
+          {%- render 'product-card', card_product: prod, section_id: section.id, layout: 'small' -%}
+        {%- else -%}
+          <!-- Placeholder card -->
+          <div class="small-product-card placeholder">
+            {{ 'product-' | append: i | plus: 1 | placeholder_svg_tag: 'placeholder-svg card-image' }}
+            <div class="card-info" style="margin-top: 15px;">
+              <span class="card-title">Example Product Title {{ i | plus: 1 }}</span>
+              <div class="card-price">$49.00</div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <!-- Center Column: 1 Featured Large Card -->
+    <div class="deal-column-center">
+      {%- if featured_prod != blank -%}
+        {%- render 'product-card',
+          card_product: featured_prod,
+          section_id: section.id,
+          layout: 'featured',
+          end_time: section_st.countdown_time,
+          total_stock: section_st.total_stock,
+          sold_stock: section_st.sold_stock
+        -%}
+      {%- else -%}
+        <!-- Placeholder Featured Card -->
+        <div class="featured-deal-card placeholder" style="text-align: center;">
+          <div class="featured-badge-label">OFFER</div>
+          {{ 'product-3' | placeholder_svg_tag: 'placeholder-svg featured-image' }}
+          <div class="featured-info-wrap" style="margin-top: 20px;">
+            <span class="featured-title">Featured Promotion Product</span>
+            <div class="featured-price" style="justify-content: center;">$199.00 <span class="featured-price-compare">$299.00</span></div>
+            <div class="featured-timer-section">
+              <div class="featured-timer-title">Time remaining:</div>
+              <div class="deal-timer-container justify-center" style="display: flex; gap: 5px; justify-content: center;">
+                <div class="deal-timer-box">02<span class="deal-timer-label">Days</span></div>
+                <div class="deal-timer-colon">:</div>
+                <div class="deal-timer-box">15<span class="deal-timer-label">Hrs</span></div>
+                <div class="deal-timer-colon">:</div>
+                <div class="deal-timer-box">45<span class="deal-timer-label">Mins</span></div>
+                <div class="deal-timer-colon">:</div>
+                <div class="deal-timer-box">30<span class="deal-timer-label">Secs</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Column: 4 Small Cards (2x2 Grid) -->
+    <div class="deal-column-side-right">
+      {%- for i in (4..7) -%}
+        {%- liquid
+          assign prod_handle = small_product_handles[i]
+          assign prod = all_products[prod_handle]
+        -%}
+        {%- if prod != blank -%}
+          {%- render 'product-card', card_product: prod, section_id: section.id, layout: 'small' -%}
+        {%- else -%}
+          <!-- Placeholder card -->
+          <div class="small-product-card placeholder">
+            {%- assign placeholder_index = i | modulo: 4 | plus: 1 -%}
+            {{ 'product-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg card-image' }}
+            <div class="card-info" style="margin-top: 15px;">
+              <span class="card-title">Example Product Title {{ i | plus: 1 }}</span>
+              <div class="card-price">$89.00</div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Today's Offer Deal",
+  "tag": "section",
+  "class": "section-deal-products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Today's Offer"
+    },
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "Featured Promotion Product (Center)"
+    },
+    {
+      "type": "text",
+      "id": "countdown_time",
+      "label": "Countdown End Date",
+      "default": "2026-12-31",
+      "info": "Format: YYYY-MM-DD or MM/DD/YYYY"
+    },
+    {
+      "type": "number",
+      "id": "total_stock",
+      "label": "Total Stock (Progress Bar)",
+      "default": 40
+    },
+    {
+      "type": "number",
+      "id": "sold_stock",
+      "label": "Sold Stock (Progress Bar)",
+      "default": 28
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Side Products Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Today's Offer Deal"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,348 @@
+{%- liquid
+  assign section_st = section.settings
+-%}
+
+<div class="homepage-container homepage-section-spacing">
+  <!-- Swiper Container -->
+  <div id="swiper-{{ section.id }}" class="swiper hero-banner-slider-container" style="border-radius: 12px; overflow: hidden; position: relative;">
+    <div class="swiper-wrapper">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign block_st = block.settings
+          -%}
+          <div class="swiper-slide hero-banner-section" style="background-color: {{ block_st.bg_color | default: '#111111' }};" {{ block.shopify_attributes }}>
+            <!-- Optional Background Image -->
+            {%- if block_st.bg_image != blank -%}
+              <div class="absolute inset-0 z-1 pointer-none w-full h-full object-fit-cover opacity-20" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none;">
+                <img src="{{ block_st.bg_image | image_url: width: 1440 }}"
+                     alt="{{ block_st.bg_image.alt | escape }}"
+                     loading="lazy"
+                     width="1440"
+                     height="600"
+                     style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            {%- endif -%}
+            
+            <div class="hero-banner-grid">
+              <!-- Left Column: Content -->
+              <div class="hero-content-col">
+                {%- if block_st.sub_heading != blank -%}
+                  <span class="hero-subhead" style="color: {{ block_st.subhead_color | default: '#FFC107' }};">
+                    {{ block_st.sub_heading | escape }}
+                  </span>
+                {%- endif -%}
+                
+                {%- if block_st.heading != blank -%}
+                  <h1 class="hero-title">
+                    {{ block_st.heading }}
+                  </h1>
+                {%- endif -%}
+                
+                {%- if block_st.description != blank -%}
+                  <p class="hero-desc">
+                    {{ block_st.description | escape }}
+                  </p>
+                {%- endif -%}
+                
+                {%- if block_st.button_label != blank and block_st.button_link != blank -%}
+                  <div class="hero-btn-wrap">
+                    <a href="{{ block_st.button_link }}" class="hero-btn-pill">
+                      {{ block_st.button_label | escape }}
+                    </a>
+                  </div>
+                {%- endif -%}
+              </div>
+              
+              <!-- Right Column: Product Image -->
+              <div class="hero-image-col">
+                {%- if block_st.product_image != blank -%}
+                  <img src="{{ block_st.product_image | image_url: width: 650 }}"
+                       alt="{{ block_st.product_image.alt | default: 'Hero product' | escape }}"
+                       width="550"
+                       height="450"
+                       class="hero-main-image">
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg hero-main-image' }}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback Slide (using section settings for backward compatibility) -->
+        <div class="swiper-slide hero-banner-section" style="background-color: {{ section_st.bg_color }};">
+          {%- if section_st.bg_image != blank -%}
+            <div class="absolute inset-0 z-1 pointer-none w-full h-full object-fit-cover opacity-20" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none;">
+              <img src="{{ section_st.bg_image | image_url: width: 1440 }}"
+                   alt="{{ section_st.bg_image.alt | escape }}"
+                   loading="lazy"
+                   width="1440"
+                   height="600"
+                   style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          {%- endif -%}
+          <div class="hero-banner-grid">
+            <div class="hero-content-col">
+              {%- if section_st.sub_heading != blank -%}
+                <span class="hero-subhead" style="color: {{ section_st.subhead_color }};">
+                  {{ section_st.sub_heading | escape }}
+                </span>
+              {%- endif -%}
+              {%- if section_st.heading != blank -%}
+                <h1 class="hero-title">
+                  {{ section_st.heading }}
+                </h1>
+              {%- endif -%}
+              {%- if section_st.description != blank -%}
+                <p class="hero-desc">
+                  {{ section_st.description | escape }}
+                </p>
+              {%- endif -%}
+              {%- if section_st.button_label != blank and section_st.button_link != blank -%}
+                <div class="hero-btn-wrap">
+                  <a href="{{ section_st.button_link }}" class="hero-btn-pill">
+                    {{ section_st.button_label | escape }}
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+            <div class="hero-image-col">
+              {%- if section_st.product_image != blank -%}
+                <img src="{{ section_st.product_image | image_url: width: 650 }}"
+                     alt="{{ section_st.product_image.alt | default: 'Hero product' | escape }}"
+                     width="550"
+                     height="450"
+                     class="hero-main-image">
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg hero-main-image' }}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Navigation Arrows -->
+    {%- if section_st.show_arrows -%}
+      <div class="swiper-button-prev swiper-button-prev-{{ section.id }} hero-swiper-arrow">
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 13L1 7L7 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="swiper-button-next swiper-button-next-{{ section.id }} hero-swiper-arrow">
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 13L7 7L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    {%- endif -%}
+
+    <!-- Pagination Dots -->
+    {%- if section_st.show_dots -%}
+      <div class="swiper-pagination swiper-pagination-{{ section.id }} hero-swiper-pagination"></div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  function initHeroSlider_{{ section.id | replace: '-', '_' }}() {
+    const sliderContainer = document.querySelector('#swiper-{{ section.id }}');
+    if (sliderContainer && typeof Swiper !== 'undefined') {
+      if (sliderContainer.swiper) {
+        sliderContainer.swiper.destroy(true, true);
+      }
+      new Swiper(sliderContainer, {
+        loop: true,
+        autoplay: {% if section_st.autoplay %}{ delay: {{ section_st.autoplay_speed | times: 1000 }}, disableOnInteraction: false }{% else %}false{% endif %},
+        pagination: {
+          el: '.swiper-pagination-{{ section.id }}',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next-{{ section.id }}',
+          prevEl: '.swiper-button-prev-{{ section.id }}',
+        },
+        grabCursor: true,
+        effect: 'slide'
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initHeroSlider_{{ section.id | replace: '-', '_' }});
+  document.addEventListener('shopify:section:load', function(e) {
+    if (e.target.id.includes('{{ section.id }}')) {
+      setTimeout(initHeroSlider_{{ section.id | replace: '-', '_' }}, 100);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Hero Banner Slider",
+  "tag": "section",
+  "class": "section-hero-banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate Slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay Delay (seconds)",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Navigation Arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show Pagination Dots",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Fallback Slide Settings (Single Banner)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#111111"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image Overlay"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "Sub Heading",
+      "default": "UP TO 50% OFF TODAY"
+    },
+    {
+      "type": "color",
+      "id": "subhead_color",
+      "label": "Sub Heading Color",
+      "default": "#FFC107"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "<p>Play Station 5 <span class=\"neon-green\">Dual Sense</span> Wireless Controller</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Immerse yourself in a gaming experience with a controller that supports tactile feedback and dynamic trigger effects."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Graphic Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide Item",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#111111"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Background Image Overlay"
+        },
+        {
+          "type": "text",
+          "id": "sub_heading",
+          "label": "Sub Heading",
+          "default": "UP TO 50% OFF TODAY"
+        },
+        {
+          "type": "color",
+          "id": "subhead_color",
+          "label": "Sub Heading Color",
+          "default": "#FFC107"
+        },
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Main Heading",
+          "default": "<p>Play Station 5 <span class=\"neon-green\">Dual Sense</span> Wireless Controller</p>"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Immerse yourself in a gaming experience with a controller that supports tactile feedback and dynamic trigger effects."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Graphic Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner Slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "bg_color": "#111111",
+            "sub_heading": "UP TO 50% OFF TODAY",
+            "subhead_color": "#FFC107"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

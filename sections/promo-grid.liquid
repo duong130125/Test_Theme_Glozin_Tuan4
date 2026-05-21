@@ -1,0 +1,155 @@
+<div class="homepage-container homepage-section-spacing">
+  <div class="promo-grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign block_st = block.settings
+        
+        # Determine fallback bg classes or custom style
+        assign bg_style = ''
+        if block_st.custom_bg_color != blank
+          assign bg_style = 'style="background-color: ' | append: block_st.custom_bg_color | append: ';"'
+        endif
+      -%}
+      
+      <div class="promo-card {% if block_st.custom_bg_color == blank %}{{ block_st.bg_class_name }}{% endif %}" {{ bg_style }} {{ block.shopify_attributes }}>
+        
+        <!-- Promo Content -->
+        <div class="promo-info">
+          {%- if block_st.label != blank -%}
+            <span class="promo-label">{{ block_st.label | escape }}</span>
+          {%- endif -%}
+          
+          {%- if block_st.title != blank -%}
+            <h3 class="promo-heading">{{ block_st.title | escape }}</h3>
+          {%- endif -%}
+          
+          {%- if block_st.link_url != blank -%}
+            <a href="{{ block_st.link_url }}" class="promo-link">
+              {{ block_st.link_text | default: 'Shop Now' | escape }}
+              <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 5H11M11 5L7 1M11 5L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+        
+        <!-- Promo Graphic Image -->
+        <div class="promo-image-wrap">
+          {%- if block_st.image != blank -%}
+            <img src="{{ block_st.image | image_url: width: 300 }}"
+                 alt="{{ block_st.image.alt | default: block_st.title | escape }}"
+                 loading="lazy"
+                 width="120"
+                 height="120"
+                 class="promo-image">
+          {%- else -%}
+            {{ 'product-3' | placeholder_svg_tag: 'placeholder-svg promo-image' }}
+          {%- endif -%}
+        </div>
+
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Promo Banner Grid",
+  "tag": "section",
+  "class": "section-promo-grid",
+  "max_blocks": 6,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "promo_item",
+      "name": "Promo Banner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Small Label",
+          "default": "NEW ARRIVALS"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Galaxy S24 Ultra"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Graphic Image"
+        },
+        {
+          "type": "select",
+          "id": "bg_class_name",
+          "label": "Preset Background Theme",
+          "options": [
+            {
+              "value": "promo-purple",
+              "label": "Purple Pastel"
+            },
+            {
+              "value": "promo-pink",
+              "label": "Pink Pastel"
+            },
+            {
+              "value": "promo-blue",
+              "label": "Blue Pastel"
+            }
+          ],
+          "default": "promo-purple"
+        },
+        {
+          "type": "color",
+          "id": "custom_bg_color",
+          "label": "Custom Background Color (Overrides preset)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Banner Grid",
+      "blocks": [
+        {
+          "type": "promo_item",
+          "settings": {
+            "label": "NEW ARRIVALS",
+            "title": "Galaxy S24 Ultra",
+            "bg_class_name": "promo-purple"
+          }
+        },
+        {
+          "type": "promo_item",
+          "settings": {
+            "label": "UP TO 30% OFF",
+            "title": "MacBook Air M3",
+            "bg_class_name": "promo-pink"
+          }
+        },
+        {
+          "type": "promo_item",
+          "settings": {
+            "label": "LATEST TECH",
+            "title": "iPad Pro 11-inch",
+            "bg_class_name": "promo-blue"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

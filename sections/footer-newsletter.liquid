@@ -1,0 +1,431 @@
+{%- style -%}
+  .footer-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 30px 0;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .footer-copyright {
+    flex: 1;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .footer-copyright p {
+    margin: 0;
+  }
+
+  .footer-copyright a {
+    color: #1f33ff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .footer-payment-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+  }
+
+  .footer-payment-label {
+    font-weight: 500;
+    color: #555;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .footer-payment-icons-list {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .footer-payment-icon-item {
+    width: 51px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .footer-payment-icon-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  @media screen and (max-width: 767px) {
+    .footer-bottom-bar {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .footer-payment-icons {
+      margin-left: 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+{%- endstyle -%}
+<footer class="footer-newsletter-section">
+  <div class="homepage-container footer-newsletter-container">
+    <!-- Top Footer: Columns -->
+    <div class="footer-newsletter-row">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'store_info' -%}
+            {%- liquid
+              assign store_title = block.settings.store_heading | default: block.settings.title
+              assign store_desc = block.settings.store_description | default: block.settings.description
+
+              assign phone_val = ''
+              if block.settings.store_phone and settings.store_phone != blank
+                assign phone_val = settings.store_phone
+              elsif block.settings.phone != blank
+                assign phone_val = block.settings.phone
+              endif
+
+              assign address_val = ''
+              if block.settings.store_address and settings.store_address != blank
+                assign address_val = settings.store_address
+              elsif block.settings.address != blank
+                assign address_val = block.settings.address
+              endif
+
+              assign email_val = ''
+              if block.settings.store_email and settings.store_email != blank
+                assign email_val = settings.store_email
+              elsif block.settings.email != blank
+                assign email_val = block.settings.email
+              endif
+            -%}
+            <div class="footer-column footer-about" {{ block.shopify_attributes }}>
+              {%- if store_title != blank -%}
+                <h3 class="footer-col-title">{{ store_title | escape }}</h3>
+              {%- endif -%}
+
+              {%- if store_desc != blank -%}
+                <div class="footer-about-text">{{ store_desc }}</div>
+              {%- endif -%}
+
+              <div class="footer-contact-details">
+                {%- if phone_val != blank -%}
+                  <div class="footer-phone-wrap">
+                    <a href="tel:{{ phone_val | replace: ' ', '' }}" class="footer-large-phone">
+                      {{ phone_val | escape }}
+                    </a>
+                  </div>
+                {%- endif -%}
+
+                {%- if address_val != blank -%}
+                  <div class="footer-contact-item address">
+                    <span>{{ address_val | escape }}</span>
+                  </div>
+                {%- endif -%}
+
+                {%- if email_val != blank -%}
+                  <div class="footer-contact-item email">
+                    <span
+                      ><a href="mailto:{{ email_val }}">{{ email_val | escape }}</a></span
+                    >
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+
+          {%- when 'link_list' -%}
+            <div class="footer-column footer-links" {{ block.shopify_attributes }}>
+              {%- assign footer_menu = linklists[block.settings.menu] -%}
+              {%- if block.settings.title != blank -%}
+                <h3 class="footer-col-title">{{ block.settings.title | escape }}</h3>
+              {%- elsif footer_menu != blank -%}
+                <h3 class="footer-col-title">{{ footer_menu.title | escape }}</h3>
+              {%- endif -%}
+
+              {%- if footer_menu.links.size > 0 -%}
+                <ul class="footer-menu-list">
+                  {%- for link in footer_menu.links -%}
+                    <li>
+                      <a href="{{ link.url }}" aria-label="{{ link.title }}">{{ link.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+
+          {%- when 'newsletter' -%}
+            <div class="footer-column footer-newsletter-col" {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}
+                <h3 class="footer-col-title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.description != blank -%}
+                <p class="footer-newsletter-desc">{{ block.settings.description | escape }}</p>
+              {%- endif -%}
+
+              <div class="footer-newsletter-form-wrap">
+                {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <div class="newsletter-form__field-wrapper">
+                    <div class="footer-newsletter-input-group">
+                      <input
+                        id="NewsletterForm--{{ section.id }}"
+                        type="email"
+                        name="contact[email]"
+                        class="footer-newsletter-input"
+                        value="{{ form.email }}"
+                        placeholder="{{ block.settings.email_placeholder | default: 'Enter your email address' | escape }}"
+                        required
+                        autocapitalize="off"
+                        autocomplete="email"
+                      >
+                      <button
+                        type="submit"
+                        class="footer-newsletter-btn"
+                        name="commit"
+                        id="Subscribe-{{ section.id }}"
+                      >
+                        {{ block.settings.button_label | default: 'SUBSCRIBE' | escape }}
+                      </button>
+                    </div>
+                    {%- if form.posted_successfully? -%}
+                      <p class="success-message" style="color: #39FF14; margin-top: 10px; font-size: 13px;">
+                        Success! Thank you for subscribing.
+                      </p>
+                    {%- endif -%}
+                  </div>
+                {%- endform -%}
+              </div>
+
+              {%- if block.settings.note != blank -%}
+                <p class="footer-newsletter-note">{{ block.settings.note | escape }}</p>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- assign payment_methods = section.settings.payment_methods -%}
+
+    <div class="footer-bottom-bar">
+      <div class="footer-copyright">
+        Copyright ©
+        <a href="" class="footer-copyright-link">Uminex</a>
+        all rights reserved. Powered by
+        <a href="" class="footer-copyright-link">Blueskytechco.</a>
+      </div>
+
+      {%- assign payment_methods = section.settings.payment_methods -%}
+
+      <div class="footer-payment-icons">
+        {%- if payment_methods != blank -%}
+          <span class="footer-payment-label">
+            {{ payment_methods.title | default: 'Payment Method:' }}
+          </span>
+
+          {%- if payment_methods.icons.value != blank -%}
+            <div class="footer-payment-icons-list">
+              {%- for icon in payment_methods.icons.value -%}
+                <span class="footer-payment-icon-item">
+                  {{
+                    icon
+                    | image_url: width: 90
+                    | image_tag: loading: 'lazy', class: 'footer-payment-icon-img', alt: 'Payment method'
+                  }}
+                </span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer (Custom)",
+  "tag": "section",
+  "class": "section-footer-newsletter",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "<p>Copyright © <a href=\"/\">Uminex</a> all rights reserved. Powered by <a href=\"/\">Blueskytechco.</a></p>"
+    },
+    {
+      "type": "metaobject",
+      "id": "payment_methods",
+      "label": "Payment Methods",
+      "metaobject_type": "payment"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "store_info",
+      "name": "About Store Info",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading (Legacy fallback)",
+          "default": "About Store"
+        },
+        {
+          "type": "text",
+          "id": "store_heading",
+          "label": "Heading",
+          "default": "ABOUT THE STORE"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description (Legacy fallback)",
+          "default": "Glozin is a premium Shopify theme with pixel-perfect layouts, responsive structure, and advanced feature sets."
+        },
+        {
+          "type": "richtext",
+          "id": "store_description",
+          "label": "Description",
+          "default": "<p>Got Question? Call us 24/7</p>"
+        },
+        {
+          "type": "text",
+          "id": "address",
+          "label": "Address (Legacy fallback)",
+          "default": "123 Main Street, New York, NY"
+        },
+        {
+          "type": "checkbox",
+          "id": "store_address",
+          "label": "Show Address",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone Number (Legacy fallback)",
+          "default": "+1 (800) 123-4567"
+        },
+        {
+          "type": "checkbox",
+          "id": "store_phone",
+          "label": "Show Phone Number",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email Address (Legacy fallback)",
+          "default": "support@example.com"
+        },
+        {
+          "type": "checkbox",
+          "id": "store_email",
+          "label": "Show Email",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "link_list",
+      "name": "Menu Links List",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Information"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select Menu"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter Subscribe",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Newsletter"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Join 20,000+ subscribers and get a new discount coupon every Saturday."
+        },
+        {
+          "type": "text",
+          "id": "email_placeholder",
+          "label": "Email Placeholder",
+          "default": "Your email address..."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "SUBSCRIBE"
+        },
+        {
+          "type": "textarea",
+          "id": "note",
+          "label": "Form Disclaimer Note",
+          "default": "By entering your email you accept the terms and conditions & privacy policy."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer (Custom)",
+      "blocks": [
+        {
+          "type": "store_info",
+          "settings": {
+            "title": "About Store"
+          }
+        },
+        {
+          "type": "link_list",
+          "settings": {
+            "title": "Information"
+          }
+        },
+        {
+          "type": "link_list",
+          "settings": {
+            "title": "Quick Links"
+          }
+        },
+        {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

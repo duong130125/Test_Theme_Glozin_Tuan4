@@ -77,10 +77,16 @@
       border-bottom: 1px solid #ebebeb;
     }
     .header__inner {
-      height: 86px !important;
+      height: 136px !important;
       display: flex !important;
       align-items: center !important;
       background-color: #FFFFFF !important;
+    }
+    header-inner {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      height: 100% !important;
     }
     .header__menu {
       height: 50px !important;
@@ -93,17 +99,26 @@
     /* Đảm bảo container bên trong chiếm đủ chiều cao để căn giữa */
     .header__topbar > .fluid_container,
     .header__topbar > .container,
+    .header__topbar > .stretch_width,
+    .header__topbar > .full_width,
     .header__inner > .fluid_container,
     .header__inner > .container,
+    .header__inner > .stretch_width,
+    .header__inner > .full_width,
     .header__menu > .fluid_container,
-    .header__menu > .container {
+    .header__menu > .container,
+    .header__menu > .stretch_width,
+    .header__menu > .full_width {
       height: 100%;
-      display: flex;
-      align-items: center;
+      display: flex !important;
+      align-items: center !important;
       width: 100% !important;
       max-width: 1410px !important;
       margin-left: auto !important;
       margin-right: auto !important;
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      box-sizing: border-box !important;
     }
     .header__topbar {
       font-family: 'Bai Jamjuree', sans-serif !important;
@@ -127,7 +142,9 @@
     }
     /* Part 3: Main Header Styles */
     .header__inner .fluid_container,
-    .header__inner .container {
+    .header__inner .container,
+    .header__inner .stretch_width,
+    .header__inner .full_width {
       display: flex !important;
       justify-content: space-between !important;
       align-items: center !important;
@@ -174,6 +191,7 @@
     }
     /* Fixes for Grid layout, Labels, Badges and Padding */
     .header-middle {
+      height: 86px !important;
       display: flex !important;
       justify-content: space-between !important;
       align-items: center !important;
@@ -209,12 +227,16 @@
     }
     /* Part 4: Navigation Bar Styles */
     .header__menu .flex-1 {
-      flex: 0 0 623px !important;
+      flex: 1 1 auto !important;
     }
     .level0 {
       display: flex !important;
       gap: 30px !important;
       align-items: center !important;
+      flex-shrink: 0 !important;
+    }
+    .level0 a {
+      white-space: nowrap !important;
     }
     .header__menu-promo {
       flex: 0 0 227px !important;
@@ -222,7 +244,7 @@
       justify-content: flex-end !important;
       align-items: center !important;
     }
-    .level0 > menu-item:last-child > a {
+    .level0:last-child a {
       color: #E52E2E !important;
     }
   }

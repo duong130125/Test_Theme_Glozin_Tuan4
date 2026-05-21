@@ -1,0 +1,240 @@
+{%- comment -%}
+  Renders a product card for the homepage.
+  Accepts:
+  - card_product: {Object} Product object (required)
+  - section_id: {String} Section ID for unique form IDs (required)
+  - layout: {String} Card layout type: 'small' or 'featured' (default: 'small')
+  - end_time: {String} Countdown target date (required if layout is 'featured')
+  - total_stock: {Number} Total stock for progress bar (optional, default: 50)
+  - sold_stock: {Number} Sold stock for progress bar (optional, default: 28)
+{%- endcomment -%}
+
+{%- liquid
+  assign layout_type = layout | default: 'small'
+  assign current_variant = card_product.selected_or_first_available_variant
+  assign product_form_id = 'quick-add-' | append: section_id | append: '-' | append: card_product.id
+  assign total_qty = total_stock | default: 50
+  assign sold_qty = sold_stock | default: 28
+  
+  # Calculate stock percentage
+  assign stock_percent = sold_qty | times: 100 | divided_by: total_qty
+-%}
+
+{%- if layout_type == 'featured' -%}
+  <!-- Featured Big Card (Today's Offer) -->
+  <div class="featured-deal-card" data-product-id="{{ card_product.id }}">
+    {%- if current_variant.compare_at_price > current_variant.price -%}
+      <div class="featured-badge-label">
+        {%- assign discount = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
+        -{{ discount }}% OFF
+      </div>
+    {%- endif -%}
+
+    <!-- Wishlist Button -->
+    <div class="featured-wishlist-wrap">
+      <button-wishlist
+        tabindex="0"
+        class="pointer btn-hover btn-white rounded-50 p-0 shadow w-35 h-35 inline-flex content-center justify-center align-center"
+        data-product-id="{{ card_product.id }}"
+        data-action="add"
+        style="width: 35px; height: 35px; border-radius: 50%; border: 1px solid #eee; background: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;"
+      >
+        <svg width="14" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #666; width: 14px; height: 14px;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+        </svg>
+      </button-wishlist>
+    </div>
+
+    <!-- Product Image -->
+    <div class="featured-image-wrap">
+      <a href="{{ card_product.url }}" class="featured-image-link">
+        {%- if card_product.featured_media != blank -%}
+          <img src="{{ card_product.featured_media | image_url: width: 450 }}"
+               alt="{{ card_product.featured_media.alt | escape }}"
+               loading="lazy"
+               width="320"
+               height="320"
+               class="featured-image">
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg featured-image' }}
+        {%- endif -%}
+      </a>
+    </div>
+
+    <!-- Product Information -->
+    <div class="featured-info-wrap">
+      <a href="{{ card_product.url }}" class="featured-title">
+        {{ card_product.title }}
+      </a>
+      
+      <!-- Rating Stars -->
+      <div class="featured-rating">
+        {%- render 'rating-stars', card_product: card_product -%}
+      </div>
+
+      <!-- Price -->
+      <div class="featured-price">
+        <span>{{ current_variant.price | money }}</span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="featured-price-compare">{{ current_variant.compare_at_price | money }}</span>
+        {%- endif -%}
+      </div>
+
+      <!-- Countdown Timer Section -->
+      {%- if end_time != blank -%}
+        <div class="featured-timer-section">
+          <div class="featured-timer-title">Hurry up! Offer ends in:</div>
+          {%- render 'countdown-timer', end_time: end_time -%}
+        </div>
+      {%- endif -%}
+
+      <!-- Stock Sold Progress Bar -->
+      <div class="featured-stock-section">
+        <div class="stock-label-wrap">
+          <span>Sold: <strong>{{ sold_qty }}/{{ total_qty }}</strong></span>
+          <span>{{ stock_percent }}%</span>
+        </div>
+        <div class="stock-bar-outer">
+          <div class="stock-bar-inner" style="width: {{ stock_percent }}%;"></div>
+        </div>
+      </div>
+
+      <!-- Add to Cart Form -->
+      <div class="featured-action-wrap">
+        <product-form class="product-item__product-form">
+          {%- form 'product',
+            card_product,
+            id: product_form_id,
+            class: 'form',
+            novalidate: 'novalidate',
+            data-type: 'add-to-cart-form'
+          -%}
+            <input
+              type="hidden"
+              name="id"
+              value="{{ current_variant.id }}"
+              disabled
+            >
+            <button
+              id="{{ product_form_id }}-submit"
+              type="submit"
+              name="add"
+              class="product__add-cart product-item__button-submit transition-btn btn"
+              {% if current_variant.available == false %}
+                disabled
+              {% endif %}
+            >
+              <span class="btn-action">
+                {%- if current_variant.available -%}
+                  ADD TO CART
+                {%- else -%}
+                  SOLD OUT
+                {%- endif -%}
+              </span>
+            </button>
+          {%- endform -%}
+        </product-form>
+      </div>
+    </div>
+  </div>
+
+{%- else -%}
+  <!-- Small Card Layout -->
+  <div class="small-product-card" data-product-id="{{ card_product.id }}">
+    {%- if current_variant.compare_at_price > current_variant.price -%}
+      <div class="card-badge-label" style="position: absolute; top: 15px; left: 15px; background-color: #e53e3e; color: #ffffff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; z-index: 3; text-transform: uppercase;">
+        {%- assign discount = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
+        -{{ discount }}%
+      </div>
+    {%- endif -%}
+    <!-- Wishlist Button -->
+    <div class="card-wishlist-btn">
+      <button-wishlist
+        tabindex="0"
+        class="pointer btn-hover btn-white rounded-50 p-0 shadow w-35 h-35 inline-flex content-center justify-center align-center"
+        data-product-id="{{ card_product.id }}"
+        data-action="add"
+        style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #eee; background: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;"
+      >
+        <svg width="12" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #666; width: 12px; height: 12px;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+        </svg>
+      </button-wishlist>
+    </div>
+
+    <!-- Image -->
+    <div class="card-image-wrap">
+      <a href="{{ card_product.url }}" class="block">
+        {%- if card_product.featured_media != blank -%}
+          <img src="{{ card_product.featured_media | image_url: width: 350 }}"
+               alt="{{ card_product.featured_media.alt | escape }}"
+               loading="lazy"
+               width="220"
+               height="220"
+               class="card-image">
+        {%- else -%}
+          {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg card-image' }}
+        {%- endif -%}
+      </a>
+    </div>
+
+    <!-- Information -->
+    <div class="card-info">
+      <a href="{{ card_product.url }}" class="card-title">
+        {{ card_product.title }}
+      </a>
+      
+      <!-- Rating -->
+      <div class="card-rating">
+        {%- render 'rating-stars', card_product: card_product -%}
+      </div>
+
+      <!-- Price -->
+      <div class="card-price">
+        <span>{{ current_variant.price | money }}</span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="card-price-compare">{{ current_variant.compare_at_price | money }}</span>
+        {%- endif -%}
+      </div>
+
+      <!-- Stock Status (Figma match) -->
+      {%- liquid
+        assign qty_tracked = false
+        if current_variant.inventory_management != blank
+          assign qty_tracked = true
+        endif
+      -%}
+      <div class="card-stock-status-wrap">
+        {%- if qty_tracked -%}
+          {%- if current_variant.inventory_quantity > 0 -%}
+            {%- if current_variant.inventory_quantity > 5 -%}
+              <div class="card-stock-status in-stock">
+                <span class="stock-dot"></span> In stock, {{ current_variant.inventory_quantity }} products
+              </div>
+            {%- else -%}
+              <div class="card-stock-status low-stock">
+                <span class="stock-dot"></span> Only {{ current_variant.inventory_quantity }} left in stock
+              </div>
+            {%- endif -%}
+          {%- else -%}
+            <div class="card-stock-status out-of-stock">
+              <span class="stock-dot"></span> Out of stock
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          {%- comment -%} Simulate stock numbers between 2 and 92 for UI representation consistency {%- endcomment -%}
+          {%- assign simulated_stock = card_product.id | modulo: 90 | plus: 2 -%}
+          {%- if simulated_stock > 8 -%}
+            <div class="card-stock-status in-stock">
+              <span class="stock-dot"></span> In stock, {{ simulated_stock }} products
+            </div>
+          {%- else -%}
+            <div class="card-stock-status low-stock">
+              <span class="stock-dot"></span> Only {{ simulated_stock }} left in stock
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

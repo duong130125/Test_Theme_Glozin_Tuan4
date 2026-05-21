@@ -1,0 +1,19 @@
+{%- comment -%}
+  Renders a countdown timer using the theme's custom element class.
+  Accepts:
+  - end_time: {String} Date string format (e.g. MM-DD-YYYY or YYYY-MM-DD)
+  - class: {String} Additional classes (optional)
+{%- endcomment -%}
+
+{%- if end_time != blank -%}
+  <countdown-timer
+    class="deal-timer-container {{ class }}"
+    data-endtime="{{ end_time }}"
+    data-format="dd:hh:mm:ss"
+    data-days="Days"
+    data-hours="Hrs"
+    data-mins="Mins"
+    data-secs="Secs"
+  >
+  </countdown-timer>
+{%- endif -%}

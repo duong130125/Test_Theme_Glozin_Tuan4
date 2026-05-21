@@ -2096,11 +2096,14 @@ minicart-item-edit.loading .edit-icon {
   margin-right: auto;
 }
 .header__layout-2 .header__menu .horizontal-list {
-  max-width: 623px;
+  max-width: none;
   display: flex;
   gap: 30px;
   align-items: center;
   flex-wrap: nowrap;
+}
+.header__layout-2 .header__menu .horizontal-list .level0 a {
+  white-space: nowrap !important;
 }
 .header__layout-2 .header__menu-promo {
   flex: 0 0 227px;
@@ -2110,8 +2113,9 @@ minicart-item-edit.loading .edit-icon {
   font-size: 13px !important;
   font-weight: 600 !important;
 }
-.header__layout-2 .header__menu .horizontal-list > menu-item:last-child a {
-  color: #E52E2E !important;
+.header__layout-2 .header__menu .horizontal-list > li:last-child a {
+  color: #DC323C !important;
+  font-weight: 600 !important;
 }
 
 @media (max-width: 768px) {
@@ -2261,4 +2265,28 @@ minicart-item-edit.loading .edit-icon {
   pointer-events: none;
 }
 
+.custom-payment-icons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 
+.payment-icon-item {
+  height: 28px;
+  padding: 4px 10px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-icon-item img {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}

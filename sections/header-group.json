@@ -11,46 +11,6 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "top_bar_CbXNYj": {
-      "type": "top-bar",
-      "blocks": {
-        "text_slider_LFaC38": {
-          "type": "text_slider",
-          "settings": {
-            "text1": "Sign up for 10% off your first order. <a href=\"/account/\" title=\"/account/\"><strong>Sign Up</strong></a>",
-            "text2": "Summer sale discount off 50%. <a href=\"/collections/activewear\" title=\"Activewear\"><strong>Shop Sale</strong></a>",
-            "text3": "Coats—every friday 75% Off . <a href=\"/collections/blazers\" title=\"Blazers\"><strong>Shop Sale</strong></a>",
-            "change_every": 3,
-            "hidden_on_mobile": false
-          }
-        },
-        "cur_lang_aPwfT9": {
-          "type": "cur_lang",
-          "settings": {
-            "menu_link": "",
-            "show_currency": true,
-            "show_language": false,
-            "show_our_store": true,
-            "hidden_on_mobile": true
-          }
-        }
-      },
-      "block_order": [
-        "text_slider_LFaC38",
-        "cur_lang_aPwfT9"
-      ],
-      "settings": {
-        "section_width": "stretch_width",
-        "color_scheme": "default",
-        "show_mobile": true,
-        "show_separator_line": false,
-        "uppercase": false,
-        "font_size": 13,
-        "font_weight": "body_weight",
-        "padding_top": 10,
-        "padding_bottom": 10
-      }
-    },
     "header": {
       "type": "header-layout2",
       "blocks": {
@@ -185,7 +145,6 @@
     }
   },
   "order": [
-    "top_bar_CbXNYj",
     "header"
   ]
 }
