@@ -74,7 +74,7 @@
             endif
           -%}
           <li class="level0{% if has_dropdown %} menu-parent menu-parent__horizontal dropdown-menu{% else %} single{% endif %}">
-            <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
+            <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color">
               <a
                 class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center"
                 href="{{ url }}"
@@ -154,7 +154,7 @@
               {%- liquid
                 assign label = block_st.item_label
               -%}
-              <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
+              <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color">
               <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}{% if link.links.size > 0 and redirect_to_link == blank %} redirect-to-link{% endif %}" href="{{ link.url }}"{% if block_st.open-link-newtab != blank %} target="_blank"{% endif %}>
                 <span>{{ link.title }}</span>
                 {%- if label != blank and label != 'unset' -%}
@@ -450,7 +450,7 @@
               class="level0{% if link.links.size > 0 %} menu-parent menu-parent__horizontal dropdown-menu{% else %} single{% endif %}"
               {{ block.shopify_attributes }}
             >
-              <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color  px-15">
+              <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color">
                 <a
                   class="{% if link.links.size > 0 and section_st.redirect_to_link == false %}redirect-to-link {% endif %}no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}"
                   href="{{ link.url }}"
@@ -658,7 +658,7 @@
               {%- liquid
                 assign label = block_st.item_label
               -%}
-              <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
+              <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color">
               <a class="no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}{% if link.links.size > 0 and redirect_to_link == blank %} redirect-to-link{% endif %}" href="{{ link.url }}"{% if block_st.open-link-newtab != blank %} target="_blank"{% endif %}>
                 <span>{{ link.title }}</span>
                 {%- if label != blank and label != 'unset' -%}
@@ -954,7 +954,7 @@
               class="level0{% if link.links.size > 0 %} menu-parent menu-parent__horizontal dropdown-menu{% else %} single{% endif %}"
               {{ block.shopify_attributes }}
             >
-              <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color px-15">
+              <menu-item class="relative static-1025 flex justify-between align-center border-bottom border-bottom-1025-0 header-color">
                 <a
                   class="{% if link.links.size > 0 and section_st.redirect_to_link == false %}redirect-to-link {% endif %}no-underline py-10 relative lh-normal inline-flex min-h-55 min-h-1025-50 z-1 align-center{% if theme_st.menu_font == 'heading_font' %} heading-style{% endif %}{% if uppercase_first %} uppercase{% endif %}"
                   href="{{ link.url }}"
@@ -1014,41 +1014,6 @@
           {% endif %}
         {%- endfor -%}
         {%- endif -%}
-        {%- if recently_viewed -%}
-          <li class="level0 hidden-1025">
-            <a
-              class="no-underline py-10 lh-normal flex border-bottom border-bottom-1025-0 min-h-55 min-h-1025-50 align-center{% if uppercase_first %} uppercase{% endif %}"
-              href="/pages/recently-view-products"
-              aria-label="{{ 'templates.rvp.title' | t }}"
-            >
-              <svg
-                width="17"
-                height="18"
-                viewBox="0 0 17 18"
-                class="me-10"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <use href="#icon-recently-view" />
-              </svg>
-              {{ 'templates.rvp.title' | t }}
-            </a>
-          </li>
-        {% endif %}
-        {%- if wishlist -%}
-          <li class="level0 hidden-1025">
-            <a
-              class="no-underline py-10 lh-normal flex border-bottom border-bottom-1025-0 min-h-55 min-h-1025-50 align-center{% if uppercase_first %} uppercase{% endif %}"
-              href="/pages/wishlist"
-              aria-label="{{ 'templates.wishlist.wishlist' | t }}"
-            >
-              <svg width="17" height="15" viewBox="0 0 19 16" class="me-10" fill="none">
-                <use href="#icon-wishlist-header" />
-              </svg>
-              {{ 'templates.wishlist.wishlist' | t }}
-            </a>
-          </li>
-        {% endif %}
       </ul>
       {% if menu_mobile_tab == 'custom-collections' and collection_list != blank %}
         {%- render 'categories-menu-mobile' | section_st: section_st -%}

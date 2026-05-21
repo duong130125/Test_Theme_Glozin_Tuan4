@@ -61,11 +61,6 @@ body {
   width: 100%;
 }
 
-:where(.stretch_width) {
-  padding-left: var(--bs-gutter-x);
-  padding-right: var(--bs-gutter-x);
-}
-
 @media (min-width: 1025px) {
 
   body.enable-vertical-menu .content-for-layout,
