@@ -13,16 +13,17 @@
   assign layout_type = layout | default: 'small'
   assign current_variant = card_product.selected_or_first_available_variant
   assign product_form_id = 'quick-add-' | append: section_id | append: '-' | append: card_product.id
-  assign total_qty = total_stock | default: 50
-  assign sold_qty = sold_stock | default: 28
-  
-  # Calculate stock percentage
-  assign stock_percent = sold_qty | times: 100 | divided_by: total_qty
 -%}
 
+
 {%- if layout_type == 'featured' -%}
+  {%- assign total_qty = total_stock | default: 50 -%}
+  {%- assign sold_qty = sold_stock | default: 28 -%}
+  {%- assign stock_percent = sold_qty | times: 100 | divided_by: total_qty -%}
+
   <!-- Featured Big Card (Today's Offer) -->
   <div class="featured-deal-card" data-product-id="{{ card_product.id }}">
+
     {%- if current_variant.compare_at_price > current_variant.price -%}
       <div class="featured-badge-label">
         {%- assign discount = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
@@ -198,14 +199,8 @@
       </div>
 
       <!-- Stock Status (Figma match) -->
-      {%- liquid
-        assign qty_tracked = false
-        if current_variant.inventory_management != blank
-          assign qty_tracked = true
-        endif
-      -%}
       <div class="card-stock-status-wrap">
-        {%- if qty_tracked -%}
+        {%- if current_variant.inventory_management != blank -%}
           {%- if current_variant.inventory_quantity > 0 -%}
             {%- if current_variant.inventory_quantity > 5 -%}
               <div class="card-stock-status in-stock">
@@ -222,19 +217,21 @@
             </div>
           {%- endif -%}
         {%- else -%}
-          {%- comment -%} Simulate stock numbers between 2 and 92 for UI representation consistency {%- endcomment -%}
-          {%- assign simulated_stock = card_product.id | modulo: 90 | plus: 2 -%}
-          {%- if simulated_stock > 8 -%}
+          {%- if current_variant.available -%}
             <div class="card-stock-status in-stock">
-              <span class="stock-dot"></span> In stock, {{ simulated_stock }} products
+              <span class="stock-dot"></span> In stock
             </div>
           {%- else -%}
-            <div class="card-stock-status low-stock">
-              <span class="stock-dot"></span> Only {{ simulated_stock }} left in stock
+            <div class="card-stock-status out-of-stock">
+              <span class="stock-dot"></span> Out of stock
             </div>
           {%- endif -%}
         {%- endif -%}
       </div>
+
+
+
+
     </div>
   </div>
 {%- endif -%}
