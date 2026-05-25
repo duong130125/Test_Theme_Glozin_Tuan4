@@ -61,8 +61,9 @@
 {%- style -%}
   @media screen and (min-width: 1025px) {
     .header {
-      height: 176px !important;
-      background-color: #FFFFFF !important;
+      height: auto !important;
+      min-height: 176px !important;
+      background-color: #ffffff !important;
       display: flex !important;
       flex-direction: column !important;
       box-sizing: border-box !important;
@@ -74,13 +75,14 @@
       display: flex !important;
       align-items: center !important;
       background-color: #FFFFFF !important;
-      border-bottom: 1px solid #ebebeb;
+      border-bottom: 1px solid #E5E8EC;
     }
     .header__inner {
       height: 136px !important;
       display: flex !important;
       align-items: center !important;
-      background-color: #FFFFFF !important;
+      background-color: #ffffff !important;
+      border-bottom: 1px solid #E5E8EC !important;
     }
     header-inner {
       display: flex !important;
@@ -89,12 +91,7 @@
       height: 100% !important;
     }
     .header__menu {
-      height: 50px !important;
-      min-height: 50px !important;
-      display: flex !important;
-      align-items: center !important;
-      background-color: #FFFFFF !important;
-      border-top: 1px solid #ebebeb;
+      background-color: #ffffff !important;
     }
     /* Đảm bảo container bên trong chiếm đủ chiều cao để căn giữa */
     .header__topbar > .fluid_container,
@@ -124,6 +121,7 @@
       line-height: 100% !important;
     }
     .header__topbar-left span {
+      color: #515d66 !important;
       font-weight: 500 !important;
     }
     .header__topbar-left a {
@@ -134,7 +132,6 @@
       display: inline-block !important;
       width: 1px !important;
       height: 14px !important;
-      background-color: #ebebeb !important;
       vertical-align: middle;
       font-size: 0 !important; /* Hide pipe character */
     }
@@ -146,46 +143,6 @@
       display: flex !important;
       justify-content: space-between !important;
       align-items: center !important;
-    }
-    .header__logo {
-      flex: 0 0 141px !important;
-    }
-    .header__logo img {
-      width: 141px !important;
-      height: 43px !important;
-      object-fit: contain;
-    }
-    .header-search__mega {
-      flex: 0 0 782px !important;
-      height: 45px !important;
-      border: 1px solid #ebebeb;
-      border-radius: 6px;
-      display: flex !important;
-      align-items: center !important;
-    }
-    .header__action {
-      flex: 0 0 auto !important;
-      display: flex !important;
-      gap: 20px !important;
-      align-items: center !important;
-    }
-    .header__account-link, .header-account-popup {
-      width: 90px !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 10px !important;
-    }
-    .header__wishlist-wrapper {
-      width: 36px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-    }
-    .header__minicart-wrapper {
-      width: 102px !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 10px !important;
     }
     /* Fixes for Grid layout, Labels, Badges and Padding */
     .header-middle {
@@ -217,10 +174,12 @@
       font-weight: 600 !important;
     }
     .h-count {
-      background-color: #E52E2E !important;
-      color: #FFFFFF !important;
+      background-color: #e52e2e !important;
+      color: #ffffff !important;
     }
-    .header__inner, .header__menu, .header__topbar {
+    .header__inner,
+    .header__menu,
+    .header__topbar {
       padding: 0 !important;
     }
     /* Part 4: Navigation Bar Styles */
@@ -236,14 +195,8 @@
     .level0 a {
       white-space: nowrap !important;
     }
-    .header__menu-promo {
-      flex: 0 0 227px !important;
-      display: flex !important;
-      justify-content: flex-end !important;
-      align-items: center !important;
-    }
     .level0:last-child a {
-      color: #E52E2E !important;
+      color: #e52e2e !important;
     }
   }
 {%- endstyle -%}
@@ -281,17 +234,17 @@
   {%- endstyle -%}
 {% endif %}
 <header
-  class="header relative gradient remove_spacing color-{{ color_scheme }}{{ transparent_class }}{% if transparent_mobile %}{{ transparent_mobile_class }}{% endif %}{% if request.page_type == 'index' and section_st.separator_line == 'homepage' %} border-bottom{% endif %}{% if section_st.separator_line == 'all-page' %} border-bottom{% endif %}{% if request.page_type != 'index' and section_st.separator_line == 'inner_page' %} border-bottom{% endif %} popup-search-mobile"
+  class="gradient remove_spacing color-{{ color_scheme }}{{ transparent_class }}{% if transparent_mobile %}{{ transparent_mobile_class }}{% endif %}{% if request.page_type == 'index' and section_st.separator_line == 'homepage' %} border-bottom{% endif %}{% if section_st.separator_line == 'all-page' %} border-bottom{% endif %}{% if request.page_type != 'index' and section_st.separator_line == 'inner_page' %} border-bottom{% endif %} popup-search-mobile"
   data-section-id="{{ section.id }}"
   data-sticky="{{ sticky_header_type }}"
   data-sticky-mobile="{{ sticky_mobile }}"
   style="{{ style | strip | strip_newlines }}{% if transparent %}{% endif %}--transparent-color: {{ transparent_color }};"
 >
-  <div class="header__topbar">
+  <div class="header__topbar bg-light">
     <div class="{{ section_width }}">
       <div class="flex justify-between align-center gap-20 text-xs font-weight-500">
         <div class="header__topbar-left">
-          <span>You are a student and students get 20% discount. </span>
+          <span>You are a student and students get 20% discount.</span>
           <a
             href="/pages/student-discount"
             class="text-decoration-underline font-weight-600 heading-color transition-color"

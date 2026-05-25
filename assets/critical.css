@@ -4286,11 +4286,6 @@ nav.mobile {
 
 /* Top Utility Bar */
 div.header__topbar.bg-light {
-  background-color: #f5f5f5 !important;
-  background: #f5f5f5 !important;
-  border-bottom: 1px solid #ebebeb !important;
-  font-size: 13px !important;
-  line-height: 1.4 !important;
   display: block !important;
   padding: 8px 0 !important;
   position: relative !important;
@@ -4298,22 +4293,16 @@ div.header__topbar.bg-light {
 }
 .header__topbar,
 .header__topbar * {
-  color: #111111 !important;
+  color: #212529 !important;
   text-decoration: none !important;
 }
-.header__topbar a, 
-.header__topbar span, 
+.header__topbar a,
+.header__topbar span,
 .header__topbar button,
 .header__topbar .button-localization,
 .header__topbar .heading-color {
   font-size: 13px !important;
   transition: color 0.2s ease !important;
-}
-.header__topbar a:hover,
-.header__topbar button:hover,
-.header__topbar a:hover *,
-.header__topbar button:hover * {
-  color: #2B38D1 !important;
 }
 
 /* Header Search Bar - Mega Style */
@@ -4325,7 +4314,7 @@ div.header__topbar.bg-light {
   background: #fff !important;
 }
 .header-search__mega .header-search__categories .categories-toggle {
-  background: #f5f5f5 !important;
+  background: #FFFFFF !important;
   border: none !important;
   border-right: 1px solid #ebebeb !important;
   height: 100% !important;
@@ -4373,11 +4362,6 @@ div.header__topbar.bg-light {
 .header__action {
   gap: 25px !important;
 }
-.header__action .text-xs {
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  white-space: nowrap !important;
-}
 .header__wishlist-wrapper,
 .header__minicart-wrapper,
 .header__account-link,
@@ -4414,8 +4398,6 @@ div.header__topbar.bg-light {
 
 /* Third Row Menu Styling */
 .header__menu.border-top-1025 {
-  border-top: 1px solid #ebebeb !important;
-  border-bottom: 1px solid #ebebeb !important;
   background-color: #ffffff !important;
   padding-left: 0 !important;
   padding-right: 0 !important;

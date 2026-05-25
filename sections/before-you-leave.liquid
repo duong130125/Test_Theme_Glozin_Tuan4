@@ -1,4 +1,4 @@
-{{ 'before-you-leave.css' | asset_url | stylesheet_tag }}
+{% comment %} {{ 'before-you-leave.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign section_st = section.settings
   assign th_st = settings
@@ -228,4 +228,4 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %} {% endcomment %}
