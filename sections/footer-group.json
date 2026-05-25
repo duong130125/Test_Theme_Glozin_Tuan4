@@ -11,8 +11,63 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
-    "footer": {
+    "footer_newsletter_RFXXGA": {
       "type": "footer-newsletter",
+      "blocks": {
+        "store_info_9kNwHh": {
+          "type": "store_info",
+          "settings": {
+            "title": "About Store",
+            "store_heading": "ABOUT THE STORE",
+            "description": "Glozin is a premium Shopify theme with pixel-perfect layouts, responsive structure, and advanced feature sets.",
+            "store_description": "<p>Got Question? Call us 24/7</p>",
+            "address": "123 Main Street, New York, NY",
+            "store_address": true,
+            "phone": "+1 (800) 123-4567",
+            "store_phone": true,
+            "email": "support@example.com",
+            "store_email": true
+          }
+        },
+        "link_list_9yfMRp": {
+          "type": "link_list",
+          "settings": {
+            "title": "Information",
+            "menu": "footer"
+          }
+        },
+        "link_list_acpVab": {
+          "type": "link_list",
+          "settings": {
+            "title": "Quick Links",
+            "menu": "quick-links"
+          }
+        },
+        "newsletter_j8EaEp": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter",
+            "description": "Join 20,000+ subscribers and get a new discount coupon every Saturday.",
+            "email_placeholder": "Your email address...",
+            "button_label": "SUBSCRIBE",
+            "note": "By entering your email you accept the terms and conditions & privacy policy."
+          }
+        }
+      },
+      "block_order": [
+        "store_info_9kNwHh",
+        "link_list_9yfMRp",
+        "link_list_acpVab",
+        "newsletter_j8EaEp"
+      ],
+      "name": "Footer (Custom)",
+      "settings": {
+        "copyright_text": "<p>Copyright © <a href=\"/\">Uminex</a> all rights reserved. Powered by <a href=\"/\">Blueskytechco.</a></p>",
+        "payment_methods": "payment-ydkemugp"
+      }
+    },
+    "footer": {
+      "type": "footer",
       "blocks": {
         "store_info_tUhcyD": {
           "type": "store_info",
@@ -60,6 +115,7 @@
         "link_list_x4zwRH",
         "newsletter_Rk8BD6"
       ],
+      "disabled": true,
       "settings": {
         "section_width": "fluid_container",
         "color_scheme": "scheme-2b5c6c91-201d-4fb1-aba3-e6d562656976",
@@ -82,6 +138,7 @@
     }
   },
   "order": [
+    "footer_newsletter_RFXXGA",
     "footer"
   ]
 }
