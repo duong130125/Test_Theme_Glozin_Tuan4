@@ -1,77 +1,230 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero_banner_custom": {
-      "type": "hero-banner",
-      "settings": {
-        "bg_color": "#111111",
-        "sub_heading": "GAMEPAD CONSOLE",
-        "subhead_color": "#FFC107",
-        "heading": "<p>Today's Offer Skin <span class=\"italic\">Gamepad<\/span> 2022<\/p>",
-        "description": "Get 30% Off On Gamepad Skin With Code: 'GAME2022'",
-        "button_label": "SHOP NOW",
-        "button_link": "shopify:\/\/collections\/best-seller",
-        "product_image": "shopify:\/\/shop_images\/main-slider1.jpg"
-      }
-    },
-    "promo_banner_grid_custom": {
-      "type": "promo-grid",
+    "slideshow_8KKtNU": {
+      "type": "slideshow",
       "blocks": {
-        "promo_1": {
-          "type": "promo_item",
+        "slider_item_f1Pq9K": {
+          "type": "slider_item",
           "settings": {
-            "label": "Trending New Phone Pro",
-            "title": "Save 20% On Products",
-            "link_text": "Shop Now",
-            "link_url": "shopify:\/\/collections\/smartphone",
-            "image": "shopify:\/\/shop_images\/collection_img_1.jpg",
-            "bg_class_name": "promo-purple"
+            "image": "shopify://shop_images/Slider.png",
+            "overlay_opacity": 30,
+            "slider_effect": "effect_fadeinup",
+            "subheading": "<span style=\"color: #FFC107;\">GAMEPAD CONSOLE</span>",
+            "heading": "Today's Offer <span style=\"color: #39FF14;\">Skin Gamepad</span> 2022",
+            "description": "",
+            "first_button_label": "SHOP NOW",
+            "first_button_link": "shopify://collections/best-seller",
+            "first_button_style": false,
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_button_style": true,
+            "content_alignment": "left",
+            "content_position": "middle-left",
+            "content_width": "full_width",
+            "content_max_width": 45,
+            "content_padding_block": 80,
+            "content_padding_inline": 80,
+            "show_content_background": false,
+            "content_background": "#000000",
+            "content_box_opacity": 40,
+            "content_alignment_mobile": "center"
           }
         },
-        "promo_2": {
-          "type": "promo_item",
+        "slider_item_iphone": {
+          "type": "slider_item",
           "settings": {
-            "label": "Top Product MateBook Pro 2022",
-            "title": "Top Quality Products",
-            "link_text": "Shop Now",
-            "link_url": "shopify:\/\/collections\/laptop-accessories",
-            "image": "shopify:\/\/shop_images\/collection_img_2.jpg",
-            "bg_class_name": "promo-pink"
+            "image": "shopify://shop_images/banner-1.png",
+            "overlay_opacity": 30,
+            "slider_effect": "effect_fadeinup",
+            "subheading": "<span style=\"color: #FFC107;\">IPHONE PRO</span>",
+            "heading": "New Brand <span style=\"color: #39FF14;\">iPhone 13 Pro</span> 2022",
+            "description": "",
+            "first_button_label": "SHOP NOW",
+            "first_button_link": "shopify://collections/best-seller",
+            "first_button_style": false,
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_button_style": true,
+            "content_alignment": "left",
+            "content_position": "middle-left",
+            "content_width": "full_width",
+            "content_max_width": 45,
+            "content_padding_block": 80,
+            "content_padding_inline": 80,
+            "show_content_background": false,
+            "content_background": "#000000",
+            "content_box_opacity": 40,
+            "content_alignment_mobile": "center"
           }
         },
-        "promo_3": {
-          "type": "promo_item",
+        "slider_item_laptop": {
+          "type": "slider_item",
           "settings": {
-            "label": "iPad Pro Up To 20% Off",
-            "title": "20 Days Return Products",
-            "link_text": "Shop Now",
-            "link_url": "shopify:\/\/collections\/wearable-tech",
-            "image": "shopify:\/\/shop_images\/collection_img_3.jpg",
-            "bg_class_name": "promo-blue"
+            "image": "shopify://shop_images/banner-2.png",
+            "overlay_opacity": 30,
+            "slider_effect": "effect_fadeinup",
+            "subheading": "<span style=\"color: #FFC107;\">LAPTOP PRO</span>",
+            "heading": "Top Quality <span style=\"color: #39FF14;\">MacBook Pro</span> 2022",
+            "description": "",
+            "first_button_label": "SHOP NOW",
+            "first_button_link": "shopify://collections/best-seller",
+            "first_button_style": false,
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_button_style": true,
+            "content_alignment": "left",
+            "content_position": "middle-left",
+            "content_width": "full_width",
+            "content_max_width": 45,
+            "content_padding_block": 80,
+            "content_padding_inline": 80,
+            "show_content_background": false,
+            "content_background": "#000000",
+            "content_box_opacity": 40,
+            "content_alignment_mobile": "center"
           }
         }
       },
       "block_order": [
-        "promo_1",
-        "promo_2",
-        "promo_3"
+        "slider_item_f1Pq9K",
+        "slider_item_iphone",
+        "slider_item_laptop"
       ],
+      "custom_css": [
+        ".h-full_screen {--height-topbar: 41px;}",
+        "@media (max-width: 767.988px) {.sec__content {align-items: end; padding-bottom: 30px; }}",
+        ".btn-primary {background: #ffffff !important; color: #111111 !important; text-transform: uppercase; border: none;}"
+      ],
+      "settings": {
+        "section_width": "full_width",
+        "slide_height": "full_screen",
+        "desktop_height": 760,
+        "mobile_height": 380,
+        "color_scheme": "",
+        "slide_effect": "fade",
+        "reveal_slideshow": false,
+        "show_arrow": true,
+        "carousel_pagination": "show_dots",
+        "pagination_position": "center",
+        "autoplay": true,
+        "autorotate_speed": 5,
+        "subheading_font_size": 16,
+        "subheading_font_weight": "subheading_weight",
+        "subheading_spacing_bottom": 16,
+        "heading_font_size": 60,
+        "heading_font_weight": "heading_weight",
+        "heading_uppercase": false,
+        "heading_spacing_bottom": 20,
+        "des_font_size": 16,
+        "des_font_weight": "body_weight",
+        "des_spacing_bottom": 30,
+        "content_below_image": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "reset_spacing": false
+      }
+    },
+    "promo_grid_PHXbTq": {
+      "type": "promo-grid",
+      "blocks": {
+        "promo_item_BBJGfB": {
+          "type": "promo_item",
+          "settings": {
+            "label": "NEW ARRIVALS",
+            "title": "Galaxy S24 Ultra",
+            "link_text": "Shop Now",
+            "link_url": "",
+            "bg_class_name": "promo-purple",
+            "custom_bg_color": ""
+          }
+        },
+        "promo_item_cai6UR": {
+          "type": "promo_item",
+          "settings": {
+            "label": "NEW ARRIVALS",
+            "title": "Galaxy S24 Ultra",
+            "link_text": "Shop Now",
+            "link_url": "",
+            "bg_class_name": "promo-purple",
+            "custom_bg_color": ""
+          }
+        },
+        "promo_item_bkTjFy": {
+          "type": "promo_item",
+          "settings": {
+            "label": "UP TO 30% OFF",
+            "title": "MacBook Air M3",
+            "link_text": "Shop Now",
+            "link_url": "",
+            "bg_class_name": "promo-pink",
+            "custom_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "promo_item_BBJGfB",
+        "promo_item_cai6UR",
+        "promo_item_bkTjFy"
+      ],
+      "name": "Promo Banner Grid",
       "settings": {}
     },
-    "today_offer_deal_custom": {
-      "type": "deal-products",
+    "featured_collection_TCP844": {
+      "type": "featured-collection",
+      "custom_css": [],
+      "name": "t:names.featured_collection",
       "settings": {
-        "title": "Today's Offer",
-        "featured_product": "crossover-long-sleeve-crop-top-copy",
-        "countdown_time": "2026-12-31",
-        "total_stock": 40,
-        "sold_stock": 28,
-        "collection": "best-seller"
+        "section_width": "fluid_container",
+        "color_scheme": "",
+        "heading": "TODAY'S OFFER",
+        "description": "",
+        "show_view_all_button": false,
+        "space_between_header": true,
+        "header_size": "medium",
+        "header_alignment": "center",
+        "show_header_on_mobile": false,
+        "enable_collection_deal": true,
+        "messages": "Hurry up! Offer ends in:",
+        "end_time": "09-22-2026",
+        "timer_style": "default",
+        "collections_type": "grid",
+        "collection": "best-seller",
+        "items_to_show": 9,
+        "items_per_row": 5,
+        "rows_on_desktop": 2,
+        "enable_load_more": false,
+        "button_label": "Load more",
+        "column_gap": 20,
+        "show_arrow": false,
+        "carousel_pagination": "show_dots_on_mobile",
+        "infinite": false,
+        "autoplay": false,
+        "autorotate_speed": 5,
+        "reveal": false,
+        "equal_height_adjustment": false,
+        "sticky_block": false,
+        "content_width": 30,
+        "block_position": "left",
+        "carousel_on_mobile": false,
+        "items_per_row_mobile": 2,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "reset_spacing": false
       }
     }
   },
   "order": [
-    "hero_banner_custom",
-    "promo_banner_grid_custom",
-    "today_offer_deal_custom"
+    "slideshow_8KKtNU",
+    "promo_grid_PHXbTq",
+    "featured_collection_TCP844"
   ]
 }
