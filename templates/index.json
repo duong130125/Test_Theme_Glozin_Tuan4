@@ -133,51 +133,6 @@
         "reset_spacing": false
       }
     },
-    "promo_grid_PHXbTq": {
-      "type": "promo-grid",
-      "blocks": {
-        "promo_item_BBJGfB": {
-          "type": "promo_item",
-          "settings": {
-            "label": "NEW ARRIVALS",
-            "title": "Galaxy S24 Ultra",
-            "link_text": "Shop Now",
-            "link_url": "",
-            "bg_class_name": "promo-purple",
-            "custom_bg_color": ""
-          }
-        },
-        "promo_item_cai6UR": {
-          "type": "promo_item",
-          "settings": {
-            "label": "NEW ARRIVALS",
-            "title": "Galaxy S24 Ultra",
-            "link_text": "Shop Now",
-            "link_url": "",
-            "bg_class_name": "promo-purple",
-            "custom_bg_color": ""
-          }
-        },
-        "promo_item_bkTjFy": {
-          "type": "promo_item",
-          "settings": {
-            "label": "UP TO 30% OFF",
-            "title": "MacBook Air M3",
-            "link_text": "Shop Now",
-            "link_url": "",
-            "bg_class_name": "promo-pink",
-            "custom_bg_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "promo_item_BBJGfB",
-        "promo_item_cai6UR",
-        "promo_item_bkTjFy"
-      ],
-      "name": "Promo Banner Grid",
-      "settings": {}
-    },
     "featured_collection_TCP844": {
       "type": "featured-collection",
       "custom_css": [],
@@ -220,11 +175,56 @@
         "padding_bottom": 20,
         "reset_spacing": false
       }
+    },
+    "promo_grid_QGnYUF": {
+      "type": "promo-grid",
+      "blocks": {
+        "promo_item_EjRVMP": {
+          "type": "promo_item",
+          "settings": {
+            "label": "NEW ARRIVALS",
+            "title": "Galaxy S24 Ultra",
+            "link_text": "Shop Now",
+            "link_url": "",
+            "bg_class_name": "promo-purple",
+            "custom_bg_color": ""
+          }
+        },
+        "promo_item_647tkG": {
+          "type": "promo_item",
+          "settings": {
+            "label": "UP TO 30% OFF",
+            "title": "MacBook Air M3",
+            "link_text": "Shop Now",
+            "link_url": "",
+            "bg_class_name": "promo-pink",
+            "custom_bg_color": ""
+          }
+        },
+        "promo_item_JAGXxz": {
+          "type": "promo_item",
+          "settings": {
+            "label": "LATEST TECH",
+            "title": "iPad Pro 11-inch",
+            "link_text": "Shop Now",
+            "link_url": "",
+            "bg_class_name": "promo-blue",
+            "custom_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "promo_item_EjRVMP",
+        "promo_item_647tkG",
+        "promo_item_JAGXxz"
+      ],
+      "name": "Promo Banner Grid",
+      "settings": {}
     }
   },
   "order": [
     "slideshow_8KKtNU",
-    "promo_grid_PHXbTq",
+    "promo_grid_QGnYUF",
     "featured_collection_TCP844"
   ]
 }
