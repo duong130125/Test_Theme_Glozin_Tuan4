@@ -78,13 +78,15 @@
   .slideshow .swiper-slide,
   .slideshow .sec__inner,
   .slideshow .banner__media {
-    min-height: 614px !important;
-    height: 614px !important;
+    height: 409px !important;
+    min-height: 409px !important;
   }
   .slideshow .banner__media {
     border-radius: 0;
   }
   .slideshow .swiper-wrapper {
+    padding-top: 30px !important;
+    padding-bottom: 5px !important;
     gap: 30px;
   }
 }

@@ -8,8 +8,6 @@ body.template-index {
 .homepage-container {
   max-width: 1410px;
   margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -19,12 +17,6 @@ body.template-index {
     padding-left: 20px;
     padding-right: 20px;
   }
-}
-
-/* Homepage Section Margins */
-.homepage-section-spacing {
-  margin-top: 60px;
-  margin-bottom: 60px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -189,18 +181,18 @@ body.template-index {
 .promo-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 5px;
 }
 
 .promo-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 12px;
+  border-radius: 5px;
   padding: 30px;
   overflow: hidden;
   position: relative;
-  height: 180px;
+  height: 200px;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
@@ -210,33 +202,67 @@ body.template-index {
   box-shadow: 0 8px 25px rgba(0,0,0,0.06);
 }
 
+/* Toàn bộ khung text */
 .promo-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center;       
   z-index: 2;
-  flex: 1;
-  padding-right: 15px;
+  position: relative;
+  width: 50%;                    
+  padding: 0;
+  gap: 26px;
+  margin-top: -35px;
 }
 
+.promo-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;                    
+  height: auto;                   
+}
+
+/* Dòng 1: "Trending" */
 .promo-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: #888888;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-
-.promo-heading {
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: 600;
   font-size: 18px;
-  font-weight: 700;
-  color: #111111;
-  margin: 0 0 15px 0;
-  line-height: 1.3;
+  line-height: 23px;
+  letter-spacing: 0;
+  color: #212529;
+  display: block;
+  white-space: nowrap;            /* không wrap */
 }
 
+/* Dòng 2: "New Phone Pro" */
+.promo-heading {
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0;
+  color: #212529;
+  margin: 0;
+  white-space: nowrap;            /* không wrap */
+}
+
+/* Subtitle */
+.promo-subtitle {
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: #212529;
+  display: block;
+  white-space: nowrap;
+  height: 18px;            /* không wrap */
+}
+
+/* Link stays below label, unchanged visually */
 .promo-link {
+  font-family: 'Bai Jamjuree', sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: #111111;
@@ -261,18 +287,23 @@ body.template-index {
 }
 
 .promo-image-wrap {
-  flex: 0 0 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  position: absolute;
+  inset: 0;
+  width: 100%;
   height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  z-index: 1;
 }
 
 .promo-image {
-  max-width: 100%;
-  max-height: 130px;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
   transition: transform 0.4s ease;
 }
 
@@ -283,6 +314,11 @@ body.template-index {
 /* Background Color Variations */
 .promo-purple {
   background-color: #E8E5F6;
+  width: 467px;
+  height: 200px;
+  border-radius: 5px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .promo-pink {
   background-color: #F9EAEA;
@@ -307,8 +343,11 @@ body.template-index {
     height: 160px;
     padding: 20px 25px;
   }
+  .promo-image-wrap {
+    margin-left: 10px;
+  }
   .promo-image {
-    max-height: 110px;
+    height: 100%;
   }
 }
 
@@ -714,49 +753,57 @@ body.template-index {
 .footer-newsletter-section {
   background-color: #ffffff;
   color: #111111;
-  border-top: 1px solid #ebebeb;
-  margin-top: 60px;
+  border-top: 1px solid #E5E8EC;
 }
 
 .footer-newsletter-container {
-  padding-top: 60px;
-  padding-bottom: 20px;
+  padding-top: 56px;
 }
 
 .footer-newsletter-row {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
+  grid-template-columns: 1.4fr 0.6fr 0.6fr 1.4fr;
   gap: 40px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .footer-col-title {
-  font-size: 16px;
+  height: 18px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
-  margin: 0 0 20px 0;
-  color: #111111;
-  letter-spacing: 0.5px;
+  margin: 0 0 22px 0;
+  color: #212529;
+  line-height: 100%;
+  letter-spacing: 0;
 }
 
 .footer-about-text {
-  color: #666666;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: 500;
   font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #515D66;
+  margin-bottom: 10px;
 }
 
-.footer-contact-details {
-  margin-top: 15px;
+.footer-about-text p {
+  margin: 0;
+  padding: 0;
 }
 
 .footer-large-phone {
-  font-size: 24px;
-  font-weight: 700;
-  color: #2f43ff;
+  font-family: 'Bai Jamjuree', sans-serif;
+  color: #2B38D1;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
   text-decoration: none !important;
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 25px;
   transition: opacity 0.2s ease;
 }
 
@@ -767,21 +814,17 @@ body.template-index {
 .footer-contact-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  color: #515D66;
+  font-weight: 500;
   font-size: 14px;
-  color: #666666;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 12px;
 }
 
 .footer-contact-item a {
-  color: #111111;
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.footer-contact-item a:hover {
-  color: #2f43ff;
 }
 
 .footer-menu-list {
@@ -791,29 +834,36 @@ body.template-index {
 }
 
 .footer-menu-list li {
-  margin-bottom: 10px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  color: #515D66;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 20px;
 }
 
 .footer-menu-list a {
-  color: #666666;
   text-decoration: none;
-  font-size: 14px;
   transition: all 0.2s ease;
 }
 
 .footer-menu-list a:hover {
   color: #111111;
   padding-left: 4px;
+  text-decoration: underline;
 }
 
 .footer-newsletter-desc {
-  color: #666666;
+  font-family: 'Bai Jamjuree', sans-serif;
+  color: #515D66;
+  font-weight: 500;
   font-size: 14px;
   line-height: 1.5;
+  letter-spacing: 0.4px !important;
   margin-bottom: 20px;
 }
 
-/* Horizontal Inline Form */
 .footer-newsletter-form-wrap .footer__newsletter {
   display: flex;
   gap: 10px;
@@ -827,77 +877,84 @@ body.template-index {
 
 .footer-newsletter-input-group {
   display: flex;
-  background-color: #f5f5f5;
-  border: 1px solid #ebebeb;
-  border-radius: 30px;
-  padding: 4px;
+  gap: 10px;
   align-items: center;
   width: 100%;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.footer-newsletter-input-group:focus-within {
-  border-color: #2f43ff;
-  box-shadow: 0 0 10px rgba(47, 67, 255, 0.15);
 }
 
 .footer-newsletter-input {
-  background: transparent !important;
-  border: none !important;
+  background: #ffffff !important;
+  border-radius: 50px !important;
   color: #111111 !important;
-  font-size: 14px !important;
-  padding: 10px 18px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 12px 20px !important;
   width: 100% !important;
   outline: none !important;
   box-shadow: none !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.footer-newsletter-input:focus {
+  border-color: #2B38D1 !important;
 }
 
 .footer-newsletter-input::placeholder {
-  color: #999999 !important;
+  color: #aaaaaa !important;
 }
 
 .footer-newsletter-btn {
-  background-color: #2f43ff !important;
+  background-color: #2B38D1 !important;
   color: #ffffff !important;
   border: none !important;
-  border-radius: 25px !important;
+  border-radius: 50px !important;
   font-weight: 700 !important;
   font-size: 12px !important;
   letter-spacing: 0.5px !important;
-  padding: 10px 24px !important;
+  padding: 18.2px 32.5px !important;
   cursor: pointer !important;
-  transition: all 0.3s ease !important;
+  transition: background-color 0.3s ease !important;
   text-transform: uppercase !important;
-  height: 42px !important;
-  flex-shrink: 0;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .footer-newsletter-btn:hover {
   background-color: #111111 !important;
-  color: #ffffff !important;
 }
 
 .footer-newsletter-note {
-  font-size: 12px;
-  color: #888888;
-  margin-top: 12px;
-  line-height: 1.4;
+  font-family: 'Bai Jamjuree', sans-serif;
+  color: #515D66;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0.4px !important;
+  margin-top: 16px;
 }
 
-/* Bottom Bar */
 .footer-bottom-bar {
-  border-top: 1px solid #ebebeb;
-  padding: 25px 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 13px;
-  color: #888888;
+  justify-content: space-between;
+  padding: 35px 0 36px 0;
+  /* Đã xóa border-top ở đây */
+  
+  /* Bắt buộc thêm 2 dòng này để làm điểm tựa */
+  position: relative; 
+  max-width: 1410px;
+  margin: 0 auto; /* Căn giữa khung 1410px */
 }
 
-.footer-copyright a {
-  color: #888888;
-  text-decoration: none;
+/* Đường kẻ giả tự động kéo dài hết 100% màn hình */
+.footer-bottom-bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; /* Tràn hết màn hình */
+  border-top: 1px solid #ebebeb; /* Đường kẻ của bạn */
 }
 
 .footer-payment-icons {

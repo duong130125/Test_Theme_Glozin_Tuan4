@@ -3,8 +3,6 @@
     {%- for block in section.blocks -%}
       {%- liquid
         assign block_st = block.settings
-        
-        # Determine fallback bg classes or custom style
         assign bg_style = ''
         if block_st.custom_bg_color != blank
           assign bg_style = 'style="background-color: ' | append: block_st.custom_bg_color | append: ';"'
@@ -13,16 +11,22 @@
       
       <div class="promo-card {% if block_st.custom_bg_color == blank %}{{ block_st.bg_class_name }}{% endif %}" {{ bg_style }} {{ block.shopify_attributes }}>
         
-        <!-- Promo Content -->
         <div class="promo-info">
-          {%- if block_st.label != blank -%}
-            <span class="promo-label">{{ block_st.label | escape }}</span>
+
+          <div class="promo-heading-group">
+            {%- if block_st.label != blank -%}
+              <span class="promo-label">{{ block_st.label | escape }}</span>
+            {%- endif -%}
+
+            {%- if block_st.title != blank -%}
+              <h3 class="promo-heading">{{ block_st.title | escape }}</h3>
+            {%- endif -%}
+          </div>
+
+          {%- if block_st.subtitle != blank -%}
+            <span class="promo-subtitle">{{ block_st.subtitle | escape }}</span>
           {%- endif -%}
-          
-          {%- if block_st.title != blank -%}
-            <h3 class="promo-heading">{{ block_st.title | escape }}</h3>
-          {%- endif -%}
-          
+
           {%- if block_st.link_url != blank -%}
             <a href="{{ block_st.link_url }}" class="promo-link">
               {{ block_st.link_text | default: 'Shop Now' | escape }}
@@ -31,9 +35,9 @@
               </svg>
             </a>
           {%- endif -%}
+
         </div>
         
-        <!-- Promo Graphic Image -->
         <div class="promo-image-wrap">
           {%- if block_st.image != blank -%}
             <img src="{{ block_st.image | image_url: width: 300 }}"
@@ -67,14 +71,20 @@
         {
           "type": "text",
           "id": "label",
-          "label": "Small Label",
-          "default": "NEW ARRIVALS"
+          "label": "Label (dòng nhỏ trên)",
+          "default": "Trending"
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Heading",
-          "default": "Galaxy S24 Ultra"
+          "label": "Heading (dòng to dưới)",
+          "default": "New Phone Pro"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Sub Text",
+          "default": "Save 20% On Products"
         },
         {
           "type": "text",
@@ -97,18 +107,9 @@
           "id": "bg_class_name",
           "label": "Preset Background Theme",
           "options": [
-            {
-              "value": "promo-purple",
-              "label": "Purple Pastel"
-            },
-            {
-              "value": "promo-pink",
-              "label": "Pink Pastel"
-            },
-            {
-              "value": "promo-blue",
-              "label": "Blue Pastel"
-            }
+            { "value": "promo-purple", "label": "Purple Pastel" },
+            { "value": "promo-pink", "label": "Pink Pastel" },
+            { "value": "promo-blue", "label": "Blue Pastel" }
           ],
           "default": "promo-purple"
         },
@@ -127,24 +128,27 @@
         {
           "type": "promo_item",
           "settings": {
-            "label": "NEW ARRIVALS",
-            "title": "Galaxy S24 Ultra",
+            "label": "Trending",
+            "title": "New Phone Pro",
+            "subtitle": "Save 20% On Products",
             "bg_class_name": "promo-purple"
           }
         },
         {
           "type": "promo_item",
           "settings": {
-            "label": "UP TO 30% OFF",
-            "title": "MacBook Air M3",
+            "label": "Top Product",
+            "title": "MateBook Pro 2022",
+            "subtitle": "Top Quality Products",
             "bg_class_name": "promo-pink"
           }
         },
         {
           "type": "promo_item",
           "settings": {
-            "label": "LATEST TECH",
-            "title": "iPad Pro 11-inch",
+            "label": "iPad Pro",
+            "title": "Up To 20% Off",
+            "subtitle": "20 Days Return Products",
             "bg_class_name": "promo-blue"
           }
         }
