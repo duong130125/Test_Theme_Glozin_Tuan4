@@ -192,7 +192,7 @@
     "promo_grid_VRm7Pj": {
       "type": "promo-grid",
       "blocks": {
-        "promo_item_GKwRHy": {
+        "promo_item_aiDQqx": {
           "type": "promo_item",
           "settings": {
             "label": "Trending",
@@ -200,6 +200,7 @@
             "subtitle": "Save 20% On Products",
             "link_text": "Shop Now",
             "link_url": "",
+            "image": "shopify://shop_images/banner-1.png",
             "bg_class_name": "promo-purple",
             "custom_bg_color": ""
           }
@@ -212,6 +213,7 @@
             "subtitle": "Top Quality Products",
             "link_text": "Shop Now",
             "link_url": "",
+            "image": "shopify://shop_images/banner-2.png",
             "bg_class_name": "promo-pink",
             "custom_bg_color": ""
           }
@@ -224,13 +226,14 @@
             "subtitle": "20 Days Return Products",
             "link_text": "Shop Now",
             "link_url": "",
+            "image": "shopify://shop_images/banner-3.png",
             "bg_class_name": "promo-blue",
             "custom_bg_color": ""
           }
         }
       },
       "block_order": [
-        "promo_item_GKwRHy",
+        "promo_item_aiDQqx",
         "promo_item_PTJ8mY",
         "promo_item_iaExeg"
       ],
