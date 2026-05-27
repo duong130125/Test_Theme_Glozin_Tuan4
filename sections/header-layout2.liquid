@@ -36,7 +36,7 @@
 -%}
 
 {%- capture account_icon -%}
-  <svg width="16" height="16" fill="none">
+  <svg width="23" height="23" viewBox="0 0 16 16" fill="none">
     <use href="#icon-account" />
   </svg>
 {%- endcapture -%}
@@ -74,15 +74,15 @@
       padding-bottom: 0 !important;
       display: flex !important;
       align-items: center !important;
-      background-color: #FFFFFF !important;
-      border-bottom: 1px solid #E5E8EC;
+      background-color: #ffffff !important;
+      border-bottom: 1px solid #e5e8ec;
     }
     .header__inner {
       height: 136px !important;
       display: flex !important;
       align-items: center !important;
       background-color: #ffffff !important;
-      border-bottom: 1px solid #E5E8EC !important;
+      border-bottom: 1px solid #e5e8ec !important;
     }
     header-inner {
       display: flex !important;
@@ -91,7 +91,20 @@
       height: 100% !important;
     }
     .header__menu {
-      background-color: #ffffff !important;
+      position: relative;
+      max-width: 1410px;
+      margin: 0 auto;
+    }
+
+    /* Đường kẻ full màn hình */
+    .header__menu::after {
+      content: '';
+      position: absolute;
+      top: 0; /* hoặc bottom: 0 nếu muốn nằm dưới */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      border-top: 1px solid #e5e8ec;
     }
     /* Đảm bảo container bên trong chiếm đủ chiều cao để căn giữa */
     .header__topbar > .fluid_container,
@@ -146,7 +159,7 @@
     }
     /* Fixes for Grid layout, Labels, Badges and Padding */
     .header-middle {
-      height: 86px !important;
+      height: 96px !important;
       display: flex !important;
       justify-content: space-between !important;
       align-items: center !important;
@@ -163,40 +176,10 @@
       align-items: flex-start !important;
       line-height: 1.2 !important;
     }
-    .text-icons-top {
-      font-size: 11px !important;
-      color: #888888 !important;
-      font-weight: 400 !important;
-    }
-    .menu-cart {
-      font-size: 13px !important;
-      color: #111111 !important;
-      font-weight: 600 !important;
-    }
-    .h-count {
-      background-color: #e52e2e !important;
-      color: #ffffff !important;
-    }
     .header__inner,
     .header__menu,
     .header__topbar {
       padding: 0 !important;
-    }
-    /* Part 4: Navigation Bar Styles */
-    .header__menu .flex-1 {
-      flex: 1 1 auto !important;
-    }
-    .level0 {
-      display: flex !important;
-      gap: 30px !important;
-      align-items: center !important;
-      flex-shrink: 0 !important;
-    }
-    .level0 a {
-      white-space: nowrap !important;
-    }
-    .level0:last-child a {
-      color: #e52e2e !important;
     }
   }
 {%- endstyle -%}
@@ -240,38 +223,25 @@
   data-sticky-mobile="{{ sticky_mobile }}"
   style="{{ style | strip | strip_newlines }}{% if transparent %}{% endif %}--transparent-color: {{ transparent_color }};"
 >
-  <div class="header__topbar bg-light">
+  <div class="header__topbar">
     <div class="{{ section_width }}">
-      <div class="flex justify-between align-center gap-20 text-xs font-weight-500">
-        <div class="header__topbar-left">
-          <span>You are a student and students get 20% discount.</span>
-          <a
-            href="/pages/student-discount"
-            class="text-decoration-underline font-weight-600 heading-color transition-color"
-            style="text-decoration: underline !important;"
-            >Learn More</a
-          >
-        </div>
-        <div class="header__topbar-right flex gap-20 align-center">
-          <div class="hidden flex-1025 gap-20">
-            <a href="/pages/store-locator" class="text-decoration-none heading-color transition-color">Store Locator</a>
-            <a href="/pages/order-tracking" class="text-decoration-none heading-color transition-color"
-              >Order Tracking</a
-            >
-            <a href="/pages/faq" class="text-decoration-none heading-color transition-color">FAQs</a>
-          </div>
-          {% if show_language or show_country %}
-            <span class="topbar-separator hidden flex-1025"></span>
-          {% endif %}
-          <div class="flex gap-15 align-center">
-            {% if show_language %}
-              {% render 'language-switcher' %}
-            {% endif %}
-            {% if show_country %}
-              {% render 'country-switcher' %}
-            {% endif %}
-          </div>
-        </div>
+      <div class="header__topbar-left">
+        <span>You are a student and students get 20% discount.</span>
+        <a href="/pages/student-discount">Learn More</a>
+      </div>
+      <div class="header__topbar-right">
+        <a href="/pages/store-locator">Store Locator</a>
+        <a href="/pages/order-tracking">Order Tracking</a>
+        <a href="/pages/faq">FAQs</a>
+        {% if show_language or show_country %}
+          <span class="topbar-separator"></span>
+        {% endif %}
+        {% if show_language %}
+          {% render 'language-switcher' %}
+        {% endif %}
+        {% if show_country %}
+          {% render 'country-switcher', show_currency_only: true %}
+        {% endif %}
       </div>
     </div>
   </div>
@@ -279,7 +249,7 @@
   <div class="header__inner header__layout-2" id="header-sticky">
     <div class="{{ section_width }}">
       <header-inner>
-        <div class="logo-position relative z-1025-16{% if section_st.show_email == false and  section_st.show_phone  == false  %} no__action-left{% endif %} section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} grid logo-{{ logo_position }} gap-10 gap-xl-50 header-middle align-center hidden-sticky">
+        <div class="logo-position relative z-1025-16{% if section_st.show_email == false and  section_st.show_phone  == false  %} no__action-left{% endif %} section{% if section_st.padding_top < 30 %} pt-min{% endif %}{% if section_st.padding_bottom < 30 %} pb-min{% endif %} grid logo-{{ logo_position }} header-middle align-center hidden-sticky">
           {%- liquid
             assign email = false
             if section_st.show_email and theme_st.store_email != blank
@@ -323,7 +293,7 @@
               <!-- Categories Dropdown -->
               <div class="header-search__categories relative">
                 <button
-                  class="categories-toggle btn-reset px-12 py-10 bg-light border-right heading-color font-weight-500 text-sm flex align-center gap-8"
+                  class="categories-toggle"
                   aria-label="Categories"
                   aria-expanded="false"
                 >
@@ -362,17 +332,16 @@
             </svg>
             {% if my_account %}
               {%- if show_account_popup -%}
-                <div class="hidden flex-1025">
+                <div class="header__account-wrapper hidden flex-1025">
                   <div
                     class="header-account-popup header__icon heading-color transparent-color flex align-center"
-                    style="gap: 10px !important; cursor: pointer !important;"
                   >
                     <shopify-account menu="{{ account_menu }}">
                       <span
                         slot="signed-out-avatar"
                         class="header-account-popup__avatar align-center flex justify-center"
                         aria-hidden="true"
-                        style="width: 24px; height: 24px;"
+                        style="width: 23px; height: 23px;"
                       >
                         {{ account_icon }}
                       </span>
@@ -392,9 +361,8 @@
                   href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
                   class="header__account-link flex align-center hidden flex-1025 text-decoration-none transition-color"
                   aria-label="{{ 'customer.account_fallback' | t }}"
-                  style="gap: 10px !important;"
                 >
-                  <span class="align-center flex justify-center" style="width: 24px; height: 24px;">
+                  <span class="align-center flex justify-center" style="width: 23px; height: 23px;">
                     {{ account_icon }}
                   </span>
                   <div class="flex flex-column align-start" style="line-height: 1.2 !important;">
@@ -424,7 +392,7 @@
           </div>
         </div>
         <div
-          class="header__menu border-top-1025 flex justify-between align-center"
+          class="header__menu flex justify-between align-center"
           style="--section-pt: 0; --section-pb: 0; min-height: 48px !important; width: 100% !important;"
         >
           <div class="flex align-center flex-1">
@@ -435,13 +403,22 @@
           <div class="header__menu-promo flex align-center" style="white-space: nowrap !important;">
             <span
               class="menu-promo-text"
-              style="color: #111111 !important; font-weight: 600 !important; font-size: 13px !important; display: inline-flex !important; align-items: center !important; gap: 8px !important;"
             >
-              <span
-                class="menu-promo-icon"
-                style="background: #d0473e; color: #fff; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 10px; font-weight: 700; transform: translateY(-0.5px);"
-                >%</span
-              >
+              {% if section.settings.promo_icon != blank %}
+                <img
+                  src="{{ section.settings.promo_icon | image_url: width: 46 }}"
+                  alt="Promo icon"
+                  width="23"
+                  height="23"
+                  style="display:block; width:23px; height:23px; object-fit:contain;"
+                >
+              {% else %}
+                <span
+                  class="menu-promo-icon"
+                  style="background: #d0473e; color: #fff; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 10px; font-weight: 700; transform: translateY(-0.5px);"
+                  >%</span
+                >
+              {% endif %}
               Sale $20 Off Your First Order.
             </span>
           </div>
@@ -801,6 +778,11 @@
       "id": "show_recently_viewed",
       "label": "t:sections.header.settings.addons.show_recently_viewed.label",
       "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_icon",
+      "label": "Promo icon"
     },
     {
       "type": "header",

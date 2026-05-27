@@ -19,7 +19,7 @@
             "overlay_opacity": 30,
             "slider_effect": "effect_fadeinup",
             "subheading": "<span style=\"color: #FFC107;\">GAMEPAD CONSOLE</span>",
-            "heading": "Today's Offer Skin <span style=\"color: #39FF14;\">Gamepad</span> 2022",
+            "heading": "Today's Offer <br>Skin <span style=\"color: #39FF14;\">Gamepad</span> 2022",
             "description": "",
             "first_button_label": "SHOP NOW",
             "first_button_link": "shopify://collections/best-seller",
@@ -92,12 +92,69 @@
             "content_box_opacity": 40,
             "content_alignment_mobile": "center"
           }
-        }
+        },
+        "slider_item_watch": {
+          "type": "slider_item",
+          "settings": {
+            "image": "shopify://shop_images/Slider.png",
+            "overlay_opacity": 30,
+            "slider_effect": "effect_fadeinup",
+            "subheading": "<span style=\"color: #FFC107;\">SMART WATCH</span>",
+            "heading": "Latest Style <span style=\"color: #39FF14;\">Apple Watch</span> 2022",
+            "description": "",
+            "first_button_label": "SHOP NOW",
+            "first_button_link": "shopify://collections/best-seller",
+            "first_button_style": false,
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_button_style": true,
+            "content_alignment": "left",
+            "content_position": "middle-left",
+            "content_width": "full_width",
+            "content_max_width": 45,
+            "content_padding_block": 80,
+            "content_padding_inline": 80,
+            "show_content_background": false,
+            "content_background": "#000000",
+            "content_box_opacity": 40,
+            "content_alignment_mobile": "center"
+          }
+        },
+        "slider_item_headphone": {
+          "type": "slider_item",
+          "settings": {
+            "image": "shopify://shop_images/banner-1.png",
+            "overlay_opacity": 30,
+            "slider_effect": "effect_fadeinup",
+            "subheading": "<span style=\"color: #FFC107;\">GAMING HEADSET</span>",
+            "heading": "Deep Bass <span style=\"color: #39FF14;\">Wireless Headset</span> 2022",
+            "description": "",
+            "first_button_label": "SHOP NOW",
+            "first_button_link": "shopify://collections/best-seller",
+            "first_button_style": false,
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_button_style": true,
+            "content_alignment": "left",
+            "content_position": "middle-left",
+            "content_width": "full_width",
+            "content_max_width": 45,
+            "content_padding_block": 80,
+            "content_padding_inline": 80,
+            "show_content_background": false,
+            "content_background": "#000000",
+            "content_box_opacity": 40,
+            "content_alignment_mobile": "center"
+          }
+        },
+        
       },
       "block_order": [
         "slider_item_f1Pq9K",
         "slider_item_iphone",
-        "slider_item_laptop"
+        "slider_item_laptop",
+        "slider_item_watch",
+        "slider_item_headphone"
       ],
       "custom_css": [
         ".h-full_screen {--height-topbar: 41px;}",

@@ -62,18 +62,15 @@ body {
 }
 
 @media (min-width: 1025px) {
-
   body.enable-vertical-menu .content-for-layout,
   body.enable-vertical-menu .shopify-section-group-header-group,
   body.enable-vertical-menu .shopify-section-group-footer-group,
   body.enable-vertical-menu .popup-search-form {
     margin-left: 6rem;
   }
-
   .container {
     width: 90%;
   }
-
   .fluid_container {
     width: 95%;
   }
@@ -2894,10 +2891,6 @@ header.active li.visible .submenu:not(.submenu-vertical) {
     border-bottom: 0;
   }
 
-  .border-top-1025 {
-    border-top: 1px solid var(--color-border);
-  }
-
   .absolute-lg {
     position: absolute;
   }
@@ -3473,12 +3466,6 @@ body .swiper-pagination {
   z-index: 1;
 }
 
-.header-color,
-.header-color>a:not(:hover),
-header-inner .button-localization {
-  color: var(--color-heading);
-}
-
 /* account hover group (not login) */
 .is-logout .header__icon-account:hover,
 .is-logout .header__icon-account:hover a,
@@ -3513,13 +3500,9 @@ header-inner .button-localization {
   height: 1.8rem;
   position: absolute;
   top: -6px;
-  left: 1.3rem;
-  background-color: var(--color-primary);
+  left: 1.8rem;
+  background-color: #DC323C;
   color: var(--color-white);
-}
-
-.header__minicart .h-count {
-  left: 1rem;
 }
 
 .menu_label {
@@ -4303,69 +4286,139 @@ div.header__topbar.bg-light {
 
 /* Header Search Bar - Mega Style */
 .header-search__mega {
-  border: 1px solid #ebebeb !important;
+  border: 1px solid #E5E8EC !important;
   border-radius: 6px !important;
   overflow: hidden !important;
-  height: 46px !important;
+  height: 45px !important;
   background: #fff !important;
-}
-.header-search__mega .header-search__categories .categories-toggle {
-  background: #FFFFFF !important;
-  border: none !important;
-  border-right: 1px solid #ebebeb !important;
-  height: 100% !important;
-  padding: 0 16px !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  color: var(--color-heading) !important;
-  cursor: pointer !important;
-  white-space: nowrap !important;
-  border-radius: 0 !important;
-  gap: 8px !important;
   display: flex !important;
   align-items: center !important;
 }
+.header-search__mega .header-search__categories {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+.header-search__mega .header-search__categories .categories-toggle {
+  font-family: 'Bai Jamjuree', sans-serif !important;
+  background: #FFFFFF !important;
+  border: none !important;
+  height: 100% !important;
+  padding: 0 25px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #212529 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  border-radius: 0 !important;
+  gap: 26px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.header-search__mega .header-search__categories .categories-toggle svg {
+  width: 9px !important;
+  height: 6px !important;
+}
+.header-search__mega .header-search__categories::after {
+  content: "" !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 1px !important;
+  height: 15px !important;
+  background-color: #E5E8EC !important;
+}
 .header-search__mega .header-search__input-wrapper {
   flex: 1 !important;
-}
-.header-search__mega .header-search__input-wrapper input {
-  border: none !important;
   height: 100% !important;
-  padding: 0 16px !important;
-  font-size: 14px !important;
+}
+.header-search__mega .header-search__input-wrapper form,
+.header-search__mega .header-search__input-wrapper .field {
+  height: 100% !important;
+  border: none !important;
   background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
   width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.header-search__mega .header-search__input-wrapper input,
+.header-search__mega input.search__input,
+.header-search__mega .field__input {
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
   outline: none !important;
+  border-radius: 0 !important;
+  padding: 14px 24px 15px 24px !important;
+  height: 100% !important;
+  width: 100% !important;
+  font-size: 14px !important;
+  color: #111111 !important;
+  line-height: 45px !important;
+}
+.header-search__mega #button_search_default,
+.header-search__mega .top-search-toggle {
+  display: none !important;
 }
 .header-search__mega .search-btn-primary {
-  background-color: #2B38D1 !important;
-  color: #fff !important;
-  border: none !important;
+  min-width: 100px !important;
   height: 100% !important;
-  padding: 0 24px !important;
+  line-height: 45px !important;
+  border-radius: 0 !important;
+  padding: 0 31.5px !important;
+  flex-shrink: 0 !important;
+  font-family: 'Bai Jamjuree', sans-serif !important;
+  background-color: #2B38D1 !important;
+  color: #FFFFFF !important;
+  border: none !important;
   font-size: 14px !important;
   font-weight: 600 !important;
   cursor: pointer !important;
   transition: background-color 0.2s ease !important;
-  border-radius: 0 !important;
   white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 .header-search__mega .search-btn-primary:hover {
   background-color: #1e2ab0 !important;
 }
 
-/* Header Action Icons */
+/* Header Action Icons - Figma exact layout */
 .header__action {
-  gap: 25px !important;
+  gap: 0 !important;
+  padding: 0 !important;
 }
-.header__wishlist-wrapper,
-.header__minicart-wrapper,
-.header__account-link,
-.header-account-popup {
+/* Each action item: no internal gap/padding, use box-sizing */
+.header__action .header__account-link,
+.header__action .header__account-wrapper,
+.header__action .header__wishlist-wrapper,
+.header__action .header__minicart-wrapper {
   display: flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
   text-decoration: none !important;
+}
+/* Account popup inside wrapper fills parent */
+.header__action .header-account-popup {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+}
+/* Spacing between items */
+.header__action .header__account-link,
+.header__action .header__account-wrapper {
+  margin-right: 24px !important;
+}
+.header__action .header__wishlist-wrapper {
+  margin-right: 27px !important;
 }
 
 /* Cart Header Labels */
@@ -4373,36 +4426,26 @@ div.header__topbar.bg-light {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
-  margin-left: 10px !important;
 }
 .header__minicart-wrapper .text-icons-top {
   font-size: 11px !important;
-  color: #888888 !important;
+  color: #515D66 !important;
   text-transform: capitalize !important;
-  margin-bottom: 2px !important;
   display: block !important;
-  line-height: 1.2 !important;
   font-weight: 400 !important;
+  font-family: 'Bai Jamjuree', sans-serif !important;
+  line-height: 100% !important; 
 }
 .header__minicart-wrapper .menu-cart {
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: #111111 !important;
+  font-family: 'Bai Jamjuree', sans-serif !important;
+  color: #212529;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
   display: block !important;
   line-height: 1.2 !important;
-}
-
-/* Third Row Menu Styling */
-.header__menu.border-top-1025 {
-  background-color: #ffffff !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-.horizontal-list li a[href*="uminex"] span,
-.horizontal-list li a[href*="buy"] span,
-.horizontal-list li:last-child a span {
-  color: #d0473e !important;
-  font-weight: 700 !important;
 }
 
 /* Header Middle Grid */
@@ -4410,18 +4453,63 @@ div.header__topbar.bg-light {
   .header__layout-2 header-inner > .logo-left {
     grid-template-columns: auto 1fr auto !important;
     grid-template-areas: 'logo menu icon' !important;
-    gap: 30px !important;
     align-items: center !important;
   }
   .header-search__mega {
-    max-width: 600px !important;
+    max-width: 782px !important;
+    width: 782px !important;
+    min-width: 782px !important;
+    height: 45px !important;
     display: flex !important;
     grid-area: menu !important;
     margin: 0 auto !important;
-    width: 100% !important;
+    position: relative !important;
+    left: 24px !important;
   }
   .header__topbar .flex-1025 {
     display: flex !important;
+  }
+  /* Action items exact sizing */
+  .header__layout-2 .header__action .header__account-link,
+  .header__layout-2 .header__action .header__account-wrapper {
+    width: 90px !important;
+    min-width: 90px !important;
+    height: 31px !important;
+  }
+  .header__layout-2 .header__action .header__wishlist-wrapper {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 29px !important;
+  }
+  .header__layout-2 .header__action .header__minicart-wrapper {
+    width: 101.98px !important;
+    min-width: 101.98px !important;
+    height: 33px !important;
+  }
+
+  /* SVG Icons exact sizing for layout-2 */
+  .header__layout-2 .header__account-link svg,
+  .header__layout-2 .header-account-popup__avatar svg {
+    width: 23px !important;
+    height: 23px !important;
+  }
+  .header__layout-2 .header-account-popup__avatar {
+    width: 23px !important;
+    height: 23px !important;
+  }
+  .header__layout-2 .header-account-popup shopify-account::part(signed-out-avatar),
+  .header__layout-2 .header-account-popup shopify-account::part(signed-in-avatar) {
+    width: 23px !important;
+    margin-right: 10px;
+  }
+  .header__layout-2 .header__wishlist-wrapper svg {
+    width: 28px !important;
+    height: 23px !important;
+  }
+  .header__layout-2 .header__minicart-wrapper svg {
+    width: 26.980709075927734px !important;
+    height: 22.911041259765625px !important;
+    margin-right: 20px;
   }
 }
 

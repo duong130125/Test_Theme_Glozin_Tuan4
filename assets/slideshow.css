@@ -283,3 +283,195 @@
 .swiper-pagination-duplicate{
   display: none;
 }
+
+/* ===== CUSTOM FIGMA SLIDESHOW CUSTOMIZATION ===== */
+/* Colors and highlight fonts for both desktop and mobile */
+.slideshow .sec__content-subheading,
+.slideshow .sec__content-subheading span {
+  color: #FDE50B !important;
+}
+.slideshow .sec__content-heading span,
+.slideshow .sec__content-heading strong {
+  color: #00E37B !important;
+}
+
+@media screen and (min-width: 1025px) {
+  /* Position and size the main container of text & buttons */
+  .slideshow .sec__content {
+    position: absolute !important;
+    top: 99px !important;
+    left: 191px !important;
+    width: 414px !important;
+    height: 210px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+  
+  .slideshow .sec__content-inner {
+    width: 414px !important;
+    max-width: 414px !important;
+    height: 210px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+
+  .slideshow .sec__content-inner > * {
+    margin: 0 !important;
+  }
+
+  /* Subheading block (Gamepad console) */
+  .slideshow .sec__content-subheading {
+    display: block !important;
+    width: 414px !important;
+    height: 15px !important;
+    font-family: 'Bai Jamjuree', sans-serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    font-size: 12px !important;
+    line-height: 100% !important;
+    letter-spacing: 0% !important;
+    text-transform: uppercase !important;
+    margin: 0 0 20px 0 !important; /* gap 20px */
+    padding: 0 !important;
+  }
+
+  /* Heading block wrapper (Today's Offer Skin Gamepad 2022) */
+  .slideshow .sec__content-inner > .block:has(.sec__content-heading) {
+    height: 100px !important;
+    margin-bottom: 30px !important; /* gap 30px to the button */
+  }
+
+  /* Heading text */
+  .slideshow .sec__content-heading {
+    display: block !important;
+    width: 414px !important;
+    height: 100px !important;
+    font-family: 'Bai Jamjuree', sans-serif !important;
+    font-weight: 600 !important;
+    font-style: normal !important;
+    font-size: 46px !important;
+    line-height: 50px !important;
+    letter-spacing: -3% !important;
+    color: #FFFFFF !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-transform: none !important;
+  }
+
+  /* Button wrapper */
+  .slideshow .sec__content-inner > .sec__content-btn {
+    height: 45px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Shop Now Button styling */
+  .slideshow .sec__content-btn a {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 151.87266540527344px !important;
+    height: 45px !important;
+    border-radius: 30px !important;
+    background-color: #FFFFFF !important;
+    color: #111111 !important;
+    font-family: 'Bai Jamjuree', sans-serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    font-size: 12px !important;
+    line-height: 100% !important;
+    letter-spacing: 0% !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    padding: 10px !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+  }
+
+  /* Button hover effect */
+  .slideshow .sec__content-btn a:hover {
+    background-color: #00E37B !important;
+    color: #FFFFFF !important;
+  }
+
+  /* Position and size the swiper arrows */
+  .slideshow .swiper-button-prev.swiper-arrow {
+    position: absolute !important;
+    display: inline-flex !important;
+    width: 50px !important;
+    height: 50px !important;
+    top: 210px !important;
+    left: 30px !important;
+    right: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    z-index: 10 !important;
+  }
+  .slideshow .swiper-button-next.swiper-arrow {
+    position: absolute !important;
+    display: inline-flex !important;
+    width: 50px !important;
+    height: 50px !important;
+    top: 210px !important;
+    left: 1330px !important;
+    right: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    z-index: 10 !important;
+  }
+
+  /* Position and size the pagination container on desktop */
+  .slideshow .swiper-pagination.swiper-pagination-bullets {
+    position: absolute !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    width: 50px !important;
+    height: 6px !important;
+    top: 413px !important;
+    left: 680px !important;
+    bottom: auto !important; /* override bottom-30 */
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 10 !important;
+  }
+
+  /* Individual dots on desktop */
+  .slideshow .swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+    margin: 0 !important;
+  }
+}
+
+/* Pagination bullets colors for all screens */
+.slideshow .swiper-pagination-bullet {
+  background: #FFFFFF33 !important;
+  opacity: 1 !important;
+  border: none !important;
+}
+
+.slideshow .swiper-pagination-bullet-active {
+  background: #FFFFFF !important;
+  opacity: 1 !important;
+}
+
+/* Disable pseudo elements that the theme might use */
+.slideshow .swiper-pagination-bullet::before,
+.slideshow .swiper-pagination-bullet::after {
+  display: none !important;
+}

@@ -4,9 +4,15 @@
     {% form 'localization', id: form_id %}
       <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
       <div class="disclosure relative flex align-center">
-        <div class="{% if type == 'mobile-navigation' %}mobile-navigation__button {% endif %}button-localization  pointer disclosure__button show-overlay flex align-center gap-10">
+        <div class="{% if type == 'mobile-navigation' %}mobile-navigation__button {% endif %}button-localization  pointer disclosure__button show-overlay flex align-center gap-5">
           <span class="{% if type == 'mobile-navigation' %}flex flex-column gap-4 align-center{% endif %}">
-            <span {% if type == 'mobile-navigation' %}style="font-size:14px;"{% endif %}>{{ localization.language.endonym_name | capitalize }}</span>
+            <span
+              {% if type == 'mobile-navigation' %}
+                style="font-size:14px;"
+              {% endif %}
+            >
+              {{- localization.language.endonym_name | capitalize -}}
+            </span>
             {% if type == 'mobile-navigation' %}
               <span class="block fs-small heading-style">{{ 'main_menu.language.title' | t }}</span>
             {% endif %}

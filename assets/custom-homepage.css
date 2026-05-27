@@ -938,7 +938,6 @@ body.template-index {
   align-items: center;
   justify-content: space-between;
   padding: 35px 0 36px 0;
-  /* Đã xóa border-top ở đây */
   
   /* Bắt buộc thêm 2 dòng này để làm điểm tựa */
   position: relative; 

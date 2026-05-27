@@ -4,18 +4,20 @@
     {% form 'localization', id: form_id %}
       <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
       <div class="disclosure relative flex align-center">
-        <div class="button-localization pointer disclosure__button show-overlay flex align-center gap-10 {% if type == 'mobile-navigation' %}mobile-navigation__button{% endif %}">
+        <div class="button-localization pointer disclosure__button show-overlay flex align-center gap-5 {% if type == 'mobile-navigation' %}mobile-navigation__button{% endif %}">
           <span class="flex align-center {% if type == 'mobile-navigation' %}flex-column gap-4{% else %}gap-10{% endif %}">
-            <span class="rounded-50 border localization-flags {% if type == 'mobile-navigation' %}mobile-navigation__flag{% endif %}">
-              {{-
-                localization.country
-                | image_url: width: localization.country.width
-                | image_tag:
-                  width: localization.country.width,
-                  height: localization.country.height,
-                  alt: localization.country.name
-              -}}
-            </span>
+            {% unless show_currency_only %}
+              <span class="rounded-50 border localization-flags {% if type == 'mobile-navigation' %}mobile-navigation__flag{% endif %}">
+                {{-
+                  localization.country
+                  | image_url: width: localization.country.width
+                  | image_tag:
+                    width: localization.country.width,
+                    height: localization.country.height,
+                    alt: localization.country.name
+                -}}
+              </span>
+            {% endunless %}
             {% if type == 'mobile-navigation' %}
               <span class="block fs-small heading-style">
                 {{ localization.country.currency.iso_code }}
@@ -23,9 +25,13 @@
               </span>
             {% else %}
               <span>
-                {{ localization.country.name }}
-                ({{ localization.country.currency.iso_code }}
-                {{ localization.country.currency.symbol }})
+                {% if show_currency_only %}
+                  {{ localization.country.currency.iso_code }}
+                {% else %}
+                  {{ localization.country.name }}
+                  ({{ localization.country.currency.iso_code }}
+                  {{ localization.country.currency.symbol }})
+                {% endif %}
               </span>
             {% endif %}
           </span>
@@ -58,10 +64,7 @@
                       {{-
                         country
                         | image_url: width: country.width
-                        | image_tag:
-                          width: country.width,
-                          height: country.height,
-                          alt: country.name
+                        | image_tag: width: country.width, height: country.height, alt: country.name
                       -}}
                     </span>
                     <span>

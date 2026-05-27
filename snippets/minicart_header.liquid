@@ -1,4 +1,3 @@
-
 <div class="minicart">
   <div>
     <div
@@ -34,15 +33,9 @@
         </h-count>
         {% if type == 'header_mega' %}
           <header-total-price>
-            <span class="text-icons  d-inline-flex fs-11 fw-500 ml-15 text-left d-none-mb">
-              <span class="text-icons-top">{{ 'general.cart.label' | t }}</span>
-              <span class="fs-14 menu-cart" data-cart-subtotal-price>
-                {% if settings.currency_code_enabled %}
-                  {{ cart.total_price | money_with_currency }}
-                {% else %}
-                  {{ cart.total_price | money }}
-                {% endif %}
-              </span>
+            <span class="text-icons d-inline-flex fs-11 fw-500 ml-15 d-none-mb">
+              <span class="text-icons-top">Your Cart</span>
+              <span class="fs-14 menu-cart" data-cart-subtotal-price> $280.00 </span>
             </span>
           </header-total-price>
         {% endif %}
