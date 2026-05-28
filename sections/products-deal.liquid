@@ -1,21 +1,70 @@
 {{ 'countdown.css' | asset_url | stylesheet_tag }}
 <style>
+  .sec__products-deal {
+    background: #fff;
+  }
+
+  .section__header-heading {
+    font-size: 24px;
+    font-weight: 700;
+    color: #212529;
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+
+  .heading-style {
+    font-size: 14px;
+    color: #212529;
+    font-weight: 600;
+  }
+
+  .countdown-header {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .countdown-header countdown-timer {
+    display: flex;
+    gap: 8px;
+  }
+
+  .countdown-header countdown-timer div {
+    background: #e53238;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 45px;
+    text-align: center;
+  }
+
+  .countdown-header countdown-timer .countdown-separator {
+    background: transparent;
+    color: #e53238;
+    padding: 0;
+    min-width: auto;
+  }
   .sec__products-deal-featured {
     display: flex;
     gap: 30px;
-    align-items: stretch;
+    align-items: flex-start;
     margin-top: 40px;
+    justify-content: center;
   }
 
   .deal-featured-center {
-    flex: 1;
-    max-width: 466px;
+    flex: 0 0 466px;
     border: 3px solid #e53238;
     padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 20px;
     background: #fff;
+    height: fit-content;
   }
 
   .deal-featured-title {
@@ -24,23 +73,28 @@
     font-weight: 700;
     text-transform: uppercase;
     color: #212529;
-    margin-bottom: 30px;
+    margin: 0;
+    padding: 0;
     letter-spacing: 0;
     line-height: 100%;
+    text-align: center;
   }
 
   .deal-featured-image {
     width: 100%;
     height: 386px;
     object-fit: contain;
-    margin-bottom: 30px;
     background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
   }
 
   .deal-featured-info {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
   }
 
   .deal-featured-name {
@@ -48,26 +102,41 @@
     font-size: 14px;
     font-weight: 600;
     color: #212529;
-    line-height: 1.3;
+    line-height: 1.4;
+    margin: 0;
+    text-align: center;
   }
 
   .deal-featured-rating {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     align-items: center;
     font-size: 12px;
+    justify-content: center;
+  }
+
+  .deal-featured-rating span {
+    color: #ffc107;
   }
 
   .deal-featured-price {
     font-size: 18px;
     font-weight: 700;
     color: #e53238;
+    text-align: center;
+  }
+
+  .deal-featured-price span {
+    margin-right: 8px;
   }
 
   .deal-featured-timer {
     display: flex;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
+    font-size: 13px;
+    justify-content: center;
   }
 
   .timer-box {
@@ -87,11 +156,41 @@
     font-size: 14px;
   }
 
+  /* Style countdown-timer component */
+  .deal-featured-timer countdown-timer {
+    display: flex;
+    gap: 8px;
+  }
+
+  .deal-featured-timer countdown-timer .countdown-box {
+    background: #e53238;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  .deal-featured-timer countdown-timer .countdown-separator {
+    color: #e53238;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
   .deal-featured-sold {
     font-size: 12px;
     color: #666;
     border-top: 2px solid #e53238;
     padding-top: 15px;
+    text-align: center;
+  }
+
+  .deal-featured-sold div:first-child {
+    color: #212529;
+    font-weight: 600;
+    margin-bottom: 8px;
   }
 
   .deal-featured-progress {
@@ -100,7 +199,6 @@
     background: #e5e5e5;
     border-radius: 3px;
     overflow: hidden;
-    margin-top: 8px;
   }
 
   .deal-featured-progress-bar {
@@ -113,13 +211,14 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    flex: 2;
+    flex: 1;
   }
 
   .deal-product-card {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
+    text-align: center;
   }
 
   .deal-product-image {
@@ -127,7 +226,11 @@
     height: 191px;
     object-fit: contain;
     background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 auto;
+    border-radius: 4px;
   }
 
   .deal-product-name {
@@ -136,27 +239,61 @@
     font-weight: 600;
     color: #212529;
     line-height: 1.3;
-    text-align: center;
+    margin: 0;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .deal-product-price {
     font-size: 14px;
     color: #e53238;
     font-weight: 600;
-    text-align: center;
+  }
+
+  .deal-product-instock {
+    font-size: 12px;
+    color: #666;
+  }
+
+  @media (max-width: 1024px) {
+    .sec__products-deal-featured {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .deal-featured-center {
+      flex: 0 0 auto;
+      max-width: 100%;
+    }
+
+    .deal-products-grid {
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+    }
   }
 
   @media (max-width: 768px) {
     .sec__products-deal-featured {
       flex-direction: column;
+      gap: 20px;
     }
 
     .deal-featured-center {
+      padding: 30px 20px;
       max-width: 100%;
     }
 
     .deal-products-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .deal-product-image {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
     }
   }
 </style>
@@ -221,7 +358,7 @@
       <div class="text-center mb-40">
         <p class="heading-style mb-15">{{ messages }}</p>
         <countdown-timer
-          class="flex gap-10 justify-content-center align-center {{ timer_style }}"
+          class="countdown-header flex gap-10 justify-content-center align-center {{ timer_style }}"
           data-endtime="{{ end_time }}"
           data-format="dd:hh:mm:ss"
           {% if timer_style == 'default' %}
@@ -274,11 +411,17 @@
 
             {% if end_time %}
               <div class="deal-featured-timer">
-                <span>Hurry up! Offer ends in:</span>
+                <span style="margin-right: 10px;">Hurry up! Offer ends in:</span>
                 <countdown-timer
-                  class="flex gap-5"
+                  class="flex gap-8 align-center"
                   data-endtime="{{ end_time }}"
                   data-format="dd:hh:mm:ss"
+                  {% if timer_style == 'default' %}
+                    data-days="{{ 'sections.times_bn.days' | t }}"
+                    data-hours="{{ 'sections.times_bn.hour' | t }}"
+                    data-mins="{{ 'sections.times_bn.mins' | t }}"
+                    data-secs="{{ 'sections.times_bn.secs' | t }}"
+                  {% endif %}
                 >
                 </countdown-timer>
               </div>
