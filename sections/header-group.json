@@ -117,6 +117,7 @@
         "show_currency": true,
         "show_language": true,
         "show_recently_viewed": false,
+        "promo_icon": "shopify://shop_images/icon-sale.svg",
         "padding_top": 10,
         "padding_bottom": 10
       }
