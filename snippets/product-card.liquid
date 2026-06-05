@@ -99,43 +99,6 @@
           <div class="stock-bar-inner" style="width: {{ stock_percent }}%;"></div>
         </div>
       </div>
-
-      <!-- Add to Cart Form -->
-      <div class="featured-action-wrap">
-        <product-form class="product-item__product-form">
-          {%- form 'product',
-            card_product,
-            id: product_form_id,
-            class: 'form',
-            novalidate: 'novalidate',
-            data-type: 'add-to-cart-form'
-          -%}
-            <input
-              type="hidden"
-              name="id"
-              value="{{ current_variant.id }}"
-              disabled
-            >
-            <button
-              id="{{ product_form_id }}-submit"
-              type="submit"
-              name="add"
-              class="product__add-cart product-item__button-submit transition-btn btn"
-              {% if current_variant.available == false %}
-                disabled
-              {% endif %}
-            >
-              <span class="btn-action">
-                {%- if current_variant.available -%}
-                  ADD TO CART
-                {%- else -%}
-                  SOLD OUT
-                {%- endif -%}
-              </span>
-            </button>
-          {%- endform -%}
-        </product-form>
-      </div>
     </div>
   </div>
 
@@ -204,34 +167,59 @@
           {%- if current_variant.inventory_quantity > 0 -%}
             {%- if current_variant.inventory_quantity > 5 -%}
               <div class="card-stock-status in-stock">
-                <span class="stock-dot"></span> In stock, {{ current_variant.inventory_quantity }} products
+                <svg class="stock-icon" width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.50195 0.164062L3.5 6.16602L0.998047 3.66406C0.879557 3.55469 0.738281 3.5 0.574219 3.5C0.419271 3.5 0.287109 3.55469 0.177734 3.66406C0.0592448 3.78255 0 3.92383 0 4.08789C0 4.24284 0.0592448 4.375 0.177734 4.48438L3.08984 7.41016C3.19922 7.51953 3.33594 7.57422 3.5 7.57422C3.66406 7.57422 3.80078 7.51953 3.91016 7.41016L10.3223 0.984375C10.4408 0.875 10.5 0.742839 10.5 0.587891C10.5 0.423828 10.4408 0.282552 10.3223 0.164062C10.2129 0.0546875 10.0762 0 9.91211 0C9.75716 0 9.62044 0.0546875 9.50195 0.164062Z"/>
+                </svg>
+                <span class="stock-text">
+                  <span class="stock-label">In stock </span>
+                  <span class="stock-qty">{{ current_variant.inventory_quantity }} </span>
+                  <span class="stock-unit">products</span>
+                </span>
               </div>
             {%- else -%}
               <div class="card-stock-status low-stock">
-                <span class="stock-dot"></span> Only {{ current_variant.inventory_quantity }} left in stock
+                <svg class="stock-icon" width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.50195 0.164062L3.5 6.16602L0.998047 3.66406C0.879557 3.55469 0.738281 3.5 0.574219 3.5C0.419271 3.5 0.287109 3.55469 0.177734 3.66406C0.0592448 3.78255 0 3.92383 0 4.08789C0 4.24284 0.0592448 4.375 0.177734 4.48438L3.08984 7.41016C3.19922 7.51953 3.33594 7.57422 3.5 7.57422C3.66406 7.57422 3.80078 7.51953 3.91016 7.41016L10.3223 0.984375C10.4408 0.875 10.5 0.742839 10.5 0.587891C10.5 0.423828 10.4408 0.282552 10.3223 0.164062C10.2129 0.0546875 10.0762 0 9.91211 0C9.75716 0 9.62044 0.0546875 9.50195 0.164062Z"/>
+                </svg>
+                <span class="stock-text">
+                  <span class="stock-label">Only </span>
+                  <span class="stock-qty">{{ current_variant.inventory_quantity }}</span>
+                  <span class="stock-label"> left in stock</span>
+                </span>
               </div>
             {%- endif -%}
           {%- else -%}
             <div class="card-stock-status out-of-stock">
-              <span class="stock-dot"></span> Out of stock
+              <svg class="stock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                <path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"/>
+              </svg>
+              <span class="stock-text">
+                <span class="stock-label">Out of stock</span>
+              </span>
             </div>
           {%- endif -%}
         {%- else -%}
           {%- if current_variant.available -%}
             <div class="card-stock-status in-stock">
-              <span class="stock-dot"></span> In stock
+              <svg class="stock-icon" width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.50195 0.164062L3.5 6.16602L0.998047 3.66406C0.879557 3.55469 0.738281 3.5 0.574219 3.5C0.419271 3.5 0.287109 3.55469 0.177734 3.66406C0.0592448 3.78255 0 3.92383 0 4.08789C0 4.24284 0.0592448 4.375 0.177734 4.48438L3.08984 7.41016C3.19922 7.51953 3.33594 7.57422 3.5 7.57422C3.66406 7.57422 3.80078 7.51953 3.91016 7.41016L10.3223 0.984375C10.4408 0.875 10.5 0.742839 10.5 0.587891C10.5 0.423828 10.4408 0.282552 10.3223 0.164062C10.2129 0.0546875 10.0762 0 9.91211 0C9.75716 0 9.62044 0.0546875 9.50195 0.164062Z"/>
+              </svg>
+              <span class="stock-text">
+                <span class="stock-label">In stock</span>
+              </span>
             </div>
           {%- else -%}
             <div class="card-stock-status out-of-stock">
-              <span class="stock-dot"></span> Out of stock
+              <svg class="stock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                <path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"/>
+              </svg>
+              <span class="stock-text">
+                <span class="stock-label">Out of stock</span>
+              </span>
             </div>
           {%- endif -%}
         {%- endif -%}
       </div>
-
-
-
-
     </div>
   </div>
 {%- endif -%}
