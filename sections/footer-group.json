@@ -14,7 +14,7 @@
     "footer_newsletter_RFXXGA": {
       "type": "footer-newsletter",
       "blocks": {
-        "store_info_9kNwHh": {
+        "store_info_PekwhQ": {
           "type": "store_info",
           "settings": {
             "title": "About Store",
@@ -25,7 +25,8 @@
             "store_address": true,
             "phone": "+1 (800) 123-4567",
             "store_phone": true,
-            "email": "support@example.com",
+            "email": "Customersupport@example.com",
+            "email_2": "info@example.com",
             "store_email": true
           }
         },
@@ -43,22 +44,22 @@
             "menu": "quick-links"
           }
         },
-        "newsletter_j8EaEp": {
+        "newsletter_pd8Pkx": {
           "type": "newsletter",
           "settings": {
-            "title": "Newsletter",
-            "description": "Join 20,000+ subscribers and get a new discount coupon every Saturday.",
+            "title": "Sign up to Newsletter",
+            "description": "Join 20.000+ subscribers and get a new discount coupon on every Saturday. Updates information on Sales and Offers.",
             "email_placeholder": "Your email address...",
             "button_label": "SUBSCRIBE",
-            "note": "By entering your email you accept the terms and conditions & privacy policy."
+            "note": "Subscribe for Uminex and get 20% off your first purchase."
           }
         }
       },
       "block_order": [
-        "store_info_9kNwHh",
+        "store_info_PekwhQ",
         "link_list_9yfMRp",
         "link_list_acpVab",
-        "newsletter_j8EaEp"
+        "newsletter_pd8Pkx"
       ],
       "name": "Footer (Custom)",
       "settings": {
