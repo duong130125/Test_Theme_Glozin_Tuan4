@@ -12,7 +12,6 @@
 {%- liquid
   assign layout_type = layout | default: 'small'
   assign current_variant = card_product.selected_or_first_available_variant
-  assign product_form_id = 'quick-add-' | append: section_id | append: '-' | append: card_product.id
 -%}
 
 {%- if layout_type == 'featured' -%}
@@ -84,7 +83,7 @@
 
       <!-- Rating Stars -->
       <div class="featured-rating">
-        {%- render 'rating-stars', card_product: card_product -%}
+        {%- render 'rating-stars', card_product: card_product, show_reviews_text: true -%}
       </div>
 
       <!-- Price -->

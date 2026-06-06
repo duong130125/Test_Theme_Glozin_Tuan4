@@ -2,23 +2,23 @@
   assign section_st = section.settings
   assign main_collection = collections[section_st.collection]
   assign featured_prod = all_products[section_st.featured_product]
-  
+
   # Accumulate products from collection, skipping the featured product if it is in the collection
-  assign small_products = ""
+  assign small_products = ''
   assign count = 0
   for prod in main_collection.products
     if prod.id != featured_prod.id
       if count < 8
-        if small_products != ""
-          assign small_products = small_products | append: ","
+        if small_products != ''
+          assign small_products = small_products | append: ','
         endif
         assign small_products = small_products | append: prod.handle
         assign count = count | plus: 1
       endif
     endif
   endfor
-  
-  assign small_product_handles = small_products | split: ","
+
+  assign small_product_handles = small_products | split: ','
 -%}
 
 <div class="homepage-container homepage-section-spacing">
@@ -62,13 +62,22 @@
         <div class="featured-deal-card placeholder" style="text-align: center;">
           <div class="deal-section-title">{{ section_st.title | default: "Today's Offer" }}</div>
           <div class="featured-badge-label">OFFER</div>
-          {{ 'product-3' | placeholder_svg_tag: 'placeholder-svg featured-image' }}
+          <div class="featured-image-wrap">
+            <div class="featured-image-link">
+              {{ 'product-3' | placeholder_svg_tag: 'placeholder-svg featured-image' }}
+            </div>
+          </div>
           <div class="featured-info-wrap" style="margin-top: 20px;">
             <span class="featured-title">Featured Promotion Product</span>
-            <div class="featured-price" style="justify-content: center;">$199.00 <span class="featured-price-compare">$299.00</span></div>
+            <div class="featured-price" style="justify-content: center;">
+              $199.00 <span class="featured-price-compare">$299.00</span>
+            </div>
             <div class="featured-timer-section">
               <div class="featured-timer-title">Time remaining:</div>
-              <div class="deal-timer-container justify-center" style="display: flex; gap: 5px; justify-content: center;">
+              <div
+                class="deal-timer-container justify-center"
+                style="display: flex; gap: 5px; justify-content: center;"
+              >
                 <div class="deal-timer-box">02<span class="deal-timer-label">Days</span></div>
                 <div class="deal-timer-colon">:</div>
                 <div class="deal-timer-box">15<span class="deal-timer-label">Hrs</span></div>
@@ -136,13 +145,13 @@
       "type": "number",
       "id": "total_stock",
       "label": "Total Stock (Progress Bar)",
-      "default": 40
+      "default": 896
     },
     {
       "type": "number",
       "id": "sold_stock",
       "label": "Sold Stock (Progress Bar)",
-      "default": 28
+      "default": 620
     },
     {
       "type": "collection",

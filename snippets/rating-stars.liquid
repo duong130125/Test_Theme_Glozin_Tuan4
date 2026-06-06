@@ -6,17 +6,18 @@
 
 {%- liquid
   assign rating_value = 5.0
-  assign review_count = 68
+  assign short_rating_count = 68
 
   if card_product != blank
     if card_product.metafields.reviews.rating.value != blank
       assign rating_value = card_product.metafields.reviews.rating.value.rating | default: 5.0
-      assign review_count = card_product.metafields.reviews.rating.value.count | default: 68
-    elsif card_product.metafields.judgeme.badge != blank
-      assign review_count = 68
-    else
-      assign temp_id = card_product.id | modulo: 80 | plus: 15
-      assign review_count = temp_id
+      assign short_rating_count = card_product.metafields.reviews.rating.value.count | default: 68
+    endif
+
+    if card_product.metafields.custom.short_rating_count.value != blank
+      assign short_rating_count = card_product.metafields.custom.short_rating_count.value
+    elsif short_rating_count == 68
+      assign short_rating_count = card_product.id | modulo: 80 | plus: 15
     endif
   endif
 -%}
@@ -48,5 +49,9 @@
       {%- endif -%}
     {%- endfor -%}
   </div>
-  <span class="rating-stars__count">({{ review_count }})</span>
+  {%- if show_reviews_text -%}
+    <span class="rating-stars__count">{{ short_rating_count }} reviews</span>
+  {%- else -%}
+    <span class="rating-stars__count">({{ short_rating_count }})</span>
+  {%- endif -%}
 </div>
