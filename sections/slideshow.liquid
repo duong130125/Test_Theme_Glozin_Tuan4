@@ -1,7 +1,11 @@
-{{ 'banner.css' | asset_url | stylesheet_tag }}
-<link rel="stylesheet" href="{{ 'slideshow.css' | asset_url }}" media="print" onload="this.media='all'">
-{% liquid
+{%- liquid
   assign section_st = section.settings
+-%}
+<link rel="stylesheet" href="{{ 'banner.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'banner.css' | asset_url | stylesheet_tag }}</noscript>
+<link rel="stylesheet" href="{{ 'slideshow.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'slideshow.css' | asset_url | stylesheet_tag }}</noscript>
+{% liquid
   assign section_width = section_st.section_width
   assign slide_height = section_st.slide_height
   assign color_scheme = section_st.color_scheme

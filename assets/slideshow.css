@@ -475,3 +475,14 @@
 .slideshow .swiper-pagination-bullet::after {
   display: none !important;
 }
+
+@media screen and (max-width: 767.98px) {
+  .slideshow .sec__content-heading {
+    font-size: clamp(28px, 8vw, 42px) !important;
+    line-height: 1.15 !important;
+  }
+
+  .slideshow .sec__content-subheading {
+    font-size: clamp(12px, 3.5vw, 16px) !important;
+  }
+}

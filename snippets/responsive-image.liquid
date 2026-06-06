@@ -73,6 +73,7 @@
   assign loading = 'lazy'
   if lazy_load == true
     assign loading = 'eager'
+    assign fetch_priority = 'high'
   endif
   assign secondary_image = false
   if class contains 'secondary-image'
@@ -129,32 +130,65 @@
         assign image = image_mobile
       endif
     -%}
+    {%- if lazy_load == true -%}
+      {{-
+        image
+        | image_url: width: image.width
+        | image_tag:
+          preload: true,
+          loading: loading,
+          fetchpriority: fetch_priority,
+          width: image.width,
+          height: image.height,
+          sizes: sizes,
+          widths: widths,
+          alt: image_alt
+      -}}
+    {%- else -%}
+      {{-
+        image
+        | image_url: width: image.width
+        | image_tag:
+          loading: loading,
+          width: image.width,
+          height: image.height,
+          sizes: sizes,
+          widths: widths,
+          alt: image_alt
+      -}}
+    {%- endif -%}
+  </picture>
+{% else %}
+  {% assign width = width | default: image.width %}
+  {%- if lazy_load == true -%}
+    {{-
+      image
+      | image_url: width: image.width
+      | image_tag:
+        preload: true,
+        loading: loading,
+        fetchpriority: fetch_priority,
+        width: width,
+        height: image.height,
+        sizes: sizes,
+        class: class,
+        widths: widths,
+        alt: image_alt
+    -}}
+  {%- else -%}
     {{-
       image
       | image_url: width: image.width
       | image_tag:
         loading: loading,
-        width: image.width,
+        width: width,
         height: image.height,
         sizes: sizes,
+        class: class,
         widths: widths,
         alt: image_alt
     -}}
-  </picture>
-{% else %}
-  {% assign width = width | default: image.width %}
-  {{-
-    image
-    | image_url: width: image.width
-    | image_tag:
-      loading: loading,
-      width: width,
-      height: image.height,
-      sizes: sizes,
-      class: class,
-      widths: widths,
-      alt: image_alt
-  -}}
+  {%- endif -%}
 {% endif %}
 {% if no_animate == blank and secondary_image == false and settings.zoom_image == true %}
   </motion-element>

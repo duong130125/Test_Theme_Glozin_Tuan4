@@ -1,6 +1,6 @@
 {% liquid
-  assign font_family_body = 'Instrument Sans'
-  assign font_family_heading = 'Instrument Sans'
+  assign font_family_body = 'Bai Jamjuree'
+  assign font_family_heading = 'Bai Jamjuree'
 
   assign theme_st = settings
   assign font_type_body = theme_st.font_type_body
@@ -12,45 +12,16 @@
   assign font_heading_shopify = theme_st.font_heading_system
   assign font_heading_google = theme_st.font_heading_google
   assign font_body_heading_embed = theme_st.font_body_heading_embed
+
+  assign use_bai_jamjuree = false
+  if font_type_body == 'default_font' or font_type_heading == 'default_font'
+    assign use_bai_jamjuree = true
+  endif
 %}
 
 {% comment %} Start check setting font {% endcomment %}
 {% if font_type_body == 'default_font' %}
-  {{
-    'InstrumentSans-Regular.woff2'
-    | asset_url
-    | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous'
-  }}
-  {% style %}
-    @font-face {
-      font-family: "Instrument Sans";
-      src: url({{ 'InstrumentSans-SemiBold.woff2' | asset_url }}) format("woff2");
-      font-weight: 600;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Instrument Sans";
-      src: url({{ 'InstrumentSans-Bold.ttf' | asset_url }});
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Instrument Sans";
-      src: url({{ 'InstrumentSans-Medium.woff2' | asset_url }}) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Instrument Sans";
-      src: url({{ 'InstrumentSans-Regular.woff2' | asset_url }}) format("woff2");
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-  {% endstyle %}
+  {% assign font_family_body = 'Bai Jamjuree' %}
 {% elsif font_type_body == 'google' %}
   {% assign font_family_body = font_body_google %}
   {{ font_body_google_embed }}
@@ -65,41 +36,7 @@
 {% endif %}
 
 {% if font_type_heading == 'default_font' %}
-  {{
-    'InstrumentSans-Regular.woff2'
-    | asset_url
-    | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous'
-  }}
-  {% style %}
-    @font-face {
-      font-family: "Instrument Sans";
-      src: url({{ 'InstrumentSans-SemiBold.woff2' | asset_url }}) format("woff2");
-      font-weight: 600;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Instrument Sans";
-      src: url({{ 'InstrumentSans-Bold.ttf' | asset_url }});
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Instrument Sans";
-      src: url({{ 'InstrumentSans-Medium.woff2' | asset_url }}) format("woff2");
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: "Instrument Sans";
-      src: url({{ 'InstrumentSans-Regular.woff2' | asset_url }}) format("woff2");
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-  {% endstyle %}
+  {% assign font_family_heading = 'Bai Jamjuree' %}
 {% elsif font_type_heading == 'google' %}
   {% assign font_family_heading = font_heading_google %}
   {{ font_body_heading_embed }}
@@ -111,6 +48,80 @@
   {%- style -%}
     {%- for variant in font_heading_shopify.variants -%}{{ variant | font_face: font_display: 'swap' }}{%- endfor -%}
   {%- endstyle -%}
+{% endif %}
+
+{% if use_bai_jamjuree %}
+  {{
+    'BaiJamjuree-Regular-latin.woff2'
+    | asset_url
+    | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous'
+  }}
+  {% style %}
+    @font-face {
+      font-family: 'Bai Jamjuree';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url({{ 'BaiJamjuree-Regular-latin.woff2' | asset_url }}) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Bai Jamjuree';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url({{ 'BaiJamjuree-Regular-vietnamese.woff2' | asset_url }}) format('woff2');
+      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+    }
+    @font-face {
+      font-family: 'Bai Jamjuree';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url({{ 'BaiJamjuree-Medium-latin.woff2' | asset_url }}) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Bai Jamjuree';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url({{ 'BaiJamjuree-Medium-vietnamese.woff2' | asset_url }}) format('woff2');
+      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+    }
+    @font-face {
+      font-family: 'Bai Jamjuree';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url({{ 'BaiJamjuree-SemiBold-latin.woff2' | asset_url }}) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Bai Jamjuree';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url({{ 'BaiJamjuree-SemiBold-vietnamese.woff2' | asset_url }}) format('woff2');
+      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+    }
+    @font-face {
+      font-family: 'Bai Jamjuree';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url({{ 'BaiJamjuree-Bold-latin.woff2' | asset_url }}) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Bai Jamjuree';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url({{ 'BaiJamjuree-Bold-vietnamese.woff2' | asset_url }}) format('woff2');
+      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+    }
+  {% endstyle %}
 {% endif %}
 
 {% liquid

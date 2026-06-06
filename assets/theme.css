@@ -25,7 +25,7 @@
 .header__topbar-left {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 .header__topbar-left span {
   font-family: 'Bai Jamjuree', sans-serif;
@@ -33,7 +33,7 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 100%;
-  letter-spacing: 0.3px;
+  letter-spacing: 0%;
 }
 .header__topbar-left a {
   font-family: 'Bai Jamjuree', sans-serif;
@@ -2082,7 +2082,7 @@ minicart-item-edit.loading .edit-icon {
   font-size: 14px;
   line-height: 100%;
   white-space: nowrap !important;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.8px;
 }
 .header__layout-2 .header__menu-promo {
   flex: 0 0 227px;

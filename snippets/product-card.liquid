@@ -89,10 +89,20 @@
       <!-- Price -->
       <div class="featured-price">
         {%- assign is_special_price = false -%}
-        {%- if current_variant.price == 102800 or current_variant.price == 28900 or current_variant.price == 1028 or current_variant.price == 289 -%}
+        {%- if current_variant.price == 102800
+          or current_variant.price == 28900
+          or current_variant.price == 1028
+          or current_variant.price == 289
+        -%}
           {%- assign is_special_price = true -%}
         {%- endif -%}
-        <span {% if is_special_price %}style="color: #2B38D1 !important;"{% endif %}>{{ current_variant.price | money }}</span>
+        <span
+          {% if is_special_price %}
+            style="color: #2B38D1 !important;"
+          {% endif %}
+        >
+          {{- current_variant.price | money -}}
+        </span>
         {%- if current_variant.compare_at_price > current_variant.price -%}
           <span class="featured-price-compare">{{ current_variant.compare_at_price | money }}</span>
         {%- endif -%}
@@ -126,14 +136,14 @@
     {%- if card_product.metafields.custom.product_badge != blank -%}
       <div
         class="card-badge-label custom-badge"
-        style="position: absolute; top: 20px; left: 20px; background-color: {{ settings.custom_badge_background | default: '#008A00' }}; color: {{ settings.custom_badge_color | default: '#FFFFFF' }}; font-size: 12px; font-weight: 600; padding: 2.25px 13px; border-radius: 2px; z-index: 3; text-transform: uppercase;"
+        style="position: absolute; top: 20px; left: 20px; background-color: {{ settings.custom_badge_background | default: '#008A00' }}; color: {{ settings.custom_badge_color | default: '#FFFFFF' }}; font-size: 12px; font-weight: 600; padding: 2.25px 14px; border-radius: 2px; z-index: 3; text-transform: uppercase;"
       >
         {{ card_product.metafields.custom.product_badge }}
       </div>
     {%- elsif current_variant.compare_at_price > current_variant.price -%}
       <div
         class="card-badge-label"
-        style="position: absolute; top: 20px; left: 20px; background-color: #DC323C; color: #FFFFFF; font-size: 12px; font-weight: 600; padding: 2.25px 13px; border-radius: 2px; z-index: 3; text-transform: uppercase;"
+        style="position: absolute; top: 20px; left: 20px; background-color: #DC323C; color: #FFFFFF; font-size: 12px; font-weight: 600; padding: 2.25px 12px; border-radius: 2px; z-index: 3; text-transform: uppercase;"
       >
         {%- assign discount = current_variant.compare_at_price
           | minus: current_variant.price
@@ -197,10 +207,20 @@
       <!-- Price -->
       <div class="card-price">
         {%- assign is_special_price = false -%}
-        {%- if current_variant.price == 102800 or current_variant.price == 28900 or current_variant.price == 1028 or current_variant.price == 289 -%}
+        {%- if current_variant.price == 102800
+          or current_variant.price == 28900
+          or current_variant.price == 1028
+          or current_variant.price == 289
+        -%}
           {%- assign is_special_price = true -%}
         {%- endif -%}
-        <span {% if is_special_price %}style="color: #2B38D1 !important;"{% endif %}>{{ current_variant.price | money }}</span>
+        <span
+          {% if is_special_price %}
+            style="color: #2B38D1 !important;"
+          {% endif %}
+        >
+          {{- current_variant.price | money -}}
+        </span>
         {%- if current_variant.compare_at_price > current_variant.price -%}
           <span class="card-price-compare">{{ current_variant.compare_at_price | money }}</span>
         {%- endif -%}

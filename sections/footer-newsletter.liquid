@@ -8,12 +8,12 @@
     font-size: 14px;
     line-height: 100%;
     letter-spacing: 0%;
-    color: #515D66;
+    color: #515d66;
   }
 
   .footer-copyright a {
     font-family: 'Bai Jamjuree', sans-serif;
-    color: #2B38D1;
+    color: #2b38d1;
     font-weight: 600;
     font-size: 14px;
     line-height: 100%;
@@ -24,7 +24,7 @@
   .footer-payment-icons {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     margin-left: auto;
   }
 
@@ -36,7 +36,7 @@
     font-size: 14px;
     line-height: 100%;
     letter-spacing: 0%;
-    color: #515D66;
+    color: #515d66;
   }
 
   .footer-payment-icons-list {
@@ -85,7 +85,7 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'store_info' -%}
-           {%- liquid
+            {%- liquid
               assign store_title = block.settings.store_heading | default: block.settings.title
               assign store_desc = block.settings.store_description | default: block.settings.description
 
@@ -141,13 +141,17 @@
 
                 {%- if email_val != blank -%}
                   <div class="footer-contact-item email">
-                    <span><a href="mailto:{{ email_val }}">{{ email_val | escape }}</a></span>
+                    <span
+                      ><a href="mailto:{{ email_val }}">{{ email_val | escape }}</a></span
+                    >
                   </div>
                 {%- endif -%}
 
                 {%- if email_val_2 != blank -%}
                   <div class="footer-contact-item email">
-                    <span><a href="mailto:{{ email_val_2 }}">{{ email_val_2 | escape }}</a></span>
+                    <span
+                      ><a href="mailto:{{ email_val_2 }}">{{ email_val_2 | escape }}</a></span
+                    >
                   </div>
                 {%- endif -%}
               </div>

@@ -17,7 +17,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="#212529">
     <link rel="canonical" href="{{ canonical_url }}">
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -36,9 +36,17 @@
     {{ 'critical.css' | asset_url | stylesheet_tag }}
     {% if enable_rtl %}{{ 'rtl.css' | asset_url | stylesheet_tag: preload: true }}{% endif %}
     {{ 'product-card.css' | asset_url | stylesheet_tag }}
-    {{ 'custom-homepage.css' | asset_url | stylesheet_tag }}
-    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
-    {{ 'judgeme-reviews.css' | asset_url | stylesheet_tag }}
+    {%- if request.page_type == 'index' -%}
+      {{ 'custom-homepage.css' | asset_url | stylesheet_tag }}
+      {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+    {%- else -%}
+      <link rel="stylesheet" href="{{ 'custom-homepage.css' | asset_url }}" media="print" onload="this.media='all'">
+      <noscript>{{ 'custom-homepage.css' | asset_url | stylesheet_tag }}</noscript>
+      <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}" media="print" onload="this.media='all'">
+      <noscript>{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}</noscript>
+    {%- endif -%}
+    <link rel="stylesheet" href="{{ 'judgeme-reviews.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>{{ 'judgeme-reviews.css' | asset_url | stylesheet_tag }}</noscript>
     {% render 'font-variables' %}
     {% if request.design_mode %}
       {{ 'design-mode.css' | asset_url | stylesheet_tag: preload: true }}
@@ -186,7 +194,9 @@
     <script src="{{ 'motion.min.js' | asset_url }}" type="module" defer="defer"></script>
     <script src="{{ 'utils.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    {% if settings.scroll_animation or settings.zoom_image %}
+    {% if settings.zoom_image %}
+      <script src="{{ 'motion-effect.js' | asset_url }}" defer="defer"></script>
+    {% elsif settings.scroll_animation != blank and settings.scroll_animation != 'none' %}
       <script src="{{ 'motion-effect.js' | asset_url }}" defer="defer"></script>
     {% endif %}
     <script>
