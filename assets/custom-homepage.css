@@ -961,7 +961,7 @@ body.template-index {
   font-weight: 500;
   font-size: 32px;
   line-height: 100%;
-  letter-spacing: 0%;
+  letter-spacing: -0.5px;
   text-decoration: none !important;
   display: block;
   margin-bottom: 25px;
