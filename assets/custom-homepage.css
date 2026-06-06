@@ -467,7 +467,7 @@ body.template-index {
   font-weight: 600;
   font-size: 14px;
   line-height: 18px;
-  letter-spacing: 0%;
+  letter-spacing: -0.2px;
   color: #212529;
   text-decoration: none;
   margin-bottom: 16px;
@@ -514,7 +514,7 @@ body.template-index {
   font-weight: 500;
   font-size: 14px;
   line-height: 100%;
-  letter-spacing: 0%;
+  letter-spacing: 0.2px;
   color: #515D66;
   vertical-align: middle;
   margin-bottom: 10px;
