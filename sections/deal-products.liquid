@@ -52,6 +52,7 @@
           card_product: featured_prod,
           section_id: section.id,
           layout: 'featured',
+          title: section_st.title,
           end_time: section_st.countdown_time,
           total_stock: section_st.total_stock,
           sold_stock: section_st.sold_stock
@@ -59,6 +60,7 @@
       {%- else -%}
         <!-- Placeholder Featured Card -->
         <div class="featured-deal-card placeholder" style="text-align: center;">
+          <div class="deal-section-title">{{ section_st.title | default: "Today's Offer" }}</div>
           <div class="featured-badge-label">OFFER</div>
           {{ 'product-3' | placeholder_svg_tag: 'placeholder-svg featured-image' }}
           <div class="featured-info-wrap" style="margin-top: 20px;">

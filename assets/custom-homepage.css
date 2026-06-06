@@ -373,6 +373,16 @@ body.template-index {
 }
 
 /* Centered Featured Deal Card */
+.deal-section-title {
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #212529;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  border-bottom: 1px solid #E5E8EC;
+}
+
 .featured-deal-card {
   width: 466px;
   height: 751px;
@@ -392,22 +402,22 @@ body.template-index {
 
 .featured-badge-label {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  background-color: #e53e3e;
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 4px;
+  top: 87px;
+  left: 40px;
+  background-color: #DC323C;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2.25px 13px;
+  border-radius: 2px;
   text-transform: uppercase;
   z-index: 3;
 }
 
 .featured-wishlist-wrap {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 87px;
+  right: 40px;
   z-index: 3;
 }
 
@@ -480,7 +490,6 @@ body.template-index {
 
 /* Countdown Red Timer boxes */
 .featured-timer-section {
-  border-top: 1px solid #eee;
   padding-top: 20px;
   margin-bottom: 20px;
 }
@@ -490,13 +499,13 @@ body.template-index {
   color: #666666;
   margin-bottom: 10px;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .deal-timer-container {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 }
 
 .deal-timer-box {
@@ -528,6 +537,55 @@ body.template-index {
   color: #e53e3e;
 }
 
+/* Style JS-generated countdown elements as red boxes */
+.featured-timer-section .countdown--container {
+  background-color: #e53e3e;
+  color: #ffffff;
+  border-radius: 4px;
+  min-width: 44px;
+  height: 44px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.1;
+  position: relative;
+  padding: 4px 6px;
+}
+
+.featured-timer-section .countdown--container::after {
+  content: ':';
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #e53e3e;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.featured-timer-section .countdown--container:last-child::after {
+  display: none;
+}
+
+.featured-timer-section .count-timer {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.featured-timer-section .timer_announcementbar--text {
+  font-size: 8px;
+  font-weight: 400;
+  text-transform: uppercase;
+  opacity: 0.85;
+  color: #ffffff;
+  line-height: 1;
+}
+
 /* Progress bar sold stock */
 .featured-stock-section {
   margin-bottom: 20px;
@@ -535,10 +593,11 @@ body.template-index {
 
 .stock-label-wrap {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   font-size: 13px;
   color: #333333;
-  margin-bottom: 6px;
+  margin-top: 8px;
+  margin-bottom: 0;
   font-weight: 500;
 }
 
@@ -716,6 +775,7 @@ body.template-index {
   letter-spacing: 0;
   color: #8D979E;
   text-decoration: line-through;
+  padding-top: 4px;
 }
 
 .card-action-wrap {
@@ -770,6 +830,14 @@ body.template-index {
   }
   .featured-deal-card {
     padding: 25px 20px;
+  }
+  .featured-badge-label {
+    top: 75px;
+    left: 20px;
+  }
+  .featured-wishlist-wrap {
+    top: 75px;
+    right: 20px;
   }
 }
 
@@ -1060,6 +1128,7 @@ body.template-index {
   font-family: 'Bai Jamjuree', sans-serif;
   font-size: 12px;
   line-height: 20px;
+  letter-spacing: 5%;
 }
 
 .stock-label {
@@ -1069,8 +1138,13 @@ body.template-index {
 
 .low-stock .stock-label,
 .low-stock .stock-qty {
+  font-family: 'Bai Jamjuree', sans-serif;
   font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  vertical-align: middle;
   color: #EF262C;
+  letter-spacing: 5%;
 }
 
 .out-of-stock .stock-label {

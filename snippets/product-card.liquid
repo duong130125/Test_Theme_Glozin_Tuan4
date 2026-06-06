@@ -15,7 +15,6 @@
   assign product_form_id = 'quick-add-' | append: section_id | append: '-' | append: card_product.id
 -%}
 
-
 {%- if layout_type == 'featured' -%}
   {%- assign total_qty = total_stock | default: 50 -%}
   {%- assign sold_qty = sold_stock | default: 28 -%}
@@ -23,39 +22,54 @@
 
   <!-- Featured Big Card (Today's Offer) -->
   <div class="featured-deal-card" data-product-id="{{ card_product.id }}">
-
-    {%- if current_variant.compare_at_price > current_variant.price -%}
+    <div class="deal-section-title">{{ title | default: "Today's Offer" }}</div>
+    {%- if card_product.metafields.custom.custom_product_badge != blank -%}
+      <div
+        class="featured-badge-label custom-badge"
+        style="background-color: {{ settings.custom_badge_background | default: '#14854e' }}; color: {{ settings.custom_badge_color | default: '#FFFFFF' }};"
+      >
+        {{ card_product.metafields.custom.custom_product_badge }}
+      </div>
+    {%- elsif current_variant.compare_at_price > current_variant.price -%}
       <div class="featured-badge-label">
-        {%- assign discount = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
-        -{{ discount }}% OFF
+        {%- assign discount = current_variant.compare_at_price
+          | minus: current_variant.price
+          | times: 100
+          | divided_by: current_variant.compare_at_price
+        -%}
+        -{{ discount }}%
       </div>
     {%- endif -%}
 
-    <!-- Wishlist Button -->
+    <!-- Add to Cart Button -->
     <div class="featured-wishlist-wrap">
-      <button-wishlist
-        tabindex="0"
-        class="pointer btn-hover btn-white rounded-50 p-0 shadow w-35 h-35 inline-flex content-center justify-center align-center"
-        data-product-id="{{ card_product.id }}"
-        data-action="add"
-        style="width: 35px; height: 35px; border-radius: 50%; border: 1px solid #eee; background: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;"
+      <button
+        type="button"
+        class="featured-cart-btn"
+        aria-label="Add to cart"
+        style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #E5E8EC; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;"
       >
-        <svg width="14" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #666; width: 14px; height: 14px;">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 4H7V13H3C1.89543 13 1 12.1046 1 11V4Z" fill="#16BCDC" fill-opacity="0.3"/>
+          <path d="M7.54688 9.07812C7.54688 8.77609 7.30204 8.53125 7 8.53125C6.69796 8.53125 6.45312 8.77609 6.45312 9.07812V11.2656C6.45312 11.5677 6.69796 11.8125 7 11.8125C7.30204 11.8125 7.54688 11.5677 7.54688 11.2656V9.07812Z" fill="#1AB4D1"/>
+          <path d="M1.53125 8.53125C1.22921 8.53125 0.984375 8.77609 0.984375 9.07812V11.2656C0.984375 12.7734 2.21102 14 3.71875 14H10.2812C11.789 14 13.0156 12.7734 13.0156 11.2656V9.07812C13.0156 8.77609 12.7708 8.53125 12.4688 8.53125C12.1667 8.53125 11.9219 8.77609 11.9219 9.07812V11.2656C11.9219 12.1703 11.1859 12.9062 10.2812 12.9062H3.71875C2.81411 12.9062 2.07812 12.1703 2.07812 11.2656V9.07812C2.07812 8.77609 1.83329 8.53125 1.53125 8.53125Z" fill="#1AB4D1"/>
+          <path d="M1.64062 7.65625H12.3594C13.264 7.65625 14 6.92027 14 6.01562V4.92188C14 4.01723 13.264 3.28125 12.3594 3.28125H10.5338C10.7206 2.95922 10.8281 2.58579 10.8281 2.1875C10.8281 0.981313 9.84681 0 8.64062 0C7.98774 0 7.40116 0.287875 7 0.742902C6.59884 0.287875 6.01226 0 5.35938 0C4.15319 0 3.17188 0.981313 3.17188 2.1875C3.17188 2.58579 3.27939 2.95922 3.46618 3.28125H1.64062C0.735984 3.28125 0 4.01723 0 4.92188V6.01562C0 6.92027 0.735984 7.65625 1.64062 7.65625ZM8.64062 1.09375C9.24372 1.09375 9.73438 1.58441 9.73438 2.1875C9.73438 2.79059 9.24372 3.28125 8.64062 3.28125H7.54688V2.1875C7.54688 1.58441 8.03753 1.09375 8.64062 1.09375ZM4.26562 2.1875C4.26562 1.58441 4.75628 1.09375 5.35938 1.09375C5.96247 1.09375 6.45312 1.58441 6.45312 2.1875V3.28125H5.35938C4.75628 3.28125 4.26562 2.79059 4.26562 2.1875ZM1.09375 4.92188C1.09375 4.62033 1.33908 4.375 1.64062 4.375H6.45312V4.92188C6.45312 5.22391 6.69796 5.46875 7 5.46875C7.30204 5.46875 7.54688 5.22391 7.54688 4.92188V4.375H12.3594C12.6609 4.375 12.9062 4.62033 12.9062 4.92188V6.01562C12.9062 6.31717 12.6609 6.5625 12.3594 6.5625H1.64062C1.33908 6.5625 1.09375 6.31717 1.09375 6.01562V4.92188Z" fill="#1AB4D1"/>
         </svg>
-      </button-wishlist>
+      </button>
     </div>
 
     <!-- Product Image -->
     <div class="featured-image-wrap">
       <a href="{{ card_product.url }}" class="featured-image-link">
         {%- if card_product.featured_media != blank -%}
-          <img src="{{ card_product.featured_media | image_url: width: 450 }}"
-               alt="{{ card_product.featured_media.alt | escape }}"
-               loading="lazy"
-               width="320"
-               height="320"
-               class="featured-image">
+          <img
+            src="{{ card_product.featured_media | image_url: width: 450 }}"
+            alt="{{ card_product.featured_media.alt | escape }}"
+            loading="lazy"
+            width="320"
+            height="320"
+            class="featured-image"
+          >
         {%- else -%}
           {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg featured-image' }}
         {%- endif -%}
@@ -67,7 +81,7 @@
       <a href="{{ card_product.url }}" class="featured-title">
         {{ card_product.title }}
       </a>
-      
+
       <!-- Rating Stars -->
       <div class="featured-rating">
         {%- render 'rating-stars', card_product: card_product -%}
@@ -91,12 +105,13 @@
 
       <!-- Stock Sold Progress Bar -->
       <div class="featured-stock-section">
-        <div class="stock-label-wrap">
-          <span>Sold: <strong>{{ sold_qty }}/{{ total_qty }}</strong></span>
-          <span>{{ stock_percent }}%</span>
-        </div>
         <div class="stock-bar-outer">
           <div class="stock-bar-inner" style="width: {{ stock_percent }}%;"></div>
+        </div>
+        <div class="stock-label-wrap">
+          <span
+            >Sold: <strong>{{ sold_qty }}/{{ total_qty }}</strong> products</span
+          >
         </div>
       </div>
     </div>
@@ -105,9 +120,23 @@
 {%- else -%}
   <!-- Small Card Layout -->
   <div class="small-product-card" data-product-id="{{ card_product.id }}">
-    {%- if current_variant.compare_at_price > current_variant.price -%}
-      <div class="card-badge-label" style="position: absolute; top: 15px; left: 15px; background-color: #e53e3e; color: #ffffff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; z-index: 3; text-transform: uppercase;">
-        {%- assign discount = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
+    {%- if card_product.metafields.custom.product_badge != blank -%}
+      <div
+        class="card-badge-label custom-badge"
+        style="position: absolute; top: 20px; left: 20px; background-color: {{ settings.custom_badge_background | default: '#008A00' }}; color: {{ settings.custom_badge_color | default: '#FFFFFF' }}; font-size: 12px; font-weight: 600; padding: 2.25px 13px; border-radius: 2px; z-index: 3; text-transform: uppercase;"
+      >
+        {{ card_product.metafields.custom.product_badge }}
+      </div>
+    {%- elsif current_variant.compare_at_price > current_variant.price -%}
+      <div
+        class="card-badge-label"
+        style="position: absolute; top: 20px; left: 20px; background-color: #DC323C; color: #FFFFFF; font-size: 12px; font-weight: 600; padding: 2.25px 13px; border-radius: 2px; z-index: 3; text-transform: uppercase;"
+      >
+        {%- assign discount = current_variant.compare_at_price
+          | minus: current_variant.price
+          | times: 100
+          | divided_by: current_variant.compare_at_price
+        -%}
         -{{ discount }}%
       </div>
     {%- endif -%}
@@ -120,7 +149,14 @@
         data-action="add"
         style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #eee; background: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;"
       >
-        <svg width="12" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #666; width: 12px; height: 12px;">
+        <svg
+          width="12"
+          height="11"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          style="color: #666; width: 12px; height: 12px;"
+        >
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
         </svg>
       </button-wishlist>
@@ -130,12 +166,14 @@
     <div class="card-image-wrap">
       <a href="{{ card_product.url }}" class="block">
         {%- if card_product.featured_media != blank -%}
-          <img src="{{ card_product.featured_media | image_url: width: 350 }}"
-               alt="{{ card_product.featured_media.alt | escape }}"
-               loading="lazy"
-               width="220"
-               height="220"
-               class="card-image">
+          <img
+            src="{{ card_product.featured_media | image_url: width: 350 }}"
+            alt="{{ card_product.featured_media.alt | escape }}"
+            loading="lazy"
+            width="220"
+            height="220"
+            class="card-image"
+          >
         {%- else -%}
           {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg card-image' }}
         {%- endif -%}
@@ -147,7 +185,7 @@
       <a href="{{ card_product.url }}" class="card-title">
         {{ card_product.title }}
       </a>
-      
+
       <!-- Rating -->
       <div class="card-rating">
         {%- render 'rating-stars', card_product: card_product -%}
@@ -167,7 +205,14 @@
           {%- if current_variant.inventory_quantity > 0 -%}
             {%- if current_variant.inventory_quantity > 5 -%}
               <div class="card-stock-status in-stock">
-                <svg class="stock-icon" width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  class="stock-icon"
+                  width="11"
+                  height="8"
+                  viewBox="0 0 11 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path d="M9.50195 0.164062L3.5 6.16602L0.998047 3.66406C0.879557 3.55469 0.738281 3.5 0.574219 3.5C0.419271 3.5 0.287109 3.55469 0.177734 3.66406C0.0592448 3.78255 0 3.92383 0 4.08789C0 4.24284 0.0592448 4.375 0.177734 4.48438L3.08984 7.41016C3.19922 7.51953 3.33594 7.57422 3.5 7.57422C3.66406 7.57422 3.80078 7.51953 3.91016 7.41016L10.3223 0.984375C10.4408 0.875 10.5 0.742839 10.5 0.587891C10.5 0.423828 10.4408 0.282552 10.3223 0.164062C10.2129 0.0546875 10.0762 0 9.91211 0C9.75716 0 9.62044 0.0546875 9.50195 0.164062Z"/>
                 </svg>
                 <span class="stock-text">
@@ -178,7 +223,14 @@
               </div>
             {%- else -%}
               <div class="card-stock-status low-stock">
-                <svg class="stock-icon" width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  class="stock-icon"
+                  width="11"
+                  height="8"
+                  viewBox="0 0 11 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path d="M9.50195 0.164062L3.5 6.16602L0.998047 3.66406C0.879557 3.55469 0.738281 3.5 0.574219 3.5C0.419271 3.5 0.287109 3.55469 0.177734 3.66406C0.0592448 3.78255 0 3.92383 0 4.08789C0 4.24284 0.0592448 4.375 0.177734 4.48438L3.08984 7.41016C3.19922 7.51953 3.33594 7.57422 3.5 7.57422C3.66406 7.57422 3.80078 7.51953 3.91016 7.41016L10.3223 0.984375C10.4408 0.875 10.5 0.742839 10.5 0.587891C10.5 0.423828 10.4408 0.282552 10.3223 0.164062C10.2129 0.0546875 10.0762 0 9.91211 0C9.75716 0 9.62044 0.0546875 9.50195 0.164062Z"/>
                 </svg>
                 <span class="stock-text">
@@ -201,7 +253,14 @@
         {%- else -%}
           {%- if current_variant.available -%}
             <div class="card-stock-status in-stock">
-              <svg class="stock-icon" width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                class="stock-icon"
+                width="11"
+                height="8"
+                viewBox="0 0 11 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path d="M9.50195 0.164062L3.5 6.16602L0.998047 3.66406C0.879557 3.55469 0.738281 3.5 0.574219 3.5C0.419271 3.5 0.287109 3.55469 0.177734 3.66406C0.0592448 3.78255 0 3.92383 0 4.08789C0 4.24284 0.0592448 4.375 0.177734 4.48438L3.08984 7.41016C3.19922 7.51953 3.33594 7.57422 3.5 7.57422C3.66406 7.57422 3.80078 7.51953 3.91016 7.41016L10.3223 0.984375C10.4408 0.875 10.5 0.742839 10.5 0.587891C10.5 0.423828 10.4408 0.282552 10.3223 0.164062C10.2129 0.0546875 10.0762 0 9.91211 0C9.75716 0 9.62044 0.0546875 9.50195 0.164062Z"/>
               </svg>
               <span class="stock-text">
