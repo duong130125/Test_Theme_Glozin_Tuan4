@@ -92,6 +92,7 @@
     font-size: 12px;
   }
 }
+
 /* --- END TOP-BAR CSS --- */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -1985,32 +1986,129 @@ minicart-item-edit.loading .edit-icon {
   padding: 0;
 }
 
-/* Mobile Responsive */
+/* Mobile & Tablet header layout */
 @media (max-width: 1024.98px) {
   .header__topbar {
     display: none;
   }
 
+  .section-header,
+  .section-header .header,
+  .header__inner,
   .header__layout-2 {
-    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header__layout-2 header-inner {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header__inner > :is(.stretch_width, .full_width, .container, .fluid_container) {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .header__layout-2 {
+    flex-wrap: nowrap;
     justify-content: space-between;
-    padding: 0.75rem 0;
+  }
+
+  .header__layout-2 .logo-position.header-middle {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas:
+      'menu logo icon'
+      'search search search';
+    gap: 12px 0;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header__layout-2 .logo-position .block {
+    grid-area: menu;
+    justify-self: start;
   }
 
   .header__layout-2 .header__logo {
-    order: 1;
-    flex: 0 0 auto;
-    width: 100%;
-    margin-bottom: 0.75rem;
+    grid-area: logo;
+    justify-self: center;
+    width: auto !important;
+    flex: unset !important;
+    margin-bottom: 0 !important;
+    text-align: center;
   }
 
+  .header__layout-2 .header__logo img {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .header__layout-2 .header-search.header-search__mega,
   .header__layout-2 .header-search__mega {
-    order: 2;
-    width: 100%;
-    margin: 0.75rem 0;
-    flex-direction: column;
-    min-width: unset;
-    max-width: 100%;
+    display: flex !important;
+    grid-area: search;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    left: 0 !important;
+    flex-direction: row !important;
+    align-items: stretch;
+  }
+
+  .header__layout-2 .header-search__mega .header-search__input-wrapper {
+    flex: 1 !important;
+    width: auto !important;
+    min-width: 0;
+  }
+
+  .header__layout-2 .search-btn-primary {
+    width: auto;
+    margin-top: 0;
+    white-space: nowrap;
+  }
+
+  .header__layout-2 .header__action {
+    grid-area: icon;
+    justify-self: end;
+    width: auto !important;
+    gap: 14px;
+    flex-wrap: nowrap;
+  }
+
+  .header__layout-2 .header__action .header__account-link,
+  .header__layout-2 .header__action .header__account-wrapper,
+  .header__layout-2 .header__action .header__wishlist-wrapper,
+  .header__layout-2 .header__action .header__minicart-wrapper {
+    margin-right: 0 !important;
+  }
+
+  .header__layout-2 .header__account-wrapper,
+  .header__layout-2 .header__account-link {
+    display: flex !important;
+    width: auto !important;
+    min-width: unset !important;
+    height: auto !important;
+  }
+
+  .header__layout-2 .header__account-link .flex-column,
+  .header__layout-2 .header__account-wrapper .flex-column,
+  .header__layout-2 .header__minicart-wrapper .text-icons {
+    display: none !important;
+  }
+
+  .header__layout-2 .header__menu {
+    display: none !important;
+  }
+
+  .header__action .lang__currency-desktop {
+    display: none !important;
   }
 
   .categories-toggle {
@@ -2018,17 +2116,79 @@ minicart-item-edit.loading .edit-icon {
     padding: 0.5rem 0.75rem;
     font-size: 0.75rem;
   }
+}
 
-  .header__layout-2 .header__action {
-    order: 3;
-    width: 100%;
-    justify-content: flex-end;
-    gap: 1rem;
+/* Tablet: account + wishlist + cart icons */
+@media (min-width: 768px) and (max-width: 1024.98px) {
+  .header__layout-2 .header__logo img {
+    width: 130px;
   }
 
-  /* Hide language/currency from action area on desktop */
-  .header__action .lang__currency-desktop {
+  .header__layout-2 .header__wishlist-wrapper,
+  .header__layout-2 .header__minicart-wrapper,
+  .header__layout-2 .header__wishlist,
+  .header__layout-2 .header__minicart {
+    display: flex !important;
+    width: auto !important;
+    min-width: unset !important;
+    height: auto !important;
+  }
+
+  .header__layout-2 .header__action {
+    gap: 18px;
+  }
+}
+
+/* Mobile: account icon only + 20px gutters */
+@media (max-width: 767.98px) {
+  .header__inner > :is(.stretch_width, .full_width, .container, .fluid_container) {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .header__layout-2 .header__logo img {
+    width: 110px;
+  }
+
+  .header__layout-2 .header__wishlist-wrapper,
+  .header__layout-2 .header__minicart-wrapper,
+  .header__layout-2 .header__wishlist,
+  .header__layout-2 .header__minicart {
     display: none !important;
+  }
+
+  .header__layout-2 .header-search,
+  .header__layout-2 .header-search__mega,
+  .header__layout-2 .header-search.header-search__mega,
+  .header__layout-2 .header-search__mega *,
+  .header__layout-2 .header-search__input-wrapper {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .header__layout-2 .search-btn-primary {
+    padding: 10px 16px !important;
+  }
+
+  .header__layout-2 .header__action .header__account-link,
+  .header__layout-2 .header__action .header__account-wrapper {
+    margin-right: 0 !important;
+  }
+}
+
+/* Tablet: 30px gutters */
+@media (min-width: 768px) and (max-width: 1024.98px) {
+  .header__inner > :is(.stretch_width, .full_width, .container, .fluid_container) {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
   }
 }
 
@@ -2038,6 +2198,8 @@ minicart-item-edit.loading .edit-icon {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .header__layout-2 .header__logo {
   flex: 0 0 141px;
@@ -2274,4 +2436,13 @@ minicart-item-edit.loading .edit-icon {
   width: auto;
   object-fit: contain;
   display: block;
+}
+
+/* Override critical.css: keep layout-2 search visible on mobile/tablet */
+@media screen and (max-width: 1024.98px) {
+  .header__layout-2 .header-search.header-search__mega {
+    display: flex !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }

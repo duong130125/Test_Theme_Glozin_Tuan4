@@ -1,59 +1,72 @@
 <div class="homepage-container homepage-section-spacing">
-  <div class="promo-grid">
-    {%- for block in section.blocks -%}
-      {%- liquid
-        assign block_st = block.settings
-        assign bg_style = ''
-        if block_st.custom_bg_color != blank
-          assign bg_style = 'style="background-color: ' | append: block_st.custom_bg_color | append: ';"'
-        endif
-      -%}
-      
-      <div class="promo-card {% if block_st.custom_bg_color == blank %}{{ block_st.bg_class_name }}{% endif %}" {{ bg_style }} {{ block.shopify_attributes }}>
-        
-        <div class="promo-info">
+  <slide-section
+    class="swiper promo-grid-swiper lazy-loading-swiper-before"
+    data-section-id="{{ section.id }}"
+    data-effect="slide"
+    data-loop="false"
+    data-speed="400"
+    data-spacing="5"
+    data-mobile="1"
+    data-tablet="2"
+    data-desktop="3"
+    data-autoplay="false"
+  >
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign block_st = block.settings
+          assign bg_style = ''
+          if block_st.custom_bg_color != blank
+            assign bg_style = 'style="background-color: ' | append: block_st.custom_bg_color | append: ';"'
+          endif
+        -%}
 
-          <div class="promo-heading-group">
-            {%- if block_st.label != blank -%}
-              <span class="promo-label">{{ block_st.label | escape }}</span>
-            {%- endif -%}
+        <div class="swiper-slide" {{ block.shopify_attributes }}>
+          <div class="promo-card {% if block_st.custom_bg_color == blank %}{{ block_st.bg_class_name }}{% endif %}" {{ bg_style }}>
+            <div class="promo-info">
+              <div class="promo-heading-group">
+                {%- if block_st.label != blank -%}
+                  <span class="promo-label">{{ block_st.label | escape }}</span>
+                {%- endif -%}
 
-            {%- if block_st.title != blank -%}
-              <h3 class="promo-heading">{{ block_st.title | escape }}</h3>
-            {%- endif -%}
+                {%- if block_st.title != blank -%}
+                  <h3 class="promo-heading">{{ block_st.title | escape }}</h3>
+                {%- endif -%}
+              </div>
+
+              {%- if block_st.subtitle != blank -%}
+                <span class="promo-subtitle">{{ block_st.subtitle | escape }}</span>
+              {%- endif -%}
+
+              {%- if block_st.link_url != blank -%}
+                <a href="{{ block_st.link_url }}" class="promo-link">
+                  {{ block_st.link_text | default: 'Shop Now' | escape }}
+                  <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 5H11M11 5L7 1M11 5L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              {%- endif -%}
+            </div>
+
+            <div class="promo-image-wrap">
+              {%- if block_st.image != blank -%}
+                <img
+                  src="{{ block_st.image | image_url: width: 300 }}"
+                  alt="{{ block_st.image.alt | default: block_st.title | escape }}"
+                  loading="lazy"
+                  width="120"
+                  height="120"
+                  class="promo-image"
+                >
+              {%- else -%}
+                {{ 'product-3' | placeholder_svg_tag: 'placeholder-svg promo-image' }}
+              {%- endif -%}
+            </div>
           </div>
-
-          {%- if block_st.subtitle != blank -%}
-            <span class="promo-subtitle">{{ block_st.subtitle | escape }}</span>
-          {%- endif -%}
-
-          {%- if block_st.link_url != blank -%}
-            <a href="{{ block_st.link_url }}" class="promo-link">
-              {{ block_st.link_text | default: 'Shop Now' | escape }}
-              <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 5H11M11 5L7 1M11 5L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          {%- endif -%}
-
         </div>
-        
-        <div class="promo-image-wrap">
-          {%- if block_st.image != blank -%}
-            <img src="{{ block_st.image | image_url: width: 300 }}"
-                 alt="{{ block_st.image.alt | default: block_st.title | escape }}"
-                 loading="lazy"
-                 width="120"
-                 height="120"
-                 class="promo-image">
-          {%- else -%}
-            {{ 'product-3' | placeholder_svg_tag: 'placeholder-svg promo-image' }}
-          {%- endif -%}
-        </div>
-
-      </div>
-    {%- endfor -%}
-  </div>
+      {%- endfor -%}
+    </div>
+  </slide-section>
 </div>
 
 {% schema %}

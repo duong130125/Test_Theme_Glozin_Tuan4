@@ -28,7 +28,7 @@ var BlsLazyloadImg = (function () {
               }
             });
           },
-          { rootMargin: "10px" }
+          { rootMargin: "10px" },
         );
         document.querySelectorAll(".bls-image-js img").forEach((img) => {
           observer.observe(img);
@@ -72,7 +72,7 @@ const imageReady = (imageOrArray) => {
           });
         }
       });
-    })
+    }),
   );
 };
 
@@ -80,7 +80,7 @@ function pauseAllMedia() {
   document.querySelectorAll(".js-youtube").forEach((video) => {
     video.contentWindow.postMessage(
       '{"event":"command","func":"' + "pauseVideo" + '","args":""}',
-      "*"
+      "*",
     );
   });
   document.querySelectorAll(".js-vimeo").forEach((video) => {
@@ -185,14 +185,20 @@ class SlideSection extends HTMLElement {
         fill: "row",
       },
       navigation: {
-        nextEl: customNavigation ? document.querySelector(`.${customNext}`) : _this.querySelector(".swiper-button-next"),
-        prevEl: customNavigation ? document.querySelector(`.${customPrev}`) : _this.querySelector(".swiper-button-prev"),
+        nextEl: customNavigation
+          ? document.querySelector(`.${customNext}`)
+          : _this.querySelector(".swiper-button-next"),
+        prevEl: customNavigation
+          ? document.querySelector(`.${customPrev}`)
+          : _this.querySelector(".swiper-button-prev"),
       },
       pagination: {
         clickable: true,
-        el: paginationCustom == undefined ? 
-          _this.querySelector(".parent-pagination") ||
-          _this.querySelector(".swiper-pagination") : _this.querySelector(`.${paginationCustom}`),
+        el:
+          paginationCustom == undefined
+            ? _this.querySelector(".parent-pagination") ||
+              _this.querySelector(".swiper-pagination")
+            : _this.querySelector(`.${paginationCustom}`),
         type: progressbar ? "progressbar" : "bullets",
       },
       breakpoints: {
@@ -201,7 +207,7 @@ class SlideSection extends HTMLElement {
           spaceBetween: spacing >= 30 ? 30 : spacing,
           type: progressbar ? "progressbar" : "bullets",
           autoHeight: false,
-          centeredSlides: false
+          centeredSlides: false,
         },
         1025: {
           slidesPerView: itemDesktop,
@@ -225,7 +231,7 @@ class SlideSection extends HTMLElement {
               async () => {
                 e.autoplay.start();
               },
-              { margin: "0px 0px -50px 0px" }
+              { margin: "0px 0px -50px 0px" },
             );
           }
 
@@ -239,7 +245,7 @@ class SlideSection extends HTMLElement {
           }
           if (arrowCenterimage) {
             var items_slide = _this.querySelectorAll(
-              ".product-item__media--ratio"
+              ".product-item__media--ratio",
             );
             if (items_slide.length != 0) {
               var oH = [];
@@ -288,7 +294,7 @@ class SlideSection extends HTMLElement {
               .querySelector(
                 ".testimonials-author-image[data-position='" +
                   index_currentSlide +
-                  "']"
+                  "']",
               )
               .classList.add("active");
           }
@@ -299,7 +305,9 @@ class SlideSection extends HTMLElement {
           currentSlide
             .querySelectorAll("motion-element")
             .forEach(async (motion) => {
-              await motion.preInitialize();
+              if (typeof motion.preInitialize === "function") {
+                await motion.preInitialize();
+              }
             });
         },
         slideChangeTransitionEnd: function () {
@@ -308,8 +316,10 @@ class SlideSection extends HTMLElement {
           currentSlide
             .querySelectorAll("motion-element")
             .forEach(async (motion) => {
-                motion.classList.remove("animate-delay"),
+              if (typeof motion.initialize === "function") {
+                motion.classList.remove("animate-delay");
                 await motion.initialize();
+              }
             });
         },
         afterInit: function () {
@@ -319,7 +329,8 @@ class SlideSection extends HTMLElement {
         },
         touchMove: function (swiper, event) {
           const innerWidth = event.view.innerWidth;
-          const swiperMedia = swiper.el.classList.contains('swiper-popup-media');
+          const swiperMedia =
+            swiper.el.classList.contains("swiper-popup-media");
           const slidePopup = document.querySelector("slide-section-popup");
           if (slidePopup && swiperMedia && innerWidth > 767) {
             slidePopup.swiper.allowTouchMove = false;
@@ -328,34 +339,40 @@ class SlideSection extends HTMLElement {
         },
         touchEnd: function (swiper, event) {
           const innerWidth = event.view.innerWidth;
-          const swiperMedia = swiper.el.classList.contains('swiper-popup-media');
+          const swiperMedia =
+            swiper.el.classList.contains("swiper-popup-media");
           const slidePopup = document.querySelector("slide-section-popup");
           if (!swiperMedia) return;
           if (slidePopup && innerWidth > 767) {
             slidePopup.swiper.allowTouchMove = true;
             slidePopup.swiper.setGrabCursor();
           }
-        }
+        },
       },
     });
   }
 
   duplicateSlides(swiper) {
     const _this = this;
-    const swiperWrapper = _this.querySelector('.swiper-wrapper');
-    const originalSlides = swiperWrapper.querySelectorAll('.swiper-slide');
-    const paginationEl = _this.querySelector('.swiper-pagination');
-    
+    const swiperWrapper = _this.querySelector(".swiper-wrapper");
+    const originalSlides = swiperWrapper.querySelectorAll(".swiper-slide");
+    const paginationEl = _this.querySelector(".swiper-pagination");
+
     if (paginationEl) {
       const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
-          if (mutation.type === 'childList') {
+          if (mutation.type === "childList") {
             mutation.addedNodes.forEach((node) => {
-              if (node.nodeType === 1 && node.classList.contains('swiper-pagination-bullet')) {
-                const allBullets = paginationEl.querySelectorAll('.swiper-pagination-bullet');
+              if (
+                node.nodeType === 1 &&
+                node.classList.contains("swiper-pagination-bullet")
+              ) {
+                const allBullets = paginationEl.querySelectorAll(
+                  ".swiper-pagination-bullet",
+                );
                 const bulletIndex = Array.from(allBullets).indexOf(node);
                 if (bulletIndex >= originalSlides.length) {
-                  node.classList.add('swiper-pagination-duplicate');
+                  node.classList.add("swiper-pagination-duplicate");
                 }
               }
             });
@@ -363,16 +380,16 @@ class SlideSection extends HTMLElement {
         });
         observer.disconnect();
       });
-      
+
       observer.observe(paginationEl, { childList: true });
     }
-    
+
     originalSlides.forEach((slide) => {
-        const clonedSlide = slide.cloneNode(true);
-        clonedSlide.classList.add('swiper-slide-duplicate');
-        swiperWrapper.appendChild(clonedSlide);
+      const clonedSlide = slide.cloneNode(true);
+      clonedSlide.classList.add("swiper-slide-duplicate");
+      swiperWrapper.appendChild(clonedSlide);
     });
-    
+
     swiper.update();
   }
 
@@ -409,7 +426,7 @@ class PopupBase extends HTMLElement {
         document.documentElement.classList.add("open-popup");
         root.style.setProperty(
           "padding-right",
-          getScrollBarWidth.init() + "px"
+          getScrollBarWidth.init() + "px",
         );
         const video = this.modalBox.querySelector("video");
         if (!video) return;
@@ -515,7 +532,7 @@ class SwatchInit extends HTMLElement {
   updateOptions() {
     this.options = Array.from(
       this.querySelectorAll(".product__color-swatches--js.active"),
-      (select) => select.getAttribute("data-value")
+      (select) => select.getAttribute("data-value"),
     );
     this.variantData.find((variant) => {
       if (this.options.length == 1) {
@@ -555,12 +572,14 @@ class DeferredMedia extends HTMLElement {
     if (!this.getAttribute("loaded")) {
       const content = document.createElement("div");
       content.appendChild(
-        this.querySelector("template").content.firstElementChild.cloneNode(true)
+        this.querySelector("template").content.firstElementChild.cloneNode(
+          true,
+        ),
       );
 
       this.setAttribute("loaded", true);
       const deferredElement = this.appendChild(
-        content.querySelector("video, model-viewer, iframe")
+        content.querySelector("video, model-viewer, iframe"),
       );
       if (focus) deferredElement.focus();
       if (
@@ -580,10 +599,10 @@ function handleErrorMessagePopup(errorMessage = false) {
     .then((responseText) => {
       const html = new DOMParser().parseFromString(responseText, "text/html");
       const elementErrorMessage = html.querySelector(
-        ".product-form__error-message-wrapper"
+        ".product-form__error-message-wrapper",
       );
       const elementMessage = elementErrorMessage.querySelector(
-        ".product-form__error-message"
+        ".product-form__error-message",
       );
       elementMessage.textContent = errorMessage;
       showToast(elementErrorMessage.innerHTML, 5000, "modal-error");
@@ -615,7 +634,7 @@ function showToast(message, duration = 3000, customClass = "") {
     {
       duration: 0.3,
       easing: "ease-out",
-    }
+    },
   );
 
   setTimeout(() => {
@@ -627,7 +646,7 @@ function closeToast(toast) {
   Motion.animate(
     toast,
     { opacity: 0, scale: 0.5 },
-    { duration: 0.2, easing: "ease-in" }
+    { duration: 0.2, easing: "ease-in" },
   ).then(() => {
     toast.remove();
   });
@@ -635,35 +654,35 @@ function closeToast(toast) {
 
 class SlideLazyLoad {
   constructor(e) {
-    (this.triggerEventsJs = e),
+    ((this.triggerEventsJs = e),
       (this.eventOptionsJs = { passive: !0 }),
       (this.userEventListenerJs = this.triggerListenerJs.bind(this)),
-      (this.delayedScriptsJs = { normal: [], async: [], defer: [] });
+      (this.delayedScriptsJs = { normal: [], async: [], defer: [] }));
   }
   triggerListenerJs() {
-    this._removeUserInteractionListenerJs(this),
+    (this._removeUserInteractionListenerJs(this),
       "loading" === document.readyState
         ? document.addEventListener(
             "DOMContentLoaded",
-            this._loadEverythingReadyNow.bind(this)
+            this._loadEverythingReadyNow.bind(this),
           )
-        : this._loadEverythingReadyNow();
+        : this._loadEverythingReadyNow());
   }
   _removeUserInteractionListenerJs(e) {
     this.triggerEventsJs.forEach((t) =>
-      window.removeEventListener(t, e.userEventListenerJs, e.eventOptionsJs)
+      window.removeEventListener(t, e.userEventListenerJs, e.eventOptionsJs),
     );
   }
   _addUserInteractionListenerJs(e) {
     this.triggerEventsJs.forEach((t) =>
-      window.addEventListener(t, e.userEventListenerJs, e.eventOptionsJs)
+      window.addEventListener(t, e.userEventListenerJs, e.eventOptionsJs),
     );
   }
   _preloadAllScriptsJs() {
     document.body.classList.add("swiper-lazy");
     document.body.classList.add("review-lazy");
     const loadingSwiper = document.querySelectorAll(
-      ".lazy-loading-swiper-after"
+      ".lazy-loading-swiper-after",
     );
     loadingSwiper.forEach((el) => {
       el.classList.remove("lazy-loading-swiper-after");
@@ -771,7 +790,7 @@ class SlideLazyLoad {
               async () => {
                 e.autoplay.start();
               },
-              { margin: "0px 0px -50px 0px" }
+              { margin: "0px 0px -50px 0px" },
             );
           }
           var sec__tiktok = _this.closest(".sec__tiktok-video");
@@ -785,7 +804,7 @@ class SlideLazyLoad {
           }
           if (arrowCenterimage) {
             var items_slide = _this.querySelectorAll(
-              ".product-item__media--ratio"
+              ".product-item__media--ratio",
             );
             if (items_slide.length != 0) {
               var oH = [];
@@ -804,7 +823,7 @@ class SlideLazyLoad {
         },
         realIndexChange: function (swiper) {
           var slide_visibles = _this.querySelectorAll(
-            ".swiper-slide motion-element:not([data-image])"
+            ".swiper-slide motion-element:not([data-image])",
           );
           slide_visibles?.forEach((slide) => {
             if (!slide.hasAttribute("hold")) {
@@ -826,7 +845,7 @@ class SlideLazyLoad {
               .querySelector(
                 ".testimonials-author-image[data-position='" +
                   index_currentSlide +
-                  "']"
+                  "']",
               )
               .classList.add("active");
           }
@@ -836,13 +855,13 @@ class SlideLazyLoad {
   }
 
   async _loadEverythingReadyNow() {
-    this._preloadAllScriptsJs(),
+    (this._preloadAllScriptsJs(),
       await this._loadScriptsFromListJs(this.delayedScriptsJs.normal),
       await this._loadScriptsFromListJs(this.delayedScriptsJs.defer),
       await this._loadScriptsFromListJs(this.delayedScriptsJs.async),
       await this._triggerDOMContentLoadedJs(),
       await this._triggerWindowLoadJs(),
-      window.dispatchEvent(new Event("glozinspeed-allScriptsLoaded"));
+      window.dispatchEvent(new Event("glozinspeed-allScriptsLoaded")));
   }
   async _loadScriptsFromListJs(e) {
     const t = e.shift();
@@ -856,7 +875,7 @@ class SlideLazyLoad {
       new Promise((t) => {
         const s = document.createElement("script");
         let n;
-        [...e.attributes].forEach((e) => {
+        ([...e.attributes].forEach((e) => {
           let t = e.nodeName;
           "type" !== t &&
             ("data-glozinlazy-type" === t && ((t = "type"), (n = e.nodeValue)),
@@ -865,12 +884,12 @@ class SlideLazyLoad {
           e.hasAttribute("src")
             ? (s.addEventListener("load", t), s.addEventListener("error", t))
             : ((s.text = e.text), t()),
-          e.parentNode.replaceChild(s, e);
+          e.parentNode.replaceChild(s, e));
       })
     );
   }
   async _triggerDOMContentLoadedJs() {
-    (this.domReadyFired = !0),
+    ((this.domReadyFired = !0),
       await this._requestAnimFrame(),
       document.dispatchEvent(new Event("glozinspeed-DOMContentLoaded")),
       await this._requestAnimFrame(),
@@ -878,17 +897,17 @@ class SlideLazyLoad {
       await this._requestAnimFrame(),
       document.dispatchEvent(new Event("glozinspeed-readystatechange")),
       await this._requestAnimFrame(),
-      document.glozinonreadystatechange && document.glozinonreadystatechange();
+      document.glozinonreadystatechange && document.glozinonreadystatechange());
   }
   async _triggerWindowLoadJs() {
-    await this._requestAnimFrame(),
+    (await this._requestAnimFrame(),
       window.dispatchEvent(new Event("glozinspeed-load")),
       await this._requestAnimFrame(),
       window.glozinonload && window.glozinonload(),
       await this._requestAnimFrame(),
       window.dispatchEvent(new Event("glozinspeed-pageshow")),
       await this._requestAnimFrame(),
-      window.glozinonpageshow && window.glozinonpageshow();
+      window.glozinonpageshow && window.glozinonpageshow());
   }
   async _requestAnimFrame() {
     return new Promise((e) => requestAnimationFrame(e));

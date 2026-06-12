@@ -5,7 +5,8 @@ function showMinicartAddSuccessMessage(cart) {
   if (!cart || typeof window.showMinicartMessage !== "function") return;
   window.showMinicartMessage({
     cart,
-    message: window?.cartStrings?.item_added || window?.variantStrings?.addSuccess,
+    message:
+      window?.cartStrings?.item_added || window?.variantStrings?.addSuccess,
     type: "success",
     duration: 4200,
   });
@@ -97,7 +98,7 @@ function eventFlashingBrowseTab() {
       document.visibilityState === "visible"
         ? (function () {
             if (isActive) return;
-            clearInterval(myTimer), (titleTag.innerText = originalTitle);
+            (clearInterval(myTimer), (titleTag.innerText = originalTitle));
           })()
         : (function () {
             var i = 1;
@@ -170,6 +171,25 @@ function initializeLazyLoad() {
 }
 initializeLazyLoad();
 document.addEventListener("shopify:section:load", initializeLazyLoad);
+
+function initFooterCollapse() {
+  const cols = document.querySelectorAll(".footer-column");
+  if (!cols || cols.length === 0) return;
+
+  cols.forEach((col) => {
+    const menu =
+      col.querySelector(".footer-menu-list") ||
+      col.querySelector(".footer-about-text") ||
+      col.querySelector(".footer-newsletter-form-wrap");
+    if (!menu) return;
+
+    col.classList.remove("opened");
+    menu.style.display = "";
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initFooterCollapse);
+document.addEventListener("shopify:section:load", initFooterCollapse);
 
 const slideAnime = (() => {
   let isAnimating = false;
@@ -305,15 +325,16 @@ class CollectionOverviews extends HTMLElement {
     const banners = section.querySelectorAll(".banner__media-collection");
     banners.forEach((banner) => {
       banner.classList.remove("active");
-      Motion.animate(banner, 
-        { 
+      Motion.animate(
+        banner,
+        {
           opacity: 0,
-          scale: 0.95
-        }, 
-        { 
+          scale: 0.95,
+        },
+        {
           duration: 0.2,
-          easing: "ease-out"
-        }
+          easing: "ease-out",
+        },
       );
     });
 
@@ -323,15 +344,16 @@ class CollectionOverviews extends HTMLElement {
 
     if (banners.length > 0) {
       banners[0].classList.add("active");
-      Motion.animate(banners[0], 
-        { 
+      Motion.animate(
+        banners[0],
+        {
           opacity: [0, 1],
-          scale: [0.95, 1]
-        }, 
-        { 
+          scale: [0.95, 1],
+        },
+        {
           duration: 0.4,
-          easing: "ease-out"
-        }
+          easing: "ease-out",
+        },
       );
     }
 
@@ -346,41 +368,47 @@ class CollectionOverviews extends HTMLElement {
         }
         const blockIndex = block.getAttribute("data-index");
 
-        const currentActiveBanners = section.querySelectorAll(".banner__media-collection.active");
-        const fadeOutPromises = Array.from(currentActiveBanners).map(banner => {
-          banner.classList.remove("active");
-          return Motion.animate(banner, 
-            { 
-              opacity: 0,
-              scale: 0.95
-            }, 
-            { 
-              duration: 0.2,
-              easing: "ease-in"
-            }
-          );
-        });
+        const currentActiveBanners = section.querySelectorAll(
+          ".banner__media-collection.active",
+        );
+        const fadeOutPromises = Array.from(currentActiveBanners).map(
+          (banner) => {
+            banner.classList.remove("active");
+            return Motion.animate(
+              banner,
+              {
+                opacity: 0,
+                scale: 0.95,
+              },
+              {
+                duration: 0.2,
+                easing: "ease-in",
+              },
+            );
+          },
+        );
 
         blocks.forEach((b) => {
           b.classList.remove("active");
         });
 
         const targetBanner = section.querySelector(
-          `.banner__media-collection[data-index="${blockIndex}"]`
+          `.banner__media-collection[data-index="${blockIndex}"]`,
         );
 
         Promise.all(fadeOutPromises).then(() => {
           if (targetBanner) {
             targetBanner.classList.add("active");
-            Motion.animate(targetBanner, 
-              { 
+            Motion.animate(
+              targetBanner,
+              {
                 opacity: [0, 1],
-                scale: [0.95, 1]
-              }, 
-              { 
+                scale: [0.95, 1],
+              },
+              {
                 duration: 0.3,
-                easing: "ease-out"
-              }
+                easing: "ease-out",
+              },
             );
           }
         });
@@ -425,7 +453,7 @@ class MultiContent extends SlideSection {
     this.classList.add("swiper");
     const html = this.swiperSlideInnerHtml.replaceAll(
       "section__block",
-      "swiper-slide"
+      "swiper-slide",
     );
     const wrapper = `<div class='swiper-wrapper'>${html}</div> <div
     class="swiper-pagination swiper-pagination-${this.id}  ${
@@ -551,16 +579,16 @@ let BlsMainMenuShopify = (function () {
       // Cache DOM elements
       const elements = {
         categoriesListMenuMobile: document.querySelector(
-          ".categories-list-menu-mobile"
+          ".categories-list-menu-mobile",
         ),
         categoriesListMenu: document.querySelector(
-          '[data-menu="categories-list"]'
+          '[data-menu="categories-list"]',
         ),
         categoriesListMenuVertical: document.querySelector(
-          '[data-menu="verticalmenu-list"]'
+          '[data-menu="verticalmenu-list"]',
         ),
         categoriesListMenuVerticalMobile: document.querySelector(
-          ".verticalmenu-mobile"
+          ".verticalmenu-mobile",
         ),
         horizontalList: document.querySelector("nav.mobile .horizontal-list"),
       };
@@ -580,16 +608,16 @@ let BlsMainMenuShopify = (function () {
 
       // Add resize event listener for responsive behavior
       window.addEventListener("resize", () =>
-        this.updateMenuTabState(elements)
+        this.updateMenuTabState(elements),
       );
       window.addEventListener("resize", () =>
-        this.updateMenuVerticalMobile(elements)
+        this.updateMenuVerticalMobile(elements),
       );
     },
 
     calculateSectionPadding: function (header) {
       let sectionPbValue = parseInt(
-        getComputedStyle(header).getPropertyValue("--section-pb").trim()
+        getComputedStyle(header).getPropertyValue("--section-pb").trim(),
       );
       if (header.querySelector(".header__layout-2")) {
         sectionPbValue = 0;
@@ -656,7 +684,7 @@ let BlsMainMenuShopify = (function () {
         {
           ease: [0.7, 0, 0.2, 1],
           duration: 0.35,
-        }
+        },
       );
 
       targetItem.classList.add("visible");
@@ -668,7 +696,7 @@ let BlsMainMenuShopify = (function () {
     handleMenuEnterWithSearchOpen: function (
       targetItem,
       submenu,
-      sectionPbValue
+      sectionPbValue,
     ) {
       const ps = document.querySelector(".popup-search");
       const overlay_search = document.querySelector(".overlay_search");
@@ -689,7 +717,7 @@ let BlsMainMenuShopify = (function () {
           {
             ease: [0.7, 0, 0.2, 1],
             duration: 0.2,
-          }
+          },
         ),
         Motion.animate(
           overlay_search,
@@ -700,7 +728,7 @@ let BlsMainMenuShopify = (function () {
           {
             ease: [0.7, 0, 0.2, 1],
             duration: 0.2,
-          }
+          },
         ),
       ]).then(() => {
         setTimeout(() => {
@@ -710,7 +738,7 @@ let BlsMainMenuShopify = (function () {
           } else {
             document.documentElement.classList.remove(
               "open-drawer",
-              "open-search"
+              "open-search",
             );
             root.style.removeProperty("padding-right");
           }
@@ -725,7 +753,7 @@ let BlsMainMenuShopify = (function () {
             {
               ease: [0.7, 0, 0.2, 1],
               duration: 0.35,
-            }
+            },
           );
           targetItem.classList.add("visible");
         }, 20);
@@ -757,7 +785,7 @@ let BlsMainMenuShopify = (function () {
         {
           ease: [0.7, 0, 0.2, 1],
           duration: 0.4,
-        }
+        },
       );
 
       targetItem.classList.remove("visible");
@@ -790,7 +818,7 @@ let BlsMainMenuShopify = (function () {
     showMenuForTab: function (tabId, elements) {
       const { horizontalList, categoriesListMenuMobile } = elements;
       const categoriesListMenuVerticalMobile = document.querySelector(
-        ".verticalmenu-mobile"
+        ".verticalmenu-mobile",
       );
 
       if (!horizontalList) return;
@@ -823,7 +851,7 @@ let BlsMainMenuShopify = (function () {
       if (windowWidth <= 1024) {
         const headerVertical = document.querySelector(".header-vertical");
         const headerVerticalMobile = document.querySelector(
-          ".verticalmenu-mobile"
+          ".verticalmenu-mobile",
         );
         const titleVertical = headerVerticalMobile?.dataset.title;
         const menuMobileTitle = document.querySelector(".menu-mobile-title");
@@ -841,10 +869,10 @@ let BlsMainMenuShopify = (function () {
           `;
           menuMobileTitle.insertAdjacentHTML(
             "beforeend",
-            contentAppendTitleVertical
+            contentAppendTitleVertical,
           );
           const newTabButton = menuMobileTitle.querySelector(
-            '[data-menu="verticalmenu-list"]'
+            '[data-menu="verticalmenu-list"]',
           );
           if (newTabButton) {
             newTabButton.addEventListener("click", (e) => {
@@ -858,10 +886,10 @@ let BlsMainMenuShopify = (function () {
           }
         }
         const wrapperVerticalmenu = document.querySelector(
-          ".verticalmenu-mobile"
+          ".verticalmenu-mobile",
         );
         const navigationMenuContent = document.querySelector(
-          ".navigation__menu-content-mobile"
+          ".navigation__menu-content-mobile",
         );
         if (!wrapperVerticalmenu || !navigationMenuContent) {
           return;
@@ -947,7 +975,7 @@ let BlsMainMenuShopify = (function () {
             root.style.removeProperty("padding-right");
             document.documentElement.classList.remove(
               "nav-open",
-              "open-drawer"
+              "open-drawer",
             );
             target.classList.remove("open");
             if (!main_menu) {
@@ -957,7 +985,7 @@ let BlsMainMenuShopify = (function () {
             // Open menu
             root.style.setProperty(
               "padding-right",
-              getScrollBarWidth.init() + "px"
+              getScrollBarWidth.init() + "px",
             );
             document.documentElement.classList.add("nav-open", "open-drawer");
             target.classList.add("open");
@@ -991,7 +1019,7 @@ let BlsMainMenuShopify = (function () {
     setupHeaderAttributes: function () {
       let headerpage = document.querySelector("header")?.clientHeight || 0;
       const body = document.querySelector("body");
-      body.style.setProperty('--height-header', `${headerpage}px`);
+      body.style.setProperty("--height-header", `${headerpage}px`);
     },
 
     initStickyHeader: function (header) {
@@ -1034,7 +1062,7 @@ let BlsMainMenuShopify = (function () {
         } else {
           sec_header.classList.remove(
             "shopify-section-header-sticky",
-            "animate"
+            "animate",
           );
         }
       } else {
@@ -1051,7 +1079,7 @@ let BlsMainMenuShopify = (function () {
             }
             sec_header.classList.add(
               "header-sticky",
-              "shopify-section-header-sticky"
+              "shopify-section-header-sticky",
             );
             this.lastScrollPosition = wpy;
           } else {
@@ -1063,7 +1091,7 @@ let BlsMainMenuShopify = (function () {
             "shopify-section-header-hidden",
             "header-sticky",
             "animate",
-            "shopify-section-header-sticky"
+            "shopify-section-header-sticky",
           );
         }
       }
@@ -1164,11 +1192,11 @@ var BlsSearchShopify = (function () {
             target.classList.add("open");
             document.documentElement.classList.add(
               "open-drawer",
-              "open-search"
+              "open-search",
             );
             root.style.setProperty(
               "padding-right",
-              getScrollBarWidth.init() + "px"
+              getScrollBarWidth.init() + "px",
             );
             setTimeout(function () {
               form.querySelector('input[type="search"]').focus();
@@ -1264,7 +1292,7 @@ var BlsSearchShopify = (function () {
               } else {
                 document.documentElement.classList.remove(
                   "open-drawer",
-                  "open-search"
+                  "open-search",
                 );
                 root.style.removeProperty("padding-right");
               }
@@ -1275,7 +1303,7 @@ var BlsSearchShopify = (function () {
     },
     openDefaultSearch: function () {
       const headerNavigation = document.querySelector(
-        ".header-bottom__navigation"
+        ".header-bottom__navigation",
       );
       const headerTopActions = document.querySelector(".header-top__actions");
       const headerWrapper = document.querySelector("header");
@@ -1298,10 +1326,10 @@ var BlsSearchShopify = (function () {
         containsHeaderLayoutOne
           ? "header"
           : containsHeaderLayoutTwo
-          ? "header-inner"
-          : containsHeaderLayoutThree
-          ? ".header-mega-store"
-          : ".search-full"
+            ? "header-inner"
+            : containsHeaderLayoutThree
+              ? ".header-mega-store"
+              : ".search-full",
       );
       let topCaculate = sf.getBoundingClientRect().bottom;
       const ps = document.querySelector(".popup-search");
@@ -1317,7 +1345,7 @@ var BlsSearchShopify = (function () {
           {
             ease: [0.7, 0, 0.2, 1],
             duration: 0.4,
-          }
+          },
         ),
 
         Motion.animate(
@@ -1329,7 +1357,7 @@ var BlsSearchShopify = (function () {
           {
             ease: [0.7, 0, 0.2, 1],
             duration: 0.4,
-          }
+          },
         ),
       ]).then(() => {
         setTimeout(() => {
@@ -1340,7 +1368,7 @@ var BlsSearchShopify = (function () {
 
     closeDefaultSearch: function () {
       const headerNavigation = document.querySelector(
-        ".header-bottom__navigation"
+        ".header-bottom__navigation",
       );
       const headerWrapper = document.querySelector("header");
       const ps = document.querySelector(".popup-search");
@@ -1365,7 +1393,7 @@ var BlsSearchShopify = (function () {
           {
             ease: [0.7, 0, 0.2, 1],
             duration: 0.4,
-          }
+          },
         ),
 
         Motion.animate(
@@ -1377,7 +1405,7 @@ var BlsSearchShopify = (function () {
           {
             ease: [0.7, 0, 0.2, 1],
             duration: 0.4,
-          }
+          },
         ),
       ]).then(() => {
         setTimeout(() => {
@@ -1386,7 +1414,7 @@ var BlsSearchShopify = (function () {
           } else {
             document.documentElement.classList.remove(
               "open-drawer",
-              "open-search"
+              "open-search",
             );
             root.style.removeProperty("padding-right");
           }
@@ -1403,7 +1431,7 @@ var BlsSearchShopify = (function () {
         "input",
         this.debounce((event) => {
           this.onChange(event);
-        }, 300).bind(this)
+        }, 300).bind(this),
       );
       input.addEventListener("focus", this.onFocus.bind(this));
       document.addEventListener("focusout", this.onFocusOut.bind(this));
@@ -1425,7 +1453,7 @@ var BlsSearchShopify = (function () {
     onChange: function () {
       const searchTerm = this.getQuery();
       const currentLocale = Shopify.locale;
-      if (currentLocale !== 'ar') {
+      if (currentLocale !== "ar") {
         if (!searchTerm.length) {
           this.close(true);
           return;
@@ -1509,7 +1537,7 @@ var BlsSearchShopify = (function () {
 
     selectOption: function () {
       const selectedProduct = document.querySelector(
-        '[aria-selected="true"] a, [aria-selected="true"] button'
+        '[aria-selected="true"] a, [aria-selected="true"] button',
       );
 
       if (selectedProduct) selectedProduct.click();
@@ -1519,7 +1547,7 @@ var BlsSearchShopify = (function () {
       const cachedResults = {};
       const queryKey = searchTerm.replace(" ", "-").toLowerCase();
       const currentLocale = Shopify.locale;
-      if (currentLocale !== 'ar') {
+      if (currentLocale !== "ar") {
         this.setLiveRegionLoadingState();
       }
       if (cachedResults[queryKey]) {
@@ -1532,14 +1560,12 @@ var BlsSearchShopify = (function () {
       var search_url;
 
       if (document.querySelector(".predictive_search_suggest")) {
-        search_url = `${
-          routes?.predictive_search_url
-        }?q=${encodeURIComponent(
-          searchTerm
+        search_url = `${routes?.predictive_search_url}?q=${encodeURIComponent(
+          searchTerm,
         )}&resources[options][fields]=title,tag,vendor,product_type,variants.title,variants.sku&resources[options][prefix]=last&resources[options][unavailable_products]=last&resources[type]=query,product,collection,page,article&section_id=${section_id}`;
       } else {
         search_url = `${routes.search_url}?q=${encodeURIComponent(
-          searchTerm
+          searchTerm,
         )}&options[prefix]=last&options[unavailable_products]=last&type=query,product,collection,page,article&section_id=${section_id}`;
       }
 
@@ -1553,12 +1579,11 @@ var BlsSearchShopify = (function () {
             this.close();
             throw error;
           }
-        
+
           if (!isSuccess) {
             this.setLiveRegionResults();
-            return; 
+            return;
           }
-          
 
           return response.text();
         })
@@ -1585,7 +1610,8 @@ var BlsSearchShopify = (function () {
         }
       } else {
         if (collection_suggest) {
-          collection_suggest.style.display = searchTerm.length > 0 ? "none" : "block";
+          collection_suggest.style.display =
+            searchTerm.length > 0 ? "none" : "block";
         }
       }
     },
@@ -1611,7 +1637,7 @@ var BlsSearchShopify = (function () {
         document.documentElement.classList.add("open-drawer", "open-search");
         root.style.setProperty(
           "padding-right",
-          getScrollBarWidth.init() + "px"
+          getScrollBarWidth.init() + "px",
         );
       }
       const quick_search = document.querySelector("#quick-search");
@@ -1641,7 +1667,7 @@ var BlsSearchShopify = (function () {
             .classList.add("search-hidden");
           document.documentElement.classList.remove(
             "open-drawer",
-            "open-search"
+            "open-search",
           );
           root.style.removeProperty("padding-right");
         }
@@ -1677,7 +1703,7 @@ class HeaderSearch extends HTMLElement {
     const _this = this;
     const header = document.querySelector("header");
     const button_search_default = document.querySelector(
-      "#button_search_default"
+      "#button_search_default",
     );
     if (
       header.classList.contains("popup-search-mobile") &&
@@ -1687,7 +1713,7 @@ class HeaderSearch extends HTMLElement {
       if (window.innerWidth <= 767) {
         _this.fetchUrl(
           `${window.location.pathname}?section_id=${sectionId}&type=popup&ajax=1`,
-          "popup"
+          "popup",
         );
         button_search_default.classList.add("top-search-toggle");
       }
@@ -1702,17 +1728,17 @@ class HeaderSearch extends HTMLElement {
           overlay_search.classList.remove("open");
           _this.fetchUrl(
             `${window.location.pathname}?section_id=${sectionId}&type=popup&ajax=1`,
-            "popup"
+            "popup",
           );
           button_search_default.classList.add("top-search-toggle");
         }
         if (newWidth > 767 && width <= 767) {
           button_search_default.classList.remove("top-search-toggle");
           _this.fetchUrl(
-            `${window.location.pathname}?section_id=${sectionId}&type=default&ajax=1`
+            `${window.location.pathname}?section_id=${sectionId}&type=default&ajax=1`,
           );
           var popup_search_form_popup = document.querySelector(
-            ".search__type-popup"
+            ".search__type-popup",
           );
           if (popup_search_form_popup) {
             popup_search_form_popup.style.display = "none";
@@ -1725,7 +1751,7 @@ class HeaderSearch extends HTMLElement {
       window.addEventListener("resize", function () {
         const newWidth = window.innerWidth;
         var popup_search_form_popup = document.querySelector(
-          ".search__type-popup"
+          ".search__type-popup",
         );
         if (newWidth <= 767 && width > 767) {
           if (
@@ -1776,7 +1802,7 @@ class HeaderSearch extends HTMLElement {
         if (document.documentElement.classList.contains("open-search")) {
           document.documentElement.classList.remove(
             "open-search",
-            "open-drawer"
+            "open-drawer",
           );
         }
         BlsSearchShopify.init();
@@ -1784,7 +1810,7 @@ class HeaderSearch extends HTMLElement {
   }
 }
 
-customElements.define("header-search", HeaderSearch);;
+customElements.define("header-search", HeaderSearch);
 class QuantityInput extends HTMLElement {
   constructor() {
     super();
@@ -1792,7 +1818,7 @@ class QuantityInput extends HTMLElement {
     this.changeEvent = new Event("change", { bubbles: true });
     this.input.addEventListener("change", this.onInputChange.bind(this));
     this.querySelectorAll("button").forEach((button) =>
-      button.addEventListener("click", this.onButtonClick.bind(this))
+      button.addEventListener("click", this.onButtonClick.bind(this)),
     );
   }
 
@@ -1802,7 +1828,7 @@ class QuantityInput extends HTMLElement {
     this.validateQtyRules();
     this.quantityUpdateUnsubscriber = subscribe(
       PUB_SUB_EVENTS.quantityUpdate,
-      this.validateQtyRules.bind(this)
+      this.validateQtyRules.bind(this),
     );
   }
 
@@ -1869,7 +1895,7 @@ class ProgressBar extends HTMLElement {
       order,
       min_by_currency,
       fe_unavaiable,
-      fe_avaiable
+      fe_avaiable,
     );
   }
   setProgressBarTitle(order, min_by_currency, fe_unavaiable, fe_avaiable) {
@@ -1884,8 +1910,8 @@ class ProgressBar extends HTMLElement {
         ammount.trim(),
         Shopify.formatMoney(
           (min_by_currency - order) * 100,
-          cartStrings.money_format
-        )
+          cartStrings.money_format,
+        ),
       );
     }
   }
@@ -2028,35 +2054,36 @@ var BlsLoginPopup = (function () {
       const currentTarget = event.currentTarget;
       const template = currentTarget.querySelector("template");
       if (template) {
-        const content = template.content.firstElementChild.cloneNode(true).outerHTML;
+        const content =
+          template.content.firstElementChild.cloneNode(true).outerHTML;
         if (content) {
-            const modal = new tingle.modal({
-              footer: false,
-              stickyFooter: false,
-              closeMethods: ["overlay", "button", "escape"],
-              closeLabel: "Close",
-              cssClass: ["login-popup-modal"],
-              onOpen: function () {},
-              onClose: function () {},
-              beforeOpen: function () {},
-              beforeClose: function () {
-                return true;
-              },
+          const modal = new tingle.modal({
+            footer: false,
+            stickyFooter: false,
+            closeMethods: ["overlay", "button", "escape"],
+            closeLabel: "Close",
+            cssClass: ["login-popup-modal"],
+            onOpen: function () {},
+            onClose: function () {},
+            beforeOpen: function () {},
+            beforeClose: function () {
+              return true;
+            },
+          });
+          modal.setContent(content);
+          modal.open();
+          document
+            .querySelectorAll(".login__popup-button-close")
+            .forEach((navToggle) => {
+              navToggle.addEventListener(
+                "click",
+                (e) => {
+                  e.preventDefault();
+                  modal.close();
+                },
+                false,
+              );
             });
-            modal.setContent(content);
-            modal.open();
-            document
-              .querySelectorAll(".login__popup-button-close")
-              .forEach((navToggle) => {
-                navToggle.addEventListener(
-                  "click",
-                  (e) => {
-                    e.preventDefault();
-                    modal.close();
-                  },
-                  false
-                );
-              });
         }
         _this.clickTab();
       }
@@ -2107,22 +2134,22 @@ class LocalizationForm extends HTMLElement {
     super();
     this.elements = {
       input: this.querySelector(
-        'input[name="language_code"], input[name="country_code"]'
+        'input[name="language_code"], input[name="country_code"]',
       ),
       button: this.querySelector(".button-localization"),
       panel: this.querySelector("ul"),
     };
     this.elements.button.addEventListener(
       "click",
-      this.openSelector.bind(this)
+      this.openSelector.bind(this),
     );
     this.elements.button.addEventListener(
       "focusout",
-      this.closeSelector.bind(this)
+      this.closeSelector.bind(this),
     );
     this.addEventListener("keyup", this.onContainerKeyUp.bind(this));
     this.querySelectorAll("a").forEach((item) =>
-      item.addEventListener("click", this.onItemClick.bind(this))
+      item.addEventListener("click", this.onItemClick.bind(this)),
     );
     this.onBodyClick = this.handleBodyClick.bind(this);
   }
@@ -2287,7 +2314,7 @@ class StickyElement extends HTMLElement {
       this.collapsibleHeading.hasEventListener = true;
       this.collapsibleHeading.addEventListener(
         "click",
-        this.toggleCollapse.bind(this)
+        this.toggleCollapse.bind(this),
       );
     }
   }
@@ -2472,7 +2499,7 @@ class PromotionPopup extends HTMLElement {
   }
   checkNotShowPromotion() {
     const check = document.querySelector(
-      ".promotion-popup-modal .do-not-show-again"
+      ".promotion-popup-modal .do-not-show-again",
     );
     if (check) {
       check.addEventListener("click", (e) => {
@@ -2513,11 +2540,21 @@ class NewsletterPopup extends HTMLElement {
   }
 
   setupEventListeners() {
-    window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+    window.addEventListener("scroll", this.handleScroll.bind(this), {
+      passive: true,
+    });
 
-    const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
-    activityEvents.forEach(event => {
-      window.addEventListener(event, this.resetIdleTimer.bind(this), { passive: true });
+    const activityEvents = [
+      "mousedown",
+      "mousemove",
+      "keypress",
+      "scroll",
+      "touchstart",
+    ];
+    activityEvents.forEach((event) => {
+      window.addEventListener(event, this.resetIdleTimer.bind(this), {
+        passive: true,
+      });
     });
 
     this.resetIdleTimer();
@@ -2543,20 +2580,20 @@ class NewsletterPopup extends HTMLElement {
     this.idleTimer = setTimeout(() => {
       this.isIdle = true;
       this.checkConditions();
-    }, 5000); 
+    }, 5000);
   }
 
   checkConditions() {
     if (this.hasScrolled60 && this.isIdle && !this.popupTriggered) {
-      this.popupTriggered = true; 
+      this.popupTriggered = true;
       this.init();
-      
+
       this.cleanup();
     }
   }
 
   cleanup() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
     clearTimeout(this.idleTimer);
   }
 
@@ -2572,7 +2609,7 @@ class NewsletterPopup extends HTMLElement {
         const parser = new DOMParser();
         const htmlDoc = parser.parseFromString(responseText, "text/html");
         const newContent = htmlDoc.querySelector("newsletter-popup")?.innerHTML;
-        
+
         if (newContent) {
           this.innerHTML = newContent;
         }
@@ -2587,13 +2624,13 @@ class NewsletterPopup extends HTMLElement {
     const _this = this;
     const s = _this?.dataset.show;
     const m = _this?.dataset.showMb === "true";
-    
+
     if (!Shopify.designMode) {
       const cookie = getCookie("newsletter_popup");
       const width = window.innerWidth;
-      
+
       if (!m && width < 768) return false;
-      
+
       if ((s == "show_homepage" || s == "show_all_page") && cookie === "") {
         const modal = new tingle.modal({
           footer: false,
@@ -2601,7 +2638,7 @@ class NewsletterPopup extends HTMLElement {
           closeMethods: ["overlay", "button", "escape"],
           closeLabel: "Close",
           beforeOpen: function () {
-            if (typeof CloseAllPopup === 'function') CloseAllPopup();
+            if (typeof CloseAllPopup === "function") CloseAllPopup();
           },
           cssClass: [
             `newsletter-popup-modal`,
@@ -2617,7 +2654,9 @@ class NewsletterPopup extends HTMLElement {
 
   onShowNewletter() {
     const _this = this;
-    const setC = document.querySelector(".newsletter-popup-modal .newsletter-popup__dont-show");
+    const setC = document.querySelector(
+      ".newsletter-popup-modal .newsletter-popup__dont-show",
+    );
     if (!setC) return;
     setC.addEventListener("click", _this.notShow.bind(_this));
     setC.addEventListener("keypress", (e) => {
@@ -2628,7 +2667,9 @@ class NewsletterPopup extends HTMLElement {
   notShow(e) {
     e.preventDefault();
     setCookie("newsletter_popup", 30, 1);
-    document.querySelector(".newsletter-popup-modal .tingle-modal__close")?.click();
+    document
+      .querySelector(".newsletter-popup-modal .tingle-modal__close")
+      ?.click();
   }
 }
 
@@ -2721,10 +2762,10 @@ var returnMessageWhenSubmit = (function () {
         .then((responseText) => {
           const html = new DOMParser().parseFromString(
             responseText,
-            "text/html"
+            "text/html",
           );
           const elementSuccessMessage = html.querySelector(
-            ".newsletter-form__success-message-wrapper"
+            ".newsletter-form__success-message-wrapper",
           );
           showToast(elementSuccessMessage.innerHTML, 3000, "modal-success");
         })
@@ -2740,13 +2781,13 @@ var returnMessageWhenSubmit = (function () {
         .then((responseText) => {
           const html = new DOMParser().parseFromString(
             responseText,
-            "text/html"
+            "text/html",
           );
           const elementErrorMessage = html.querySelector(
-            ".newsletter-form__error-message-wrapper"
+            ".newsletter-form__error-message-wrapper",
           );
           const elementMessage = elementErrorMessage.querySelector(
-            ".newsletter-form__message"
+            ".newsletter-form__message",
           );
           showToast(elementErrorMessage.innerHTML, 3000, "modal-error");
         })
@@ -2801,7 +2842,7 @@ class CarouselMobile extends SlideSection {
     this.classList.remove("grid", "grid-cols");
     const html = this.swiperSlideInnerHtml.replaceAll(
       "sec__icon-switch-slide",
-      "swiper-slide"
+      "swiper-slide",
     );
     const wrapper = `<div class='swiper-wrapper'>${html}</div> <div
     class="swiper-pagination swiper-pagination-${this.id}  ${
@@ -2821,12 +2862,12 @@ class CarouselMobile extends SlideSection {
     this.closest("motion-items-effect")?.init();
   }
   actionPointer() {
-    this.addEventListener('pointerup', (e) => {
+    this.addEventListener("pointerup", (e) => {
       const multiContent = this.closest("multi-content");
       if (!multiContent || !multiContent.swiper) return;
       multiContent.swiper.allowTouchMove = true;
     });
-    this.addEventListener('pointerdown', (e) => {
+    this.addEventListener("pointerdown", (e) => {
       const multiContent = this.closest("multi-content");
       if (!multiContent || !multiContent.swiper) return;
       multiContent.swiper.allowTouchMove = false;
@@ -2852,7 +2893,7 @@ class PaginateLoadmore extends HTMLElement {
             }, 400);
           });
           for (var item of document.querySelectorAll(
-            ".sec__collections-list .collection-item.grid-custom-item"
+            ".sec__collections-list .collection-item.grid-custom-item",
           )) {
             item.classList.remove("hidden");
           }
@@ -2861,7 +2902,7 @@ class PaginateLoadmore extends HTMLElement {
             motionCollection.reloadAnimationEffect();
           }
         },
-        false
+        false,
       );
     }
   }
@@ -2877,7 +2918,7 @@ class PaginateLoadmore extends HTMLElement {
               }
             });
           },
-          { threshold: 1.0 }
+          { threshold: 1.0 },
         );
         observer.observe(loadMore);
       } else {
@@ -2888,7 +2929,7 @@ class PaginateLoadmore extends HTMLElement {
             const target = event.currentTarget;
             _this.loadMoreItem(target);
           },
-          false
+          false,
         );
       }
     });
@@ -2910,10 +2951,10 @@ class PaginateLoadmore extends HTMLElement {
       .then((responseText) => {
         const resultNodes = parser.parseFromString(responseText, "text/html");
         const resultNodesHtml = resultNodes.querySelectorAll(
-          ".loadmore-lists .loadmore-item"
+          ".loadmore-lists .loadmore-item",
         );
         resultNodesHtml.forEach((prodNode) =>
-          document.querySelector(".loadmore-lists").appendChild(prodNode)
+          document.querySelector(".loadmore-lists").appendChild(prodNode),
         );
         const load_more = resultNodes.querySelector(".actions-loadmore");
         document.querySelector(".load-more-bar").innerHTML =
@@ -2999,14 +3040,10 @@ class VariantRadiosQuickEdit extends SwatchInit {
     swatchButtons.forEach((btn) => {
       this.checkSwatches(btn);
     });
-    
+
     const optionSwatches = this.querySelectorAll(".option-swatch-js");
     optionSwatches.forEach((button) => {
-      button.addEventListener(
-        "click", 
-        this.onVariantChange.bind(this), 
-        false
-      );
+      button.addEventListener("click", this.onVariantChange.bind(this), false);
     });
   }
 
@@ -3025,7 +3062,7 @@ class VariantRadiosQuickEdit extends SwatchInit {
       .querySelector(".swatch-selected-value").textContent = value;
     this.options = Array.from(
       this.querySelectorAll(".option-swatch-js.active"),
-      (select) => select.getAttribute("data-value")
+      (select) => select.getAttribute("data-value"),
     );
     this.updateMasterId();
     this.toggleAddButton(true, "", false);
@@ -3054,7 +3091,7 @@ class VariantRadiosQuickEdit extends SwatchInit {
     if (!this.currentVariant) return;
     if (!this.currentVariant.featured_media) return;
     const form = document.getElementById(
-      `product-form-quick-edit-${this.dataset.section}`
+      `product-form-quick-edit-${this.dataset.section}`,
     );
     if (form.querySelector(".product__media img")) {
       form.querySelector(".product__media img").removeAttribute("srcset");
@@ -3062,14 +3099,14 @@ class VariantRadiosQuickEdit extends SwatchInit {
         .querySelector(".product__media img")
         .setAttribute(
           "src",
-          this.currentVariant.featured_media.preview_image.src
+          this.currentVariant.featured_media.preview_image.src,
         );
     }
   }
 
   updateVariantInput() {
     const productForms = document.querySelectorAll(
-      `#product-form-quick-edit-${this.dataset.section}`
+      `#product-form-quick-edit-${this.dataset.section}`,
     );
     productForms.forEach((productForm) => {
       const input = productForm.querySelector('input[name="id"]');
@@ -3084,10 +3121,10 @@ class VariantRadiosQuickEdit extends SwatchInit {
     const current_price = this.currentVariant.price;
     const price_format = Shopify.formatMoney(
       this.currentVariant.price,
-      cartStrings?.money_format
+      cartStrings?.money_format,
     );
     const form = document.getElementById(
-      `product-form-quick-edit-${this.dataset.section}`
+      `product-form-quick-edit-${this.dataset.section}`,
     );
     form.querySelector(".price-regular .price").innerHTML = price_format;
     const price = form.querySelector(".price");
@@ -3100,7 +3137,7 @@ class VariantRadiosQuickEdit extends SwatchInit {
     if (compare_at_price && compare_at_price > current_price) {
       const compare_format = Shopify.formatMoney(
         compare_at_price,
-        cartStrings?.money_format
+        cartStrings?.money_format,
       );
       if (!price.querySelector(".compare-price")) {
         var ps = document.createElement("div");
@@ -3141,19 +3178,19 @@ class VariantRadiosQuickEdit extends SwatchInit {
     }
     this.toggleAddButton(
       !this.currentVariant.available,
-      window.variantStrings?.soldOut
+      window.variantStrings?.soldOut,
     );
   }
 
   toggleAddButton(disable = true, text, modifyClass = true) {
     const productForm = document.getElementById(
-      `product-form-quick-edit-${this.dataset.section}`
+      `product-form-quick-edit-${this.dataset.section}`,
     );
     if (!productForm) return;
     const addButton = productForm.querySelector('[name="add"]');
     const addButtonText = productForm.querySelector('[name="add"] > span');
     const buttonPayment = productForm.querySelector(
-      ".product-dynamic-checkout"
+      ".product-dynamic-checkout",
     );
     if (!addButton) return;
 
@@ -3170,7 +3207,7 @@ class VariantRadiosQuickEdit extends SwatchInit {
 
   setUnavailable() {
     const button = document.getElementById(
-      `product-form-quick-edit-${this.dataset.section}`
+      `product-form-quick-edit-${this.dataset.section}`,
     );
     const addButton = button.querySelector('[name="add"]');
     const addButtonText = button.querySelector('[name="add"] > span');
@@ -3193,7 +3230,7 @@ class VariantRadiosQuickEdit extends SwatchInit {
   updateVariantStatuses() {
     const selectedOptionOneVariants = this.getVariantData().filter(
       (variant) =>
-        this.querySelector(".active").dataset.value === variant.option1
+        this.querySelector(".active").dataset.value === variant.option1,
     );
     const inputWrappers = [...this.querySelectorAll(".product-form__input")];
     inputWrappers.forEach((option, index) => {
@@ -3205,7 +3242,7 @@ class VariantRadiosQuickEdit extends SwatchInit {
         .filter(
           (variant) =>
             variant.available &&
-            variant[`option${index}`] === previousOptionSelected
+            variant[`option${index}`] === previousOptionSelected,
         )
         .map((variantOption) => variantOption[`option${index + 1}`]);
       this.setAvailability(optionInputs, availableOptionInputsValue);
@@ -3233,7 +3270,7 @@ class VariantRadiosBundle extends SwatchInit {
       this.variantHover(btn);
     });
     this.querySelectorAll(".option-swatch-js").forEach((button) =>
-      button.addEventListener("click", this.onVariantChange.bind(this), false)
+      button.addEventListener("click", this.onVariantChange.bind(this), false),
     );
   }
 
@@ -3241,7 +3278,7 @@ class VariantRadiosBundle extends SwatchInit {
     event.preventDefault();
     this.productTarget = this.closest(".product__item-js");
     const variantQtyData = JSON.parse(
-      this.productTarget.querySelector(".productVariantsQty").textContent
+      this.productTarget.querySelector(".productVariantsQty").textContent,
     );
     const target = event.currentTarget;
     const value = target.getAttribute("data-value");
@@ -3256,7 +3293,7 @@ class VariantRadiosBundle extends SwatchInit {
       .querySelector(".swatch-selected-value").textContent = value;
     this.options = Array.from(
       this.querySelectorAll(".option-swatch-js.active"),
-      (select) => select.getAttribute("data-value")
+      (select) => select.getAttribute("data-value"),
     );
     this.updateMasterId();
     this.toggleAddButton(true, "", false);
@@ -3331,13 +3368,13 @@ class VariantRadiosBundle extends SwatchInit {
       await Motion.animate(
         this.productTarget.querySelector(".product__media img"),
         { opacity: [1, 0] },
-        { duration: 0.1, easing: "ease-in" }
+        { duration: 0.1, easing: "ease-in" },
       );
       this.productTarget
         .querySelector(".product__media img")
         .setAttribute(
           "src",
-          this.currentVariant.featured_media.preview_image.src
+          this.currentVariant.featured_media.preview_image.src,
         );
       await new Promise((resolve) => {
         this.productTarget.querySelector(".product__media img").onload = () => {
@@ -3347,14 +3384,14 @@ class VariantRadiosBundle extends SwatchInit {
       Motion.animate(
         this.productTarget.querySelector(".product__media img"),
         { opacity: [0, 1] },
-        { duration: 0.1, easing: "ease-in" }
+        { duration: 0.1, easing: "ease-in" },
       );
     }
   }
 
   updateVariantInput() {
     const productForms = document.querySelectorAll(
-      `#quick-add-bundle-${this.dataset.section}`
+      `#quick-add-bundle-${this.dataset.section}`,
     );
     productForms.forEach((productForm) => {
       const input = productForm.querySelector('input[name="id"]');
@@ -3378,10 +3415,10 @@ class VariantRadiosBundle extends SwatchInit {
     let avaiable = productTarget.querySelector(".available-value");
     const price_format = Shopify.formatMoney(
       this.currentVariant.price,
-      cartStrings?.money_format
+      cartStrings?.money_format,
     );
     const typePercent = productTarget.querySelector(
-      ".product__badges-type-percent"
+      ".product__badges-type-percent",
     );
     productTarget.querySelector(".price-regular .price").innerHTML =
       price_format;
@@ -3405,7 +3442,7 @@ class VariantRadiosBundle extends SwatchInit {
 
       const compare_format = Shopify.formatMoney(
         compare_at_price,
-        cartStrings?.money_format
+        cartStrings?.money_format,
       );
       if (!price.querySelector(".compare-price")) {
         var ps = price.querySelector(".price__sale");
@@ -3459,7 +3496,7 @@ class VariantRadiosBundle extends SwatchInit {
     }
     this.toggleAddButton(
       !this.currentVariant.available,
-      window.variantStrings?.soldOut
+      window.variantStrings?.soldOut,
     );
 
     this.renderLabel(sale, pre_order, soldOut, percent, productTarget);
@@ -3469,7 +3506,7 @@ class VariantRadiosBundle extends SwatchInit {
     const label = productTarget.querySelector(".product__badges");
     const sale_badge = productTarget.querySelector(".sale_badge");
     const productBadgesScrolling = productTarget.querySelector(
-      ".product__badges-sale-scrolling"
+      ".product__badges-sale-scrolling",
     );
     if (sale || pre_order || soldOut) {
       if (!label) {
@@ -3480,7 +3517,7 @@ class VariantRadiosBundle extends SwatchInit {
           "flex",
           "flex-wrap",
           "gap-5",
-          "uppercase"
+          "uppercase",
         );
         if (sale_badge) {
           sale_badge.appendChild(element);
@@ -3500,7 +3537,7 @@ class VariantRadiosBundle extends SwatchInit {
       const show_sold_out = label?.dataset.showSoldOut === "true";
       const prd = Shopify.formatMoney(
         percent,
-        themeGlobalVariables.settings.money_format
+        themeGlobalVariables.settings.money_format,
       );
       const dsale = label.querySelector(".product__badges-sale");
       const dsoldout = label.querySelector(".product__badges-sold-out");
@@ -3522,7 +3559,7 @@ class VariantRadiosBundle extends SwatchInit {
             "subheading_weight",
             "btn-rounded",
             "lh-normal",
-            "text-center"
+            "text-center",
           );
           elementsale.style.setProperty("--badges-color", saleColor);
           elementsale.style.setProperty("--badges-bg", saleBg);
@@ -3563,7 +3600,7 @@ class VariantRadiosBundle extends SwatchInit {
             "subheading_weight",
             "btn-rounded",
             "lh-normal",
-            "text-center"
+            "text-center",
           );
           elementpo.style.setProperty("--badges-color", preOrderColor);
           elementpo.style.setProperty("--badges-bg", preOrderBg);
@@ -3594,7 +3631,7 @@ class VariantRadiosBundle extends SwatchInit {
             "subheading_weight",
             "btn-rounded",
             "lh-normal",
-            "text-center"
+            "text-center",
           );
           elementso.style.setProperty("--badges-color", soldOutColor);
           elementso.style.setProperty("--badges-bg", soldOutBg);
@@ -3616,12 +3653,12 @@ class VariantRadiosBundle extends SwatchInit {
       const dataBadgesScrolling =
         productBadgesScrolling?.dataset.textProductScrolling;
       const allProductBadgesScrolling = productBadgesScrolling.querySelectorAll(
-        ".content-badges-scrolling"
+        ".content-badges-scrolling",
       );
       allProductBadgesScrolling.forEach((content) => {
         content.innerText = dataBadgesScrolling.replace(
           "[percent_sale]",
-          percent.toFixed(0) + "%"
+          percent.toFixed(0) + "%",
         );
       });
     }
@@ -3629,13 +3666,13 @@ class VariantRadiosBundle extends SwatchInit {
 
   toggleAddButton(disable = true, text, modifyClass = true) {
     const productForm = document.getElementById(
-      `quick-add-bundle-${this.dataset.section}`
+      `quick-add-bundle-${this.dataset.section}`,
     );
     if (!productForm) return;
     const addButton = productForm.querySelector('[name="add"]');
     const addButtonText = productForm.querySelector('[name="add"] > span');
     const buttonPayment = productForm.querySelector(
-      ".product-dynamic-checkout"
+      ".product-dynamic-checkout",
     );
     if (!addButton) return;
 
@@ -3654,7 +3691,7 @@ class VariantRadiosBundle extends SwatchInit {
 
   setUnavailable() {
     const button = document.getElementById(
-      `quick-add-bundle-${this.dataset.section}`
+      `quick-add-bundle-${this.dataset.section}`,
     );
     const addButton = button.querySelector('[name="add"]');
     const addButtonText = button.querySelector('[name="add"] > span');
@@ -3677,7 +3714,7 @@ class VariantRadiosBundle extends SwatchInit {
   updateVariantStatuses() {
     const selectedOptionOneVariants = this.getVariantData().filter(
       (variant) =>
-        this.querySelector(".active").dataset.value === variant.option1
+        this.querySelector(".active").dataset.value === variant.option1,
     );
     const inputWrappers = [...this.querySelectorAll(".product-form__input")];
     inputWrappers.forEach((option, index) => {
@@ -3689,7 +3726,7 @@ class VariantRadiosBundle extends SwatchInit {
         .filter(
           (variant) =>
             variant.available &&
-            variant[`option${index}`] === previousOptionSelected
+            variant[`option${index}`] === previousOptionSelected,
         )
         .map((variantOption) => variantOption[`option${index + 1}`]);
       this.setAvailability(optionInputs, availableOptionInputsValue);
@@ -3755,7 +3792,7 @@ if (!customElements.get("product-form-bundle")) {
         if (!submitButton) return;
 
         const bundleItems = document.querySelectorAll(
-          "[data-product-bundle-variant][data-variant-id]"
+          "[data-product-bundle-variant][data-variant-id]",
         );
         if (bundleItems.length >= minimum) {
           submitButton.classList.remove("disabled");
@@ -3763,7 +3800,7 @@ if (!customElements.get("product-form-bundle")) {
           submitButton.classList.add("disabled");
         }
         const btnAddCart = this.closest("product-bundle").querySelectorAll(
-          "product-form-bundle button"
+          "product-form-bundle button",
         );
         if (bundleItems.length >= maximum) {
           btnAddCart.forEach((btn) => {
@@ -3788,13 +3825,13 @@ if (!customElements.get("product-form-bundle")) {
         const productHandle = this.dataset.handle || this.dataset.productHandle;
 
         fetch(
-          `/products/${productHandle}?section_id=bundle-item&variant=${variantId}`
+          `/products/${productHandle}?section_id=bundle-item&variant=${variantId}`,
         )
           .then((response) => response.text())
           .then((responseText) => {
             const doc = parser.parseFromString(responseText, "text/html");
             const bundleContainers = document.querySelectorAll(
-              "[data-product-bundle-variant]"
+              "[data-product-bundle-variant]",
             );
             if (!bundleContainers.length) {
               console.error("No bundle container found");
@@ -3811,15 +3848,15 @@ if (!customElements.get("product-form-bundle")) {
 
             if (existingItemContainer) {
               const currentQty = parseInt(
-                existingItemContainer.getAttribute("data-quantity") || 0
+                existingItemContainer.getAttribute("data-quantity") || 0,
               );
               existingItemContainer.setAttribute(
                 "data-quantity",
-                currentQty + parseInt(quantity)
+                currentQty + parseInt(quantity),
               );
 
               const quantityDisplay = existingItemContainer.querySelector(
-                ".bundle-item-quantity"
+                ".bundle-item-quantity",
               );
               if (quantityDisplay) {
                 quantityDisplay.textContent = currentQty + parseInt(quantity);
@@ -3840,7 +3877,7 @@ if (!customElements.get("product-form-bundle")) {
 
               if (!targetContainer) {
                 this.handleErrorMessage(
-                  "Bundle is full. Please remove an item first."
+                  "Bundle is full. Please remove an item first.",
                 );
                 return;
               }
@@ -3848,7 +3885,7 @@ if (!customElements.get("product-form-bundle")) {
               const bundleImage = doc.querySelector(".bundle-image");
               const bundleContent = doc.querySelector(".bundle-content");
               const bundleRemoveButton = doc.querySelector(
-                "bundle-cart-remove-button"
+                "bundle-cart-remove-button",
               );
 
               if (!bundleImage || !bundleContent) {
@@ -3865,7 +3902,7 @@ if (!customElements.get("product-form-bundle")) {
               targetContainer.classList.add("bundle-item-dev");
 
               const mediaContainer = targetContainer.querySelector(
-                "[data-product-bundle-variant-media]"
+                "[data-product-bundle-variant-media]",
               );
               if (mediaContainer && bundleImage) {
                 mediaContainer.classList.remove("skeleton");
@@ -3873,7 +3910,7 @@ if (!customElements.get("product-form-bundle")) {
               }
 
               const contentContainer = targetContainer.querySelector(
-                "[data-product-bundle-variant-content]"
+                "[data-product-bundle-variant-content]",
               );
               if (contentContainer && bundleContent) {
                 contentContainer
@@ -3891,18 +3928,18 @@ if (!customElements.get("product-form-bundle")) {
                 if (bundleRemoveButton) {
                   const existingButtons =
                     bundleActionContainer.querySelectorAll(
-                      "bundle-cart-remove-button"
+                      "bundle-cart-remove-button",
                     );
                   existingButtons.forEach((button) => button.remove());
                   const removeButtonHTML = bundleRemoveButton.outerHTML;
 
                   bundleActionContainer.insertAdjacentHTML(
                     "beforeend",
-                    removeButtonHTML
+                    removeButtonHTML,
                   );
 
                   const newRemoveButton = bundleActionContainer.querySelector(
-                    "bundle-cart-remove-button:last-child"
+                    "bundle-cart-remove-button:last-child",
                   );
 
                   if (newRemoveButton) {
@@ -3928,10 +3965,10 @@ if (!customElements.get("product-form-bundle")) {
                       _this.updateContainerOrders();
                       _this.updateBundleTotal();
                       document.dispatchEvent(
-                        new CustomEvent("bundle:item-changed")
+                        new CustomEvent("bundle:item-changed"),
                       );
                       const bundleItems = document.querySelectorAll(
-                        "[data-product-bundle-variant][data-variant-id]"
+                        "[data-product-bundle-variant][data-variant-id]",
                       );
                       const maximum = _this.closest("product-form-bundle")
                         .dataset.maximum;
@@ -3939,17 +3976,18 @@ if (!customElements.get("product-form-bundle")) {
                         const btnAddCart = _this
                           .closest("product-bundle")
                           .querySelectorAll(
-                            "product-form-bundle button.disabled"
+                            "product-form-bundle button.disabled",
                           );
                         btnAddCart.forEach((btn) => {
                           const productForm = btn.closest(
-                            "product-form-bundle"
+                            "product-form-bundle",
                           );
                           const productId =
                             productForm.querySelector('input[name="id"]').value;
                           const isInBundle = Array.from(bundleItems).some(
                             (item) =>
-                              item.getAttribute("data-variant-id") === productId
+                              item.getAttribute("data-variant-id") ===
+                              productId,
                           );
                           if (!isInBundle) {
                             btn.classList.remove("disabled");
@@ -3984,7 +4022,7 @@ if (!customElements.get("product-form-bundle")) {
 
       updateContainerOrders() {
         const bundleContainers = document.querySelectorAll(
-          "[data-product-bundle-variant]"
+          "[data-product-bundle-variant]",
         );
 
         bundleContainers.forEach((container) => {
@@ -4011,7 +4049,7 @@ if (!customElements.get("product-form-bundle")) {
         let totalPrice = 0;
         let itemTotalPrice = 0;
         const bundleItems = document.querySelectorAll(
-          "[data-product-bundle-variant][data-variant-id]"
+          "[data-product-bundle-variant][data-variant-id]",
         );
         bundleItems.forEach((item) => {
           const priceElement = item.querySelector(".price-item--regular");
@@ -4020,7 +4058,7 @@ if (!customElements.get("product-form-bundle")) {
           itemTotalPrice += price * quantity;
           totalPrice = Shopify.formatMoney(
             itemTotalPrice,
-            cartStrings?.money_format
+            cartStrings?.money_format,
           );
         });
         const totalElement = document.querySelector(".subtotal-price__bundle");
@@ -4029,7 +4067,7 @@ if (!customElements.get("product-form-bundle")) {
         } else {
           totalElement.textContent = Shopify.formatMoney(
             0,
-            cartStrings?.money_format
+            cartStrings?.money_format,
           );
         }
       }
@@ -4060,7 +4098,7 @@ if (!customElements.get("product-form-bundle")) {
         this.errorMessage =
           this.errorMessage ||
           this.errorMessageWrapper.querySelector(
-            ".product-form__error-message"
+            ".product-form__error-message",
           );
 
         this.errorMessageWrapper.toggleAttribute("hidden", !errorMessage);
@@ -4077,13 +4115,13 @@ if (!customElements.get("product-form-bundle")) {
           .then((responseText) => {
             const html = new DOMParser().parseFromString(
               responseText,
-              "text/html"
+              "text/html",
             );
             const elementErrorMessage = html.querySelector(
-              ".product-form__error-message-wrapper"
+              ".product-form__error-message-wrapper",
             );
             const elementMessage = elementErrorMessage.querySelector(
-              ".product-form__error-message"
+              ".product-form__error-message",
             );
             elementMessage.textContent = errorMessage;
             showToast(elementErrorMessage.innerHTML, 3000, "modal-error");
@@ -4092,7 +4130,7 @@ if (!customElements.get("product-form-bundle")) {
             throw e;
           });
       }
-    }
+    },
   );
 }
 
@@ -4106,7 +4144,7 @@ class QuantityInputBundle extends HTMLElement {
 
     this.input.addEventListener("change", this.onInputChange.bind(this));
     this.querySelectorAll("button").forEach((button) =>
-      button.addEventListener("click", this.onButtonClick.bind(this))
+      button.addEventListener("click", this.onButtonClick.bind(this)),
     );
   }
 
@@ -4142,7 +4180,7 @@ class QuantityInputBundle extends HTMLElement {
   updateBundleTotal() {
     let itemTotalPrice = 0;
     const bundleItems = document.querySelectorAll(
-      "[data-product-bundle-variant][data-variant-id]"
+      "[data-product-bundle-variant][data-variant-id]",
     );
 
     bundleItems.forEach((item) => {
@@ -4162,12 +4200,12 @@ class QuantityInputBundle extends HTMLElement {
       if (itemTotalPrice > 0) {
         totalElement.textContent = Shopify.formatMoney(
           itemTotalPrice,
-          cartStrings?.money_format
+          cartStrings?.money_format,
         );
       } else {
         totalElement.textContent = Shopify.formatMoney(
           0,
-          cartStrings?.money_format
+          cartStrings?.money_format,
         );
       }
     }
@@ -4196,7 +4234,7 @@ class ButtonSubmitBundle extends HTMLElement {
       window.variantStrings?.addingToCart || "Adding to cart...";
 
     const bundleItems = document.querySelectorAll(
-      "[data-product-bundle-variant][data-variant-id]"
+      "[data-product-bundle-variant][data-variant-id]",
     );
 
     if (!bundleItems.length) {
@@ -4302,7 +4340,7 @@ class ButtonSubmitBundle extends HTMLElement {
       const elementToReplace = document.getElementById(section.id);
       const html = new DOMParser().parseFromString(
         response.sections[section.id],
-        "text/html"
+        "text/html",
       );
 
       if (elementToReplace) {
@@ -4318,21 +4356,21 @@ class ButtonSubmitBundle extends HTMLElement {
 
   clearBundle() {
     const bundleContainers = document.querySelectorAll(
-      "[data-product-bundle-variant]"
+      "[data-product-bundle-variant]",
     );
     bundleContainers.forEach((container) => {
       container.removeAttribute("data-variant-id");
       container.removeAttribute("data-quantity");
 
       const mediaContainer = container.querySelector(
-        "[data-product-bundle-variant-media]"
+        "[data-product-bundle-variant-media]",
       );
       if (mediaContainer) {
         mediaContainer.innerHTML = "";
       }
 
       const contentContainer = container.querySelector(
-        "[data-product-bundle-variant-content]"
+        "[data-product-bundle-variant-content]",
       );
       if (contentContainer) {
         contentContainer.innerHTML = `
@@ -4352,7 +4390,7 @@ class ButtonSubmitBundle extends HTMLElement {
     if (totalElement) {
       totalElement.textContent = Shopify.formatMoney(
         0,
-        cartStrings?.money_format
+        cartStrings?.money_format,
       );
     }
 
@@ -4367,10 +4405,10 @@ class ButtonSubmitBundle extends HTMLElement {
       .then((responseText) => {
         const html = new DOMParser().parseFromString(responseText, "text/html");
         const elementErrorMessage = html.querySelector(
-          ".product-form__error-message-wrapper"
+          ".product-form__error-message-wrapper",
         );
         const elementMessage = elementErrorMessage.querySelector(
-          ".product-form__error-message"
+          ".product-form__error-message",
         );
         elementMessage.textContent = errorMessage;
         showToast(elementErrorMessage.innerHTML, 3000, "modal-error");
@@ -4390,11 +4428,11 @@ class ButtonSubmitBundle extends HTMLElement {
 
   updateButtonStatus() {
     const bundleItems = document.querySelectorAll(
-      "[data-product-bundle-variant][data-variant-id]"
+      "[data-product-bundle-variant][data-variant-id]",
     );
     const sectionId = this.dataset.sectionId;
     const bundleBtnAddCart = document.querySelectorAll(
-      `#product-bundle-${sectionId} product-form-bundle button`
+      `#product-bundle-${sectionId} product-form-bundle button`,
     );
     bundleBtnAddCart.forEach((button) => {
       if (button.classList.contains("disabled")) {
@@ -4423,15 +4461,15 @@ class ProgressBundleBar extends HTMLElement {
     this.updateBundleProgress();
 
     document.addEventListener("bundle:item-changed", () =>
-      this.updateBundleProgress()
+      this.updateBundleProgress(),
     );
   }
 
   updateBundleProgress() {
     const bundleItems = Array.from(
       this.closest("sticky-element").querySelectorAll(
-        "[data-product-bundle-variant][data-variant-id]"
-      )
+        "[data-product-bundle-variant][data-variant-id]",
+      ),
     );
     const itemCount = bundleItems.length;
 
@@ -4505,7 +4543,7 @@ if (!customElements.get("product-form-quick-edit")) {
         if (this.cart) {
           formData.append(
             "sections",
-            this.cart.getSectionsToRender().map((section) => section.id)
+            this.cart.getSectionsToRender().map((section) => section.id),
           );
           formData.append("sections_url", window.location.pathname);
           this.cart.setActiveElement(document.activeElement);
@@ -4536,7 +4574,7 @@ if (!customElements.get("product-form-quick-edit")) {
                       .updateTotal(cart);
                   }
                   const cart_free_ship = document.querySelector(
-                    "free-ship-progress-bar"
+                    "free-ship-progress-bar",
                   );
                   if (cart_free_ship) {
                     cart_free_ship.init(cart.items_subtotal_price);
@@ -4552,7 +4590,7 @@ if (!customElements.get("product-form-quick-edit")) {
                 const elementToReplace = document.getElementById(section.id);
                 const html = new DOMParser().parseFromString(
                   parsedState.sections[section.id],
-                  "text/html"
+                  "text/html",
                 );
                 elementToReplace.innerHTML =
                   html.querySelector("#minicart-form").innerHTML;
@@ -4588,7 +4626,7 @@ if (!customElements.get("product-form-quick-edit")) {
                 const cartUpsellItem =
                   document.querySelectorAll(".cart-upsell-item");
                 const cartUpsellSlide = document.querySelectorAll(
-                  ".swiper-cart-upsell .swiper-slide"
+                  ".swiper-cart-upsell .swiper-slide",
                 );
 
                 if (cartUpsellItem.length > 0) {
@@ -4611,7 +4649,7 @@ if (!customElements.get("product-form-quick-edit")) {
       updateMessageQuickErrors(message) {
         this.querySelector(".cart-item__error-text").textContent = message;
       }
-    }
+    },
   );
 }
 
@@ -4658,19 +4696,22 @@ class BeforeYouLeave extends HTMLElement {
     var action = 0;
 
     if (element !== null) {
-      var getPopup = setTimeout(() => {
-        getTimeOut();
-      }, (delay - 10) * 1000);
+      var getPopup = setTimeout(
+        () => {
+          getTimeOut();
+        },
+        (delay - 10) * 1000,
+      );
 
       const addMultipleListeners = (
         el,
         types,
         listener,
         options,
-        useCapture
+        useCapture,
       ) => {
         types.forEach((type) =>
-          el.addEventListener(type, listener, options, useCapture)
+          el.addEventListener(type, listener, options, useCapture),
         );
       };
 
@@ -4679,7 +4720,7 @@ class BeforeYouLeave extends HTMLElement {
         ["scroll", "click", "mousemove", "keydown"],
         () => {
           setAction();
-        }
+        },
       );
       const closeBefore = document.querySelectorAll(".close-before");
       closeBefore.forEach((event) => {
@@ -4699,15 +4740,17 @@ class BeforeYouLeave extends HTMLElement {
         if (action >= 1) {
           const htmlElement = document.documentElement;
           const bodyElement = document.body;
-          
-          if (htmlElement.classList.contains("open-drawer") || 
-              bodyElement.classList.contains("tingle-enabled")) {
+
+          if (
+            htmlElement.classList.contains("open-drawer") ||
+            bodyElement.classList.contains("tingle-enabled")
+          ) {
             return;
           }
           document.documentElement.classList.add("open-drawer", "open-byl");
           root.style.setProperty(
             "padding-right",
-            getScrollBarWidth.init() + "px"
+            getScrollBarWidth.init() + "px",
           );
           element.classList.add("open");
           const cp = element.querySelectorAll(".discount");
@@ -4739,17 +4782,17 @@ class MiniCartRemoveButton extends HTMLElement {
     this.addEventListener("click", (event) => {
       event.preventDefault();
       const wishlist_items = JSON.parse(
-        localStorage.getItem("glozin__wishlist-items")
+        localStorage.getItem("glozin__wishlist-items"),
       );
       const productHandle = this.dataset.productHandle;
       let index = wishlist_items?.indexOf(productHandle);
       if (this.classList.contains("action-add-wishlist")) {
         if (index == -1 || index == undefined) {
           this.closest(".cart-item").querySelector(
-            ".minicart__wishlist"
+            ".minicart__wishlist",
           ).style.display = "block";
           this.closest(".cart-item").querySelector(
-            ".minicart__product-info"
+            ".minicart__product-info",
           ).style.display = "none";
         } else {
           const cartItems = this.closest("cart-notification");
@@ -4779,7 +4822,7 @@ class MiniCartWishlistAction extends HTMLElement {
         event.preventDefault();
         const target = event.currentTarget;
         this.eventRemove(target);
-      }
+      },
     );
   }
 
@@ -4790,7 +4833,7 @@ class MiniCartWishlistAction extends HTMLElement {
         event.preventDefault();
         const target = event.currentTarget;
         const localListProductIds = localStorage.getItem(
-          "glozin__wishlist-items"
+          "glozin__wishlist-items",
         );
         let listProductIds = [];
         let productId = target.dataset.productId;
@@ -4809,7 +4852,7 @@ class MiniCartWishlistAction extends HTMLElement {
         const stringifyListProductIds = JSON.stringify(listProductIds);
         localStorage.setItem("glozin__wishlist-items", stringifyListProductIds);
         this.eventRemove(target);
-      }
+      },
     );
   }
 
@@ -4858,7 +4901,7 @@ class CookieBar extends HTMLElement {
             setCookie("cookie_bar", "dismiss", 30);
           }
         },
-        false
+        false,
       );
     });
   }
@@ -4880,7 +4923,7 @@ class TermsConditions extends PopupBase {
           const header = popup.getAttribute("data-text");
           this.initPopup(
             popup.querySelector(".terms-conditions-content").outerHTML,
-            `<h3 class="title-popup h5 my-0 px-20 px-md-30 py-20 border-bottom">${header}</h3>`
+            `<h3 class="title-popup h5 my-0 px-20 px-md-30 py-20 border-bottom">${header}</h3>`,
           );
           target.href = "javascript: (function(){})();";
           target.target = "_self";
@@ -4892,7 +4935,7 @@ class TermsConditions extends PopupBase {
       this.querySelector(".conditions_form_product");
     const bpb = document.querySelector(".btn-checkout");
     const dynamicCheckout = this.closest("product-form")?.querySelector(
-      ".btn-checkout-dynamic"
+      ".btn-checkout-dynamic",
     );
     if (conditions) {
       if (getCookie("term_conditions")) {
@@ -5024,7 +5067,7 @@ var BlsGlozinAdminLi = (function () {
         purchaseLink.setAttribute("class", "popup-btn");
         purchaseLink.setAttribute(
           "href",
-          "https://nextsky.gitbook.io/glozin-theme/get-started/purchase-code-and-activation"
+          "https://nextsky.gitbook.io/glozin-theme/get-started/purchase-code-and-activation",
         );
         purchaseLink.textContent = "👉 Get Glozin purchase code";
         stepElements[1].appendChild(purchaseLink);
@@ -5070,7 +5113,7 @@ var BlsGlozinAdminLi = (function () {
             console.log(
               responseText.err
                 ? responseText.err.message
-                : "Please contact to server's adminstrator!!!"
+                : "Please contact to server's adminstrator!!!",
             );
           }
         })
@@ -5109,7 +5152,7 @@ class QuickView extends PopupBase {
         this.html = parser
           .parseFromString(text, "text/html")
           .querySelector(
-            "#shopify-section-product-quickview .product-quickview__content"
+            "#shopify-section-product-quickview .product-quickview__content",
           );
         if (!this.html) return;
         // Load scripts in the HTML content
@@ -5189,7 +5232,7 @@ class ButtonWishlist extends HTMLElement {
     if (!localListProductIds) return;
     const parseLocalListProductIds = JSON.parse(localListProductIds);
     const isProductIdContained = parseLocalListProductIds.includes(
-      this.productId
+      this.productId,
     );
     if (isProductIdContained) {
       this.classList.add("active");
@@ -5228,7 +5271,7 @@ class ButtonWishlist extends HTMLElement {
   onThisClick() {
     const localListProductIds = localStorage.getItem("glozin__wishlist-items");
     const allThisProductIds = document.querySelectorAll(
-      `button-wishlist[data-product-id="${this.productId}"]`
+      `button-wishlist[data-product-id="${this.productId}"]`,
     );
     let listProductIds = [];
     if (!this.productId) return;
@@ -5236,7 +5279,7 @@ class ButtonWishlist extends HTMLElement {
       // wishlist localstorage exists
       const parseLocalListProductIds = JSON.parse(localListProductIds);
       let isProductIdContained = parseLocalListProductIds.includes(
-        this.productId
+        this.productId,
       );
       if (!isProductIdContained) {
         // case item is not in wishlist
@@ -5247,14 +5290,14 @@ class ButtonWishlist extends HTMLElement {
         if (this.action) {
           if (this.action === "remove") {
             const indexOfProductId = parseLocalListProductIds.indexOf(
-              this.productId
+              this.productId,
             );
             parseLocalListProductIds.splice(indexOfProductId, 1);
             listProductIds.push(...parseLocalListProductIds);
             if (this.closest(".wishlist-page-main")) {
               this.closest(".wishlist-list").remove();
               const product = document.querySelectorAll(
-                `.wishlist-page-section .product-item__action button-wishlist`
+                `.wishlist-page-section .product-item__action button-wishlist`,
               );
               if (product.length < 1) {
                 document
@@ -5307,7 +5350,7 @@ class ButtonCompare extends HTMLElement {
     if (!localListProductIds) return;
     const parseLocalListProductIds = JSON.parse(localListProductIds);
     const isProductIdContained = parseLocalListProductIds.includes(
-      this.productId
+      this.productId,
     );
     if (isProductIdContained) {
       this.classList.add("active");
@@ -5346,7 +5389,7 @@ class ButtonCompare extends HTMLElement {
   onThisClick() {
     const localListProductIds = localStorage.getItem("glozin__compare-items");
     const allThisProductIds = document.querySelectorAll(
-      `button-compare[data-product-id="${this.productId}"]`
+      `button-compare[data-product-id="${this.productId}"]`,
     );
     let listProductIds = [];
     if (!this.productId) return;
@@ -5354,7 +5397,7 @@ class ButtonCompare extends HTMLElement {
       // compare localstorage exists
       const parseLocalListProductIds = JSON.parse(localListProductIds);
       let isProductIdContained = parseLocalListProductIds.includes(
-        this.productId
+        this.productId,
       );
       if (!isProductIdContained) {
         // case item is not in compare
@@ -5365,7 +5408,7 @@ class ButtonCompare extends HTMLElement {
         if (this.action) {
           if (this.action === "remove") {
             const indexOfProductId = parseLocalListProductIds.indexOf(
-              this.productId
+              this.productId,
             );
             parseLocalListProductIds.splice(indexOfProductId, 1);
             listProductIds.push(...parseLocalListProductIds);
@@ -5429,7 +5472,7 @@ class SwatchFunctions extends SwatchInit {
     this.productTarget = this.closest(".product__item-js");
     const target = e.target;
     const variantQtyData = JSON.parse(
-      this.productTarget.querySelector(".productVariantsQty").textContent
+      this.productTarget.querySelector(".productVariantsQty").textContent,
     );
     this.groupFunctionsInit();
     if (!this.currentVariant) {
@@ -5468,12 +5511,12 @@ class SwatchFunctions extends SwatchInit {
     const unit_price_measurement = this.currentVariant.unit_price_measurement;
     const price_format = Shopify.formatMoney(
       this.currentVariant.price,
-      themeGlobalVariables.settings.money_format
+      themeGlobalVariables.settings.money_format,
     );
     if (unit_price && unit_price_measurement) {
       const price_num = Shopify.formatMoney(
         unit_price,
-        themeGlobalVariables.settings.money_format
+        themeGlobalVariables.settings.money_format,
       );
       const price_unit =
         unit_price_measurement.reference_value != 1
@@ -5493,13 +5536,13 @@ class SwatchFunctions extends SwatchInit {
     }
     if (productTarget.classList.contains("video-item__popup")) {
       productTarget.querySelector(
-        ".shopable-video__product-information .price-regular .price"
+        ".shopable-video__product-information .price-regular .price",
       ).innerHTML = price_format;
     }
     let bls__price = productTarget.querySelector(".card-product-price");
     if (productTarget.classList.contains("video-item__popup")) {
       bls__price = productTarget.querySelector(
-        ".shopable-video__product-information .card-product-price"
+        ".shopable-video__product-information .card-product-price",
       );
     }
     if (bls__price) {
@@ -5519,7 +5562,7 @@ class SwatchFunctions extends SwatchInit {
         if (compare_at_price && compare_at_price > price) {
           const compare_format = Shopify.formatMoney(
             compare_at_price,
-            themeGlobalVariables.settings.money_format
+            themeGlobalVariables.settings.money_format,
           );
           cpp.innerHTML = compare_format;
           if (bls__price.querySelector(".price-regular")) {
@@ -5555,7 +5598,7 @@ class SwatchFunctions extends SwatchInit {
   }
   toggleAddButton(disable = true, text, modifyClass = true) {
     const productForm = document.getElementById(
-      `product-form-${this.dataset.section}`
+      `product-form-${this.dataset.section}`,
     );
     if (!productForm) return;
     const addButton = productForm.querySelector('[name="add"]');
@@ -5574,26 +5617,26 @@ class SwatchFunctions extends SwatchInit {
   }
   setUnavailable(target) {
     const button = document.getElementById(
-      `product-form-${this.dataset.section}`
+      `product-form-${this.dataset.section}`,
     );
     const addButton = button.querySelector('[name="add"]');
     const addButtonText = button.querySelector('[name="add"] > span');
     const price = document.getElementById(`price-${this.dataset.section}`);
     const inventory = document.getElementById(
-      `Inventory-${this.dataset.section}`
+      `Inventory-${this.dataset.section}`,
     );
     const sku = document.getElementById(`Sku-${this.dataset.section}`);
     const pricePerItem = document.getElementById(
-      `Price-Per-Item-${this.dataset.section}`
+      `Price-Per-Item-${this.dataset.section}`,
     );
     const volumeNote = document.getElementById(
-      `Volume-Note-${this.dataset.section}`
+      `Volume-Note-${this.dataset.section}`,
     );
     const volumeTable = document.getElementById(
-      `Volume-${this.dataset.section}`
+      `Volume-${this.dataset.section}`,
     );
     const qtyRules = document.getElementById(
-      `Quantity-Rules-${this.dataset.section}`
+      `Quantity-Rules-${this.dataset.section}`,
     );
 
     if (target) {
@@ -5616,20 +5659,20 @@ class SwatchFunctions extends SwatchInit {
   setAvailable() {
     const price = document.getElementById(`price-${this.dataset.section}`);
     const inventory = document.getElementById(
-      `Inventory-${this.dataset.section}`
+      `Inventory-${this.dataset.section}`,
     );
     const sku = document.getElementById(`Sku-${this.dataset.section}`);
     const pricePerItem = document.getElementById(
-      `Price-Per-Item-${this.dataset.section}`
+      `Price-Per-Item-${this.dataset.section}`,
     );
     const volumeNote = document.getElementById(
-      `Volume-Note-${this.dataset.section}`
+      `Volume-Note-${this.dataset.section}`,
     );
     const volumeTable = document.getElementById(
-      `Volume-${this.dataset.section}`
+      `Volume-${this.dataset.section}`,
     );
     const qtyRules = document.getElementById(
-      `Quantity-Rules-${this.dataset.section}`
+      `Quantity-Rules-${this.dataset.section}`,
     );
 
     if (price && price.classList.contains("hidden"))
@@ -5655,7 +5698,7 @@ class SwatchFunctions extends SwatchInit {
       const swiper = mediaGalleries.querySelector("slide-with-thumbs");
       if (!swiper) return;
       const slide_items = swiper.querySelectorAll(
-        ".swiper-wrapper-preview .media-gallery__image.swiper-slide"
+        ".swiper-wrapper-preview .media-gallery__image.swiper-slide",
       );
 
       if (slide_items.length == 0) return;
@@ -5678,7 +5721,7 @@ class SwatchFunctions extends SwatchInit {
       //   true
       // );
       const mediaElement = document.querySelector(
-        `[data-media-id="${this.dataset.section}-${this.currentVariant.featured_media.id}"]`
+        `[data-media-id="${this.dataset.section}-${this.currentVariant.featured_media.id}"]`,
       );
       if (mediaElement) {
         mediaElement.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -5713,7 +5756,7 @@ class SwatchFunctions extends SwatchInit {
     let sku_area = productTarget.querySelector(".product__sku");
     // Update option labels
     const productDetailPicker = productTarget.querySelector(
-      ".product-detail__variant-picker"
+      ".product-detail__variant-picker",
     );
     if (productDetailPicker) {
       const type = productDetailPicker.dataset.type || "swatches";
@@ -5827,7 +5870,7 @@ class SwatchFunctions extends SwatchInit {
     const label = productTarget.querySelector(".product__badges");
     const sale_badge = productTarget.querySelector(".sale_badge");
     const productBadgesScrolling = productTarget.querySelector(
-      ".product__badges-sale-scrolling"
+      ".product__badges-sale-scrolling",
     );
     if (sale || pre_order || soldOut) {
       if (!label) {
@@ -5838,7 +5881,7 @@ class SwatchFunctions extends SwatchInit {
           "flex",
           "flex-wrap",
           "gap-5",
-          "uppercase"
+          "uppercase",
         );
         if (sale_badge) {
           sale_badge.appendChild(element);
@@ -5859,7 +5902,7 @@ class SwatchFunctions extends SwatchInit {
       const saleBadgeType = label?.dataset.saleBadgeType;
       const prd = Shopify.formatMoney(
         percent,
-        themeGlobalVariables.settings.money_format
+        themeGlobalVariables.settings.money_format,
       );
       const dsale = label.querySelector(".product__badges-sale");
       const dsoldout = label.querySelector(".product__badges-sold-out");
@@ -5884,7 +5927,7 @@ class SwatchFunctions extends SwatchInit {
               saleBadgeType === "percent"
                 ? "product__badges-type-percent"
                 : "badges"
-            }`
+            }`,
           );
           elementsale.style.setProperty("--badges-color", saleColor);
           elementsale.style.setProperty("--badges-bg", saleBg);
@@ -5937,7 +5980,7 @@ class SwatchFunctions extends SwatchInit {
             "subheading_weight",
             "btn-rounded",
             "lh-normal",
-            "text-center"
+            "text-center",
           );
           elementpo.style.setProperty("--badges-color", preOrderColor);
           elementpo.style.setProperty("--badges-bg", preOrderBg);
@@ -5968,7 +6011,7 @@ class SwatchFunctions extends SwatchInit {
             "subheading_weight",
             "btn-rounded",
             "lh-normal",
-            "text-center"
+            "text-center",
           );
           elementso.style.setProperty("--badges-color", soldOutColor);
           elementso.style.setProperty("--badges-bg", soldOutBg);
@@ -5990,12 +6033,12 @@ class SwatchFunctions extends SwatchInit {
       const dataBadgesScrolling =
         productBadgesScrolling?.dataset.textProductScrolling;
       const allProductBadgesScrolling = productBadgesScrolling.querySelectorAll(
-        ".content-badges-scrolling"
+        ".content-badges-scrolling",
       );
       allProductBadgesScrolling.forEach((content) => {
         content.innerText = dataBadgesScrolling.replace(
           "[percent_sale]",
-          percent.toFixed(0) + "%"
+          percent.toFixed(0) + "%",
         );
       });
     }
@@ -6003,7 +6046,7 @@ class SwatchFunctions extends SwatchInit {
   renderBtnStatus(productTarget, im, av, qty) {
     if (!productTarget) return;
     let btns_add_cart = productTarget.querySelectorAll(
-      ".product_submit_button"
+      ".product_submit_button",
     );
     btns_add_cart.forEach((btn_add_cart) => {
       if (btn_add_cart.querySelector(".btn-label")) {
@@ -6033,7 +6076,7 @@ class SwatchFunctions extends SwatchInit {
   }
   updateVariantStatuses() {
     const selectedOptionOneVariants = this.variantData.filter(
-      (variant) => this.querySelector(":checked").value === variant.option1
+      (variant) => this.querySelector(":checked").value === variant.option1,
     );
     const inputWrappers = [...this.querySelectorAll(".product-form__input")];
     inputWrappers.forEach((option, index) => {
@@ -6047,7 +6090,7 @@ class SwatchFunctions extends SwatchInit {
         .filter(
           (variant) =>
             variant.available &&
-            variant[`option${index}`] === previousOptionSelected
+            variant[`option${index}`] === previousOptionSelected,
         )
         .map((variantOption) => variantOption[`option${index + 1}`]);
       this.setInputAvailability(optionInputs, availableOptionInputsValue);
@@ -6065,7 +6108,7 @@ class SwatchFunctions extends SwatchInit {
           ? value
           : window.variantStrings.unavailable_with_option.replace(
               "[value]",
-              value
+              value,
             );
       }
     });
@@ -6080,8 +6123,8 @@ class SwatchFunctions extends SwatchInit {
       if (element.tagName === "FIELDSET") {
         this.options.push(
           Array.from(element.querySelectorAll("input")).find(
-            (radio) => radio.checked
-          )?.value
+            (radio) => radio.checked,
+          )?.value,
         );
       }
     });
@@ -6101,12 +6144,12 @@ class SwatchFunctions extends SwatchInit {
     window.history.replaceState(
       {},
       "",
-      `${this.dataset.url}?variant=${this.currentVariant.id}`
+      `${this.dataset.url}?variant=${this.currentVariant.id}`,
     );
   }
   updateVariantInput() {
     const productForms = document.querySelectorAll(
-      `#product-form-${this.dataset.section}, #sticky-addcart-form-${this.dataset.section}`
+      `#product-form-${this.dataset.section}, #sticky-addcart-form-${this.dataset.section}`,
     );
     productForms.forEach((productForm) => {
       const input = productForm.querySelector('input[name="id"]');
@@ -6118,7 +6161,7 @@ class SwatchFunctions extends SwatchInit {
     const copyButton = document.getElementById(`Share-${this.dataset.section}`);
     if (!copyButton || !copyButton.updateUrl) return;
     copyButton.updateUrl(
-      `${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`
+      `${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`,
     );
     const copyParent = copyButton.closest(".share__content");
     if (!copyParent) return;
@@ -6169,7 +6212,7 @@ class SwatchDropdownSelectValue extends HTMLElement {
 }
 customElements.define(
   "swatch-dropdown-select-value",
-  SwatchDropdownSelectValue
+  SwatchDropdownSelectValue,
 );
 
 // Function to remove active class when clicking outside
@@ -6228,7 +6271,7 @@ class VariantRadios extends SwatchFunctions {
     this.productTarget = this.closest(".product__item-js");
     this.position_swatch = target.dataset.position;
     const variantQtyData = JSON.parse(
-      this.productTarget.querySelector(".productItemVariantsQty").textContent
+      this.productTarget.querySelector(".productItemVariantsQty").textContent,
     );
     if (!target.classList.contains("active")) {
       const activeSwatches = target
@@ -6264,12 +6307,12 @@ class VariantRadios extends SwatchFunctions {
     const unit_price_measurement = this.currentVariant.unit_price_measurement;
     const price_format = Shopify.formatMoney(
       this.currentVariant.price,
-      themeGlobalVariables.settings.money_format
+      themeGlobalVariables.settings.money_format,
     );
     if (unit_price && unit_price_measurement) {
       const price_num = Shopify.formatMoney(
         unit_price,
-        themeGlobalVariables.settings.money_format
+        themeGlobalVariables.settings.money_format,
       );
       const price_unit =
         unit_price_measurement.reference_value != 1
@@ -6309,7 +6352,7 @@ class VariantRadios extends SwatchFunctions {
         if (compare_at_price && compare_at_price > price) {
           const compare_format = Shopify.formatMoney(
             compare_at_price,
-            themeGlobalVariables.settings.money_format
+            themeGlobalVariables.settings.money_format,
           );
           cpp.innerHTML = compare_format;
           if (bls__price.querySelector(".price-regular")) {
@@ -6357,10 +6400,10 @@ class VariantRadios extends SwatchFunctions {
     const price = this.currentVariant.price;
     const productTarget = this.productTarget;
     const productBadgesScrolling = productTarget.querySelector(
-      ".product__badges-sale-scrolling"
+      ".product__badges-sale-scrolling",
     );
     const typePercent = productTarget.querySelector(
-      ".product__badges-type-percent"
+      ".product__badges-type-percent",
     );
     const vqd = variantQtyData.reduce((acc, item) => {
       const existingItem = acc.find((i) => i.option === item.option);
@@ -6416,9 +6459,9 @@ class VariantRadios extends SwatchFunctions {
   updateOptions() {
     this.options = Array.from(
       this.productTarget.querySelectorAll(
-        ".product__color-swatches--js.active"
+        ".product__color-swatches--js.active",
       ),
-      (select) => select.getAttribute("data-value")
+      (select) => select.getAttribute("data-value"),
     );
 
     this.variantData.find((variant) => {
@@ -6484,13 +6527,13 @@ class VariantRadios extends SwatchFunctions {
       await Motion.animate(
         this.productTarget.querySelector(".product__media img"),
         { opacity: [1, 0] },
-        { duration: 0.1, easing: "ease-in" }
+        { duration: 0.1, easing: "ease-in" },
       );
       this.productTarget
         .querySelector(".product__media img")
         .setAttribute(
           "src",
-          this.currentVariant.featured_media.preview_image.src
+          this.currentVariant.featured_media.preview_image.src,
         );
       await new Promise((resolve) => {
         this.productTarget.querySelector(".product__media img").onload = () => {
@@ -6500,7 +6543,7 @@ class VariantRadios extends SwatchFunctions {
       Motion.animate(
         this.productTarget.querySelector(".product__media img"),
         { opacity: [0, 1] },
-        { duration: 0.1, easing: "ease-in" }
+        { duration: 0.1, easing: "ease-in" },
       );
     }
   }
@@ -6529,7 +6572,7 @@ class VariantRadiosDetail extends SwatchFunctions {
 
     const select = stickyAddCart.querySelector("select");
     const detailRadio = this.productTarget.querySelector(
-      "variant-radios-detail, variant-group-detail"
+      "variant-radios-detail, variant-group-detail",
     );
     if (!select && detailRadio) return;
 
@@ -6573,7 +6616,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
   onVariantChange(e) {
     this.productTarget = this.closest(".product__item-js");
     const variantQtyData = JSON.parse(
-      this.productTarget.querySelector(".productVariantsQty").textContent
+      this.productTarget.querySelector(".productVariantsQty").textContent,
     );
     this.groupFunctionsInit();
 
@@ -6597,11 +6640,11 @@ class VariantGroupDetail extends VariantRadiosDetail {
     if (colorString) {
       const colorArray = colorString.split(",");
       const colorSelector = this.productTarget.querySelector(
-        `[data-value="${CSS.escape(e.target.value)}"]`
+        `[data-value="${CSS.escape(e.target.value)}"]`,
       );
       const dataName = colorSelector?.dataset.name;
       const isColorInput = colorArray.includes(
-        dataName ? dataName : e.target.name
+        dataName ? dataName : e.target.name,
       );
       if (isColorInput) {
         const dataValue = colorSelector?.dataset.colorValue;
@@ -6638,22 +6681,22 @@ class VariantGroupDetail extends VariantRadiosDetail {
               "flex-md",
               "gap-10",
               "overflow-hidden",
-              "justify-content-right"
+              "justify-content-right",
             );
           }
           parentDiv.dataset.thumbDirection =
             desktopLayout === "thumbnail_left" ? "vertical" : "horizontal";
           let parentContainer = parentDiv.querySelector(
-            ".media-main-swiper .swiper-wrapper"
+            ".media-main-swiper .swiper-wrapper",
           );
           let wrapperFeatureProduct =
             this.productTarget.querySelector("slide-with-thumbs");
           let slidePreviewFeatureProduct = wrapperFeatureProduct.querySelector(
-            ".media-main-swiper .swiper-wrapper"
+            ".media-main-swiper .swiper-wrapper",
           );
           if (zoom === "no_zoom") {
             const noZoomItems = html.querySelectorAll(
-              "div.media-gallery__image[data-pane-container]"
+              "div.media-gallery__image[data-pane-container]",
             );
             noZoomItems.forEach((item) => {
               if (
@@ -6664,7 +6707,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
                 if (mediaDefaultId) {
                   item.setAttribute(
                     "data-media-id",
-                    `${sectionId}-${mediaDefaultId}`
+                    `${sectionId}-${mediaDefaultId}`,
                   );
                 }
                 parentContainer.innerHTML += item.outerHTML;
@@ -6677,7 +6720,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
             });
           } else if (zoom !== "open_lightbox") {
             const driftZoomItems = html.querySelectorAll(
-              "div.media-gallery__image[data-pane-container]"
+              "div.media-gallery__image[data-pane-container]",
             );
             driftZoomItems.forEach((item) => {
               if (
@@ -6688,7 +6731,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
                 if (mediaDefaultId) {
                   item.setAttribute(
                     "data-media-id",
-                    `${sectionId}-${mediaDefaultId}`
+                    `${sectionId}-${mediaDefaultId}`,
                   );
                 }
                 parentDiv.querySelector(".swiper-wrapper").innerHTML +=
@@ -6706,7 +6749,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
                 if (mediaDefaultId) {
                   item.setAttribute(
                     "data-media-id",
-                    `${sectionId}-${mediaDefaultId}`
+                    `${sectionId}-${mediaDefaultId}`,
                   );
                 }
                 parentContainer.innerHTML += item.outerHTML;
@@ -6715,11 +6758,11 @@ class VariantGroupDetail extends VariantRadiosDetail {
           }
           if (desktopLayout !== "hidden_thumbnail") {
             let thumbHtml = html.querySelector(
-              ".media-gallery__append .media-thumb-swiper"
+              ".media-gallery__append .media-thumb-swiper",
             );
             let thumbHtmlWrapper = thumbHtml.querySelector(".swiper-wrapper");
             let thumbHtmlFeatureProduct = wrapperFeatureProduct.querySelector(
-              ".media-thumb-swiper .swiper-wrapper"
+              ".media-thumb-swiper .swiper-wrapper",
             );
             if (!thumbHtml || !thumbHtmlFeatureProduct) return;
             if (mobileLayout !== "show_thumbnails") {
@@ -6753,7 +6796,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
               }
             }
             const noZoomItems = html.querySelectorAll(
-              "div.media-gallery__image:not([data-pane-container])"
+              "div.media-gallery__image:not([data-pane-container])",
             );
             noZoomItems.forEach((item) => {
               if (
@@ -6764,7 +6807,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
                 if (mediaDefaultId) {
                   item.setAttribute(
                     "data-media-id",
-                    `${sectionId}-${mediaDefaultId}`
+                    `${sectionId}-${mediaDefaultId}`,
                   );
                 }
                 thumbHtmlWrapper.innerHTML += item.outerHTML;
@@ -6810,7 +6853,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
               "grid",
               "gap-10",
               "grid_scroll",
-              "grid-cols"
+              "grid-cols",
             );
           }
           if (
@@ -6829,25 +6872,25 @@ class VariantGroupDetail extends VariantRadiosDetail {
           if (desktopLayout === "grid_1_column") {
             parentDiv.setAttribute(
               "style",
-              "--col-number: 1;--col-desktop: 1;--col-tablet: 1;--col-gap: 10px;"
+              "--col-number: 1;--col-desktop: 1;--col-tablet: 1;--col-gap: 10px;",
             );
           }
           if (desktopLayout === "grid_2_column" || desktopLayout === "stack") {
             if (window.innerWidth > 768) {
               parentDiv.setAttribute(
                 "style",
-                "--col-number: 2;--col-tablet: 2;--col-gap: 10px;"
+                "--col-number: 2;--col-tablet: 2;--col-gap: 10px;",
               );
             } else {
               parentDiv.setAttribute(
                 "style",
-                "--col-number: 1.2;--col-tablet: 2;--col-gap: 10px;"
+                "--col-number: 1.2;--col-tablet: 2;--col-gap: 10px;",
               );
             }
           }
           if (zoom === "no_zoom") {
             const noZoomItems = html.querySelectorAll(
-              "div.media-gallery__image:not([data-pane-container])"
+              "div.media-gallery__image:not([data-pane-container])",
             );
             noZoomItems.forEach((item) => {
               if (
@@ -6858,7 +6901,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
                 if (mediaDefaultId) {
                   item.setAttribute(
                     "data-media-id",
-                    `${sectionId}-${mediaDefaultId}`
+                    `${sectionId}-${mediaDefaultId}`,
                   );
                 }
                 parentDiv.innerHTML += item.outerHTML;
@@ -6866,13 +6909,13 @@ class VariantGroupDetail extends VariantRadiosDetail {
             });
             if (elementFeatureProduct) {
               const wrapperGrid = this.productTarget.querySelector(
-                `#GalleryViewer-${sectionId}`
+                `#GalleryViewer-${sectionId}`,
               );
               wrapperGrid.innerHTML = parentDiv.innerHTML;
             }
           } else if (zoom !== "open_lightbox") {
             const driftZoomItems = html.querySelectorAll(
-              "div.media-gallery__image[data-pane-container]"
+              "div.media-gallery__image[data-pane-container]",
             );
             driftZoomItems.forEach((item) => {
               if (
@@ -6883,7 +6926,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
                 if (mediaDefaultId) {
                   item.setAttribute(
                     "data-media-id",
-                    `${sectionId}-${mediaDefaultId}`
+                    `${sectionId}-${mediaDefaultId}`,
                   );
                 }
                 parentDiv.innerHTML += item.outerHTML;
@@ -6900,7 +6943,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
                 if (mediaDefaultId) {
                   item.setAttribute(
                     "data-media-id",
-                    `${sectionId}-${mediaDefaultId}`
+                    `${sectionId}-${mediaDefaultId}`,
                   );
                 }
                 parentDiv.innerHTML += item.outerHTML;
@@ -6930,7 +6973,7 @@ class VariantGroupDetail extends VariantRadiosDetail {
   getAllButtonValue() {
     const buttonArray = [];
     this.querySelectorAll(
-      ".product__color-swatches--js, .product-sticky-js"
+      ".product__color-swatches--js, .product-sticky-js",
     ).forEach((btn) => {
       if (
         btn.classList.contains("product__color-swatches--js") &&
@@ -7023,7 +7066,7 @@ class CountdownTimer extends HTMLElement {
       if (this.format.includes("hh")) {
         if (this.format.includes("dd")) {
           timeLeft.hours_timer = Math.floor(
-            (difference / (1000 * 60 * 60)) % 24
+            (difference / (1000 * 60 * 60)) % 24,
           );
         } else {
           timeLeft.hours_timer = Math.floor(difference / (1000 * 60 * 60));
@@ -7204,7 +7247,7 @@ if (!customElements.get("product-form")) {
         if (this.cart) {
           formData.append(
             "sections",
-            this.cart.getSectionsToRender().map((section) => section.id)
+            this.cart.getSectionsToRender().map((section) => section.id),
           );
           formData.append("sections_url", window.location.pathname);
           this.cart.setActiveElement(document.activeElement);
@@ -7212,7 +7255,7 @@ if (!customElements.get("product-form")) {
         if (this.cartPage) {
           formData.append(
             "sections",
-            this.getMainCartSectionRender().map((section) => section.id)
+            this.getMainCartSectionRender().map((section) => section.id),
           );
         }
         config.body = formData;
@@ -7260,7 +7303,7 @@ if (!customElements.get("product-form")) {
                       .updateTotal(cart);
                   }
                   const cart_free_ship = document.querySelector(
-                    "free-ship-progress-bar"
+                    "free-ship-progress-bar",
                   );
                   if (cart_free_ship) {
                     cart_free_ship.init(cart.items_subtotal_price);
@@ -7277,10 +7320,10 @@ if (!customElements.get("product-form")) {
               cartData: response,
             });
             const modalQuickview = document.querySelector(
-              ".tingle-modal--visible.tingle-modal.quickview .tingle-modal__close"
+              ".tingle-modal--visible.tingle-modal.quickview .tingle-modal__close",
             );
             const modalShopableVideo = document.querySelector(
-              ".tingle-modal--visible.tingle-modal.shopable-video .tingle-modal__close"
+              ".tingle-modal--visible.tingle-modal.shopable-video .tingle-modal__close",
             );
             let time = 0;
             if (modalQuickview || modalShopableVideo) {
@@ -7308,7 +7351,7 @@ if (!customElements.get("product-form")) {
                   const elementToReplace = document.getElementById(section.id);
                   const html = new DOMParser().parseFromString(
                     response.sections[section.id],
-                    "text/html"
+                    "text/html",
                   );
                   if (elementToReplace) {
                     elementToReplace.innerHTML =
@@ -7335,7 +7378,7 @@ if (!customElements.get("product-form")) {
                       const cartUpsellItem =
                         document.querySelectorAll(".cart-upsell-item");
                       const cartUpsellSlide = document.querySelectorAll(
-                        ".swiper-cart-upsell .swiper-slide"
+                        ".swiper-cart-upsell .swiper-slide",
                       );
                       if (cartUpsellItem.length > 0) {
                         setTimeout(function () {
@@ -7364,12 +7407,12 @@ if (!customElements.get("product-form")) {
                       document.getElementById(section.id);
                     elementToReplace.innerHTML = this.getSectionInnerHTML(
                       response.sections[section.id],
-                      section.selector
+                      section.selector,
                     );
                     const cart_gift_html = new DOMParser()
                       .parseFromString(
                         response.sections[section.id],
-                        "text/html"
+                        "text/html",
                       )
                       .querySelector("#gift");
                     const cart_gift = document.getElementById("gift");
@@ -7386,10 +7429,10 @@ if (!customElements.get("product-form")) {
                             } else {
                               this.updateQuantity(
                                 event.currentTarget.dataset.index,
-                                0
+                                0,
                               );
                             }
-                          }
+                          },
                         );
                       }
                     }
@@ -7415,7 +7458,7 @@ if (!customElements.get("product-form")) {
 
                 const totals = this.getSectionInnerHTML(
                   response.sections["main-cart-items"],
-                  ".cart-info .totals"
+                  ".cart-info .totals",
                 );
                 const totals_content =
                   document.querySelector(".cart-info .totals");
@@ -7464,7 +7507,7 @@ if (!customElements.get("product-form")) {
         this.errorMessage =
           this.errorMessage ||
           this.errorMessageWrapper.querySelector(
-            ".product-form__error-message"
+            ".product-form__error-message",
           );
 
         this.errorMessageWrapper.toggleAttribute("hidden", !errorMessage);
@@ -7481,13 +7524,13 @@ if (!customElements.get("product-form")) {
           .then((responseText) => {
             const html = new DOMParser().parseFromString(
               responseText,
-              "text/html"
+              "text/html",
             );
             const elementErrorMessage = html.querySelector(
-              ".product-form__error-message-wrapper"
+              ".product-form__error-message-wrapper",
             );
             const elementMessage = elementErrorMessage.querySelector(
-              ".product-form__error-message"
+              ".product-form__error-message",
             );
             elementMessage.textContent = errorMessage;
             showToast(elementErrorMessage.innerHTML, 3000, "modal-error");
@@ -7496,7 +7539,7 @@ if (!customElements.get("product-form")) {
             throw e;
           });
       }
-    }
+    },
   );
 }
 
@@ -7524,7 +7567,7 @@ class Loadmore extends HTMLElement {
     let url = this.dataset.url;
     if (!url) return;
     let sectionContainer = document.querySelector(
-      `#shopify-section-${this.sectionId}`
+      `#shopify-section-${this.sectionId}`,
     );
     sectionContainer?.classList.add("bls-image-js");
     this.querySelector("button").classList.add("loading");
@@ -7544,16 +7587,16 @@ class Loadmore extends HTMLElement {
           end_load;
         if (this.blockId) {
           itemDiv = parentDiv.querySelector(
-            `.collection-tab-${this.blockId} .product-ajax__append`
+            `.collection-tab-${this.blockId} .product-ajax__append`,
           );
           fetchDiv = html.querySelector(
-            `.sec__products-loadmore .collection-tab-${this.blockId} .product-ajax__append`
+            `.sec__products-loadmore .collection-tab-${this.blockId} .product-ajax__append`,
           );
           elements = fetchDiv.querySelectorAll(".grid-custom-item");
         } else {
           itemDiv = parentDiv.querySelector(".product-ajax__append");
           fetchDiv = html.querySelector(
-            ".sec__products-loadmore .product-ajax__append"
+            ".sec__products-loadmore .product-ajax__append",
           );
           elements = fetchDiv.querySelectorAll(".grid-custom-item");
         }
@@ -7572,7 +7615,9 @@ class Loadmore extends HTMLElement {
             return;
           }
           itemDiv.appendChild(prodNode);
-          parentDiv.querySelector("motion-items-effect")?.reloadAnimationEffect();
+          parentDiv
+            .querySelector("motion-items-effect")
+            ?.reloadAnimationEffect();
         });
       })
       .finally(() => {
@@ -7642,14 +7687,16 @@ class LookbookItem extends HTMLElement {
       const closeButton = this.querySelector("icon-close");
       if (!closeButton) return;
       closeButton.addEventListener("click", this.onClose.bind(this));
-      
+
       if (window.innerWidth >= 1024) {
-        const imageElement =  this.querySelector(".placeholder-image");
+        const imageElement = this.querySelector(".placeholder-image");
         if (imageElement) {
           imageElement.addEventListener("click", (e) => {
-            if (this.classList.contains("open") && 
-                this.itemPopup && 
-                !this.itemPopup.classList.contains("invisible")) {
+            if (
+              this.classList.contains("open") &&
+              this.itemPopup &&
+              !this.itemPopup.classList.contains("invisible")
+            ) {
               e.preventDefault();
               e.stopPropagation();
               this.onClose();
@@ -7659,13 +7706,13 @@ class LookbookItem extends HTMLElement {
       }
     }
   }
-  onClickOutside(event) { 
+  onClickOutside(event) {
     const wrapper = this.closest(".lookbook-item__wrapper");
     const isGlobalOpen = wrapper?.getAttribute("data-lookbook-open") === "true";
     if (isGlobalOpen) return;
-    if (!event.target.closest("lookbook-item")) { 
-      this.onClose(); 
-    } 
+    if (!event.target.closest("lookbook-item")) {
+      this.onClose();
+    }
   }
   onClick() {
     if (this.type === "open") {
@@ -7675,10 +7722,12 @@ class LookbookItem extends HTMLElement {
         const allPopups = thisSection.querySelectorAll(".lookbook-item__popup");
         if (window.innerWidth >= 1024) {
           this.onToggle();
-          
+
           const wrapper = this.closest(".lookbook-item__wrapper");
           if (wrapper) {
-            const toggleButton = wrapper.querySelector("lookbook-toggle-button");
+            const toggleButton = wrapper.querySelector(
+              "lookbook-toggle-button",
+            );
             if (toggleButton && toggleButton.checkAndUpdateLabel) {
               setTimeout(() => {
                 toggleButton.checkAndUpdateLabel();
@@ -7697,56 +7746,60 @@ class LookbookItem extends HTMLElement {
             `;
           }
           const modal = new tingle.modal({
-          footer: false,
-          stickyFooter: false,
-          closeMethods: ["overlay", "button", "escape"],
-          closeLabel: "Close",
-          cssClass: ["lookbook-modal"],
-          onOpen() {
-            console.log("[Lookbook] onOpen fired");
+            footer: false,
+            stickyFooter: false,
+            closeMethods: ["overlay", "button", "escape"],
+            closeLabel: "Close",
+            cssClass: ["lookbook-modal"],
+            onOpen() {
+              console.log("[Lookbook] onOpen fired");
 
-            let tries = 0;
-            const tryInsert = () => {
-              const modalEl = modal.modal;
-              const box = modalEl?.querySelector(".tingle-modal-box");
-              const content = modalEl?.querySelector(".tingle-modal-box__content");
+              let tries = 0;
+              const tryInsert = () => {
+                const modalEl = modal.modal;
+                const box = modalEl?.querySelector(".tingle-modal-box");
+                const content = modalEl?.querySelector(
+                  ".tingle-modal-box__content",
+                );
 
-              if (box && content) {
-                if (headerText && !box.querySelector(".tingle-modal-box__header")) {
-                  const header = document.createElement("div");
-                  header.className = "tingle-modal-box__header";
-                  header.innerHTML = headerText;
-                  box.insertBefore(header, content);
+                if (box && content) {
+                  if (
+                    headerText &&
+                    !box.querySelector(".tingle-modal-box__header")
+                  ) {
+                    const header = document.createElement("div");
+                    header.className = "tingle-modal-box__header";
+                    header.innerHTML = headerText;
+                    box.insertBefore(header, content);
+                  }
+                  return;
                 }
-                return;
-              }
 
-              tries++;
-              if (tries < 20) {
+                tries++;
+                if (tries < 20) {
+                  requestAnimationFrame(tryInsert);
+                }
+              };
+
+              if (headerText) {
                 requestAnimationFrame(tryInsert);
               }
-            };
+            },
+          });
 
-            if (headerText) {
-              requestAnimationFrame(tryInsert);
-            }
-          },
-        });
-
-        modal.setContent(
-          this.itemPopup.querySelector(".product-item").innerHTML
-        );
-        modal.open();
+          modal.setContent(
+            this.itemPopup.querySelector(".product-item").innerHTML,
+          );
+          modal.open();
         }
       }
-    } 
-    else {
+    } else {
       if (this.lookbookProductDiv && this.position) {
         const slideSEction = this.lookbookProductDiv.querySelector(
-          "slide-section-lookbook"
+          "slide-section-lookbook",
         );
         const allDots = this.lookbookProductDiv.querySelectorAll(
-          `lookbook-item[data-type="slide"]`
+          `lookbook-item[data-type="slide"]`,
         );
         allDots.forEach((dot) => {
           dot.classList.remove("active");
@@ -7757,13 +7810,13 @@ class LookbookItem extends HTMLElement {
         }
       } else if (this.instagramShop && this.position) {
         const slideSEction = this.instagramShop.querySelector(
-          "slide-section-instagram"
+          "slide-section-instagram",
         );
         if (slideSEction) {
           slideSEction.functionGoto(this.position);
         }
         const allDots = this.instagramShop.querySelectorAll(
-          `lookbook-item[data-type="slide"]`
+          `lookbook-item[data-type="slide"]`,
         );
         allDots.forEach((dot) => {
           dot.classList.remove("active");
@@ -7858,7 +7911,7 @@ class LookbookItem extends HTMLElement {
               this.isAnimating = false;
               this.currentAnimation = null;
             },
-          }
+          },
         );
       }
     }, 10);
@@ -7881,7 +7934,7 @@ class LookbookItem extends HTMLElement {
                 tooltip.parentNode.removeChild(tooltip);
               }
             },
-          }
+          },
         );
       }
     });
@@ -7928,7 +7981,7 @@ class LookbookItem extends HTMLElement {
             this.currentAnimation = null;
             this.activeTooltip = null;
           },
-        }
+        },
       );
     }
   }
@@ -7975,7 +8028,10 @@ class TabItems extends HTMLElement {
       const btn = e.target.closest('[data-role="view-all"]');
       if (!btn) return;
       const url = this.getActiveCollectionUrl();
-      if (!url || url === "#") { e.preventDefault(); return; }
+      if (!url || url === "#") {
+        e.preventDefault();
+        return;
+      }
       e.preventDefault();
       btn.setAttribute("href", url);
       window.location.assign(url);
@@ -8002,17 +8058,24 @@ class TabItems extends HTMLElement {
         if (opt) {
           const title = this.querySelector(".select__selected_title");
           if (title) {
-            title.innerHTML = opt.innerHTML +
+            title.innerHTML =
+              opt.innerHTML +
               `<svg class="icon-down transition active-rotated" width="10" height="6"><use href="#icon-arrow-down"></use></svg>`;
           }
           this.setActive(opt.dataset.id);
-          this.querySelectorAll(".select-custom__content").forEach(el => el.classList.add("invisible"));
-          this.querySelector(".select-collection-tab")?.classList.remove("active");
+          this.querySelectorAll(".select-custom__content").forEach((el) =>
+            el.classList.add("invisible"),
+          );
+          this.querySelector(".select-collection-tab")?.classList.remove(
+            "active",
+          );
         }
       });
     }
 
-    const activeContent = this.querySelector(".collection-tab__tab-content.active");
+    const activeContent = this.querySelector(
+      ".collection-tab__tab-content.active",
+    );
     if (activeContent) this.setActive(activeContent.dataset.blockId);
     else {
       const firstTab = this.querySelector(".collection-tab__tab-item");
@@ -8023,29 +8086,31 @@ class TabItems extends HTMLElement {
   setActive(blockId) {
     this.querySelectorAll(".collection-tab__tab-content").forEach((c) => {
       const isMatch = c.dataset.blockId === blockId;
-      
+
       if (isMatch && !c.classList.contains("active")) {
-        Motion.animate(c, 
-          { 
+        Motion.animate(
+          c,
+          {
             opacity: [0, 1],
-            y: [20, 0]
-          }, 
-          { 
+            y: [20, 0],
+          },
+          {
             duration: 0.3,
-          }
+          },
         );
         c.classList.add("active");
         c.classList.remove("hidden");
         this.initContentSwiper();
       } else if (!isMatch && c.classList.contains("active")) {
-        Motion.animate(c, 
-          { 
+        Motion.animate(
+          c,
+          {
             opacity: [1, 0],
-            y: [0, 20]
-          }, 
-          { 
+            y: [0, 20],
+          },
+          {
             duration: 0.3,
-          }
+          },
         );
         c.classList.remove("active");
         c.classList.add("hidden");
@@ -8061,14 +8126,15 @@ class TabItems extends HTMLElement {
       t.classList.toggle("active", isMatch);
 
       if (isMatch && !wasActive) {
-        Motion.animate(t, 
-          { 
+        Motion.animate(
+          t,
+          {
             scale: [0.95, 1],
-          }, 
-          { 
+          },
+          {
             duration: 0.25,
-            easing: "ease-out"
-          }
+            easing: "ease-out",
+          },
         );
       }
 
@@ -8086,7 +8152,9 @@ class TabItems extends HTMLElement {
   }
 
   getActiveCollectionUrl() {
-    const activeContent = this.querySelector(".collection-tab__tab-content.active");
+    const activeContent = this.querySelector(
+      ".collection-tab__tab-content.active",
+    );
     return activeContent?.dataset.collectionUrl || null;
   }
 
@@ -8097,23 +8165,25 @@ class TabItems extends HTMLElement {
   }
 
   initContentSwiper() {
-    const slideSection = this.querySelector('.collection-tab__tab-content.active slide-section');
+    const slideSection = this.querySelector(
+      ".collection-tab__tab-content.active slide-section",
+    );
     if (slideSection && slideSection.swiper) {
-        try {
-          if (slideSection.swiper.initialized) {
-            slideSection.swiper.destroy(true, false);
-            slideSection.init();
-          }
-          
-          setTimeout(() => {
-            if (slideSection.swiper && slideSection.swiper.initialized) {
-              slideSection.swiper.update();
-            }
-          }, 10);
-        } catch (e) {
-          console.warn('Error updating swiper:', e);
+      try {
+        if (slideSection.swiper.initialized) {
+          slideSection.swiper.destroy(true, false);
+          slideSection.init();
         }
+
+        setTimeout(() => {
+          if (slideSection.swiper && slideSection.swiper.initialized) {
+            slideSection.swiper.update();
+          }
+        }, 10);
+      } catch (e) {
+        console.warn("Error updating swiper:", e);
       }
+    }
   }
 }
 customElements.define("tab-items", TabItems);
@@ -8124,7 +8194,7 @@ class GridCustom extends SlideSection {
     super();
     this.enable = this.dataset.enable;
     this.parentElementt = document.querySelector(
-      `#shopify-section-${this.dataset?.sectionId}`
+      `#shopify-section-${this.dataset?.sectionId}`,
     );
     this.loadmore = this.parentElementt?.querySelectorAll("loadmore-function");
     this.viewAll = this.parentElementt?.querySelector(".view_all");
@@ -8163,7 +8233,7 @@ class GridCustom extends SlideSection {
     }
     const html = this.swiperSlideInnerHtml.replaceAll(
       "grid-custom-item",
-      "swiper-slide"
+      "swiper-slide",
     );
     const wrapper = `<div class='swiper-wrapper'>${html}</div> <div
     class="swiper-pagination  ${
@@ -8207,7 +8277,7 @@ class SlideWithThumbs extends HTMLElement {
       this.initThumbnail();
       if (Shopify.designMode) {
         document.addEventListener("shopify:section:load", () =>
-          this.initThumbnail()
+          this.initThumbnail(),
         );
       }
     }
@@ -8371,7 +8441,7 @@ class SlideWithThumbs extends HTMLElement {
           if (video.src.includes("youtube")) {
             video.contentWindow.postMessage(
               '{"event":"command","func":"playVideo","args":""}',
-              "*"
+              "*",
             );
           }
         }
@@ -8408,7 +8478,7 @@ class ProductRecentlyViewed extends SlideSection {
   }
   initData() {
     var savedProductsArr = JSON.parse(
-      localStorage.getItem("glozin__recently-viewed-products")
+      localStorage.getItem("glozin__recently-viewed-products"),
     );
     this.getStoredProducts(savedProductsArr);
   }
@@ -8432,7 +8502,7 @@ class ProductRecentlyViewed extends SlideSection {
         const html = document.createElement("div");
         html.innerHTML = text;
         const recentlyViewedProducts = html.querySelector(
-          "recently-viewed-products"
+          "recently-viewed-products",
         );
         if (
           recentlyViewedProducts &&
@@ -8477,7 +8547,7 @@ class MediaGallery extends HTMLElement {
   }
   setActiveMedia(mediaId, prepend) {
     const activeMedia = this.querySelector(
-      '[id^="GalleryViewer"]'
+      '[id^="GalleryViewer"]',
     ).querySelector(`[data-media-id="${mediaId}"]`);
     if (!activeMedia) return;
     this.querySelector('[id^="GalleryViewer"]')
@@ -8497,7 +8567,7 @@ customElements.define("media-gallery", MediaGallery);
 var BlsCustomer = (function () {
   return {
     init: function () {
-      this.toggleForm(), this.deleteAddresses(), this.addAddresses();
+      (this.toggleForm(), this.deleteAddresses(), this.addAddresses());
     },
     toggleForm: function () {
       const e = document.querySelector(".add-address");
@@ -8543,7 +8613,7 @@ var BlsCustomer = (function () {
           "AddressProvinceNew",
           {
             hideElement: "AddressProvinceNewContainer",
-          }
+          },
         );
       }
       const edit = document.querySelectorAll(".edit-country-option");
@@ -8580,7 +8650,7 @@ class IdeaProducts extends PopupBase {
     });
     document.addEventListener(
       "modal:opened",
-      this.handleModalOpened.bind(this)
+      this.handleModalOpened.bind(this),
     );
   }
 
@@ -8592,13 +8662,13 @@ class IdeaProducts extends PopupBase {
         if (window.innerWidth <= 767) {
           const content =
             this.querySelector("template").content.firstElementChild.cloneNode(
-              true
+              true,
             ).outerHTML;
           if (content) {
             this.initPopup(
               content,
               `<h3 class="title-popup h5 my-0 px-20 px-md-30 py-20 border-bottom">${this.header}</h3>`,
-              "popup-idea-product"
+              "popup-idea-product",
             );
           }
         } else {
@@ -8653,7 +8723,7 @@ class HeaderTotalPrice extends HTMLElement {
     if (cart.total_price == undefined) return;
     const price_format = Shopify.formatMoney(
       cart.total_price,
-      cartStrings?.money_format
+      cartStrings?.money_format,
     );
     this.minicart_total.innerHTML = price_format;
   }
@@ -8693,7 +8763,7 @@ class ProductWithBanner extends HTMLElement {
       const backgroundColor = activeSlide.dataset.backgroundColor;
       this.style.setProperty(
         "--content_bg_color",
-        backgroundColor || "#ffffff"
+        backgroundColor || "#ffffff",
       );
       const blockId =
         blockIdFromSlide ||
@@ -8706,7 +8776,7 @@ class ProductWithBanner extends HTMLElement {
       let matchingBanner;
       if (blockId) {
         matchingBanner = Array.from(this.bannerImages).find(
-          (image) => image.dataset.blockId === blockId
+          (image) => image.dataset.blockId === blockId,
         );
       }
 
@@ -8741,7 +8811,7 @@ class ProductAddons extends PopupBase {
     html.classList.remove("hidden");
     this.initPopup(
       html,
-      `<h3 class="title-popup h5 my-0 px-20 px-md-30 py-20 border-bottom">${this.dataset?.textHeader}</h3>`
+      `<h3 class="title-popup h5 my-0 px-20 px-md-30 py-20 border-bottom">${this.dataset?.textHeader}</h3>`,
     );
   }
 }
@@ -8758,7 +8828,8 @@ class InstagramShop extends PopupBase {
   onClick() {
     const template = this.querySelector("template");
     if (template) {
-      const content = template.content.firstElementChild.cloneNode(true).outerHTML;
+      const content =
+        template.content.firstElementChild.cloneNode(true).outerHTML;
       this.initPopup(content);
     }
   }
@@ -8769,14 +8840,15 @@ class PopupLink extends PopupBase {
   constructor() {
     super();
     this.addEventListener("click", this.onClick.bind(this));
-    this.popupWidth = this.dataset?.popupWidth || '600px';
+    this.popupWidth = this.dataset?.popupWidth || "600px";
   }
 
   onClick() {
     const template = this.querySelector("template");
     if (template) {
-      const content = template.content.firstElementChild.cloneNode(true).outerHTML;
-      this.initPopup(content,'', 'modal-popup-link', this.popupWidth);
+      const content =
+        template.content.firstElementChild.cloneNode(true).outerHTML;
+      this.initPopup(content, "", "modal-popup-link", this.popupWidth);
     }
   }
 }
@@ -8789,7 +8861,7 @@ class CountUp {
   }
 
   init() {
-    const numbers = this.el.querySelectorAll('[data-end-number]');
+    const numbers = this.el.querySelectorAll("[data-end-number]");
 
     if (numbers.length > 0) {
       numbers.forEach((el) => {
@@ -8800,7 +8872,7 @@ class CountUp {
 
   setupInView(el) {
     Motion.inView(el, () => {
-      const endNumber = parseFloat(el.dataset.endNumber.replace(/,/g, ''));
+      const endNumber = parseFloat(el.dataset.endNumber.replace(/,/g, ""));
       const decimals = this.countDecimals(endNumber);
       this.animateNumber(el, endNumber, decimals);
     });
@@ -8809,7 +8881,7 @@ class CountUp {
   animateNumber(el, endNumber, decimals) {
     Motion.animate(0, endNumber, {
       duration: 2,
-      ease: 'easeOutQuint',
+      ease: "easeOutQuint",
       onUpdate: (latest) => {
         el.innerHTML = this.formatNumber(latest, decimals);
       },
@@ -8818,11 +8890,11 @@ class CountUp {
 
   countDecimals(val) {
     if (Math.floor(val) === val) return 0;
-    return val.toString().split('.')[1].length || 0;
+    return val.toString().split(".")[1].length || 0;
   }
 
   formatNumber(val, decimals) {
-    return val.toLocaleString('en-US', {
+    return val.toLocaleString("en-US", {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
     });
@@ -8831,7 +8903,7 @@ class CountUp {
 
 const dataModules = [...document.querySelectorAll('[data-module="countup"]')];
 dataModules.forEach((element) => {
-  element.dataset.module.split(' ').forEach(() => {
+  element.dataset.module.split(" ").forEach(() => {
     new CountUp(element);
   });
 });
@@ -8843,7 +8915,7 @@ class LookbookToggleButton extends HTMLElement {
     this.modal = null;
     this.observer = null;
     this.currentWidth = window.innerWidth;
-    this.clickOutsideHandler = null; 
+    this.clickOutsideHandler = null;
     this.addEventListener("click", this.onToggle.bind(this));
     this.updateLabels(false);
     this.setupModalObserver();
@@ -8851,56 +8923,63 @@ class LookbookToggleButton extends HTMLElement {
     this.setupClickOutside();
   }
 
-initPopup(content, text, customClass, modalWidth) {
-  const _this = this;
-  const headerText = text && text.trim() ? text : null;
-  
-  this.modal = new tingle.modal({
-    footer: false,
-    stickyFooter: false,
-    closeMethods: ["overlay", "button", "escape"],
-    cssClass: [customClass || "lookbook-modal"],
-    onOpen: () => { 
-      const modalBoxContent = this.modal.modal.querySelector(".tingle-modal-box");
-      if (modalWidth) {
-        modalBoxContent.style.setProperty("--popup-max-width", modalWidth);
-      }
-      
-      if (headerText && this.modal.modalBoxContent) {
-        const existingHeader = this.modal.modal.querySelector(".tingle-modal-box__header");
-        if (existingHeader) {
-          existingHeader.innerHTML = headerText;
-        } else {
-          let popup_header = document.createElement("div");
-          popup_header.classList.add("tingle-modal-box__header");
-          popup_header.innerHTML = headerText;
-          let parentElement = this.modal.modalBoxContent.parentNode;
-          if (parentElement) {
-            parentElement.insertBefore(popup_header, this.modal.modalBoxContent);
+  initPopup(content, text, customClass, modalWidth) {
+    const _this = this;
+    const headerText = text && text.trim() ? text : null;
+
+    this.modal = new tingle.modal({
+      footer: false,
+      stickyFooter: false,
+      closeMethods: ["overlay", "button", "escape"],
+      cssClass: [customClass || "lookbook-modal"],
+      onOpen: () => {
+        const modalBoxContent =
+          this.modal.modal.querySelector(".tingle-modal-box");
+        if (modalWidth) {
+          modalBoxContent.style.setProperty("--popup-max-width", modalWidth);
+        }
+
+        if (headerText && this.modal.modalBoxContent) {
+          const existingHeader = this.modal.modal.querySelector(
+            ".tingle-modal-box__header",
+          );
+          if (existingHeader) {
+            existingHeader.innerHTML = headerText;
+          } else {
+            let popup_header = document.createElement("div");
+            popup_header.classList.add("tingle-modal-box__header");
+            popup_header.innerHTML = headerText;
+            let parentElement = this.modal.modalBoxContent.parentNode;
+            if (parentElement) {
+              parentElement.insertBefore(
+                popup_header,
+                this.modal.modalBoxContent,
+              );
+            }
           }
         }
-      }
-      
-      _this.isOpen = true;
-      _this.updateLabels(true);
-    },
-    onClose: function () {
-      _this.modal = null;
-    },
-    beforeClose: function () {
-      return true;
-    },
-  });
-  
-  const contentHTML = content instanceof HTMLElement ? content.innerHTML : content;
-  this.modal.setContent(contentHTML);
-  this.modal.open();
-}
+
+        _this.isOpen = true;
+        _this.updateLabels(true);
+      },
+      onClose: function () {
+        _this.modal = null;
+      },
+      beforeClose: function () {
+        return true;
+      },
+    });
+
+    const contentHTML =
+      content instanceof HTMLElement ? content.innerHTML : content;
+    this.modal.setContent(contentHTML);
+    this.modal.open();
+  }
 
   setupClickOutside() {
     const _this = this;
-    
-    this.clickOutsideHandler = function(event) {
+
+    this.clickOutsideHandler = function (event) {
       if (window.innerWidth < 1024) return;
       if (!_this.isOpen) return;
       const clickedOnButton = _this.contains(event.target);
@@ -8923,7 +9002,7 @@ initPopup(content, text, customClass, modalWidth) {
   closeAllPopups() {
     const wrapper = this.closest(".lookbook-item__wrapper");
     if (!wrapper) return;
-    
+
     const items = wrapper.querySelectorAll("lookbook-item");
     items.forEach((item) => {
       if (!item.itemPopup) return;
@@ -8931,7 +9010,7 @@ initPopup(content, text, customClass, modalWidth) {
       item.itemPopup.classList.remove("visible");
       item.classList.remove("open");
     });
-    
+
     this.isOpen = false;
     this.updateLabels(false);
     wrapper.setAttribute("data-lookbook-open", "false");
@@ -8940,18 +9019,20 @@ initPopup(content, text, customClass, modalWidth) {
   checkAndUpdateLabel() {
     const wrapper = this.closest(".lookbook-item__wrapper");
     if (!wrapper) return;
-    
+
     const items = wrapper.querySelectorAll("lookbook-item");
     let hasOpenItem = false;
-    
+
     items.forEach((item) => {
-      if (item.classList.contains("open") && 
-          item.itemPopup && 
-          !item.itemPopup.classList.contains("invisible")) {
+      if (
+        item.classList.contains("open") &&
+        item.itemPopup &&
+        !item.itemPopup.classList.contains("invisible")
+      ) {
         hasOpenItem = true;
       }
     });
-    
+
     if (!hasOpenItem && this.isOpen) {
       this.isOpen = false;
       this.updateLabels(false);
@@ -8966,17 +9047,17 @@ initPopup(content, text, customClass, modalWidth) {
   setupResizeListener() {
     const _this = this;
     let resizeTimeout;
-    
-    window.addEventListener("resize", function() {
+
+    window.addEventListener("resize", function () {
       clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(function() {
+      resizeTimeout = setTimeout(function () {
         const newWidth = window.innerWidth;
         const wasDesktop = _this.currentWidth >= 1024;
         const isDesktop = newWidth >= 1024;
         if (wasDesktop !== isDesktop) {
           _this.handleViewportChange(wasDesktop, isDesktop);
         }
-        
+
         _this.currentWidth = newWidth;
       }, 100);
     });
@@ -9008,14 +9089,15 @@ initPopup(content, text, customClass, modalWidth) {
 
   setupModalObserver() {
     const _this = this;
-    this.observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        mutation.removedNodes.forEach(function(node) {
+    this.observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.removedNodes.forEach(function (node) {
           if (node.nodeType === 1) {
-            const modalElement = node.classList && node.classList.contains('lookbook-modal') 
-              ? node 
-              : node.querySelector && node.querySelector('.lookbook-modal');
-            
+            const modalElement =
+              node.classList && node.classList.contains("lookbook-modal")
+                ? node
+                : node.querySelector && node.querySelector(".lookbook-modal");
+
             if (modalElement && _this.isOpen) {
               _this.isOpen = false;
               _this.updateLabels(false);
@@ -9025,17 +9107,17 @@ initPopup(content, text, customClass, modalWidth) {
         });
       });
     });
-    
+
     this.observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
   }
 
   updateLabels(isOpen) {
     const showLabel = this.querySelector(".show_product--label");
     const hideLabel = this.querySelector(".hide_product--label");
-    
+
     if (showLabel && hideLabel) {
       if (isOpen) {
         showLabel.classList.add("hidden");
@@ -9105,10 +9187,7 @@ initPopup(content, text, customClass, modalWidth) {
       }
 
       combinedContent.classList.remove("hidden");
-      this.initPopup(
-        combinedContent,
-        headerText || "" 
-      );
+      this.initPopup(combinedContent, headerText || "");
       return;
     }
 
@@ -9156,27 +9235,30 @@ class tickerHandler extends HTMLElement {
   constructor() {
     super();
     this.width = 0;
-    this.ticker = this.querySelector('.ticker__container--js');
+    this.ticker = this.querySelector(".ticker__container--js");
     setTimeout(this.resizeHandler.bind(this), 100);
 
-    this.debouncedResizeHandler = this.debounce(this.resizeHandler.bind(this), 150);
+    this.debouncedResizeHandler = this.debounce(
+      this.resizeHandler.bind(this),
+      150,
+    );
     window.addEventListener("resize", this.debouncedResizeHandler, false);
 
     this.querySelectorAll("[loading]").forEach((item) => {
       item.removeAttribute("loading");
     });
     this.initfunction = this.init.bind(this);
-    window.addEventListener('tickerLoaded', this.initfunction);
-    if(!document.querySelector('.tickerjs')){
-      let script = document.createElement('script');
-      script.classList.add('tickerjs')
-      script.src = this.getAttribute('data-script');
+    window.addEventListener("tickerLoaded", this.initfunction);
+    if (!document.querySelector(".tickerjs")) {
+      let script = document.createElement("script");
+      script.classList.add("tickerjs");
+      script.src = this.getAttribute("data-script");
       script.onload = () => {
-        window.dispatchEvent(new CustomEvent('tickerLoaded'))
+        window.dispatchEvent(new CustomEvent("tickerLoaded"));
       };
       document.head.append(script);
     }
-    Shopify.designMode&&this.init();
+    Shopify.designMode && this.init();
   }
   debounce(func, wait) {
     let timeout;
@@ -9191,45 +9273,48 @@ class tickerHandler extends HTMLElement {
   }
   disconnectedCallback() {
     window.removeEventListener("resize", this.debouncedResizeHandler);
-    window.removeEventListener('tickerLoaded', this.initfunction);
+    window.removeEventListener("tickerLoaded", this.initfunction);
   }
-  init(){
-      !Shopify.designMode&&window.removeEventListener('tickerLoaded', this.initfunction);
-      var translate = 1.5 * 100 / (1 + 1.5);
-      if (this.dataset.direction == 'right') {
-        translate = translate * -1;
-      }
-      Motion.scroll(
-        Motion.animate(this, { transform: [`translateX(${translate}%)`, `translateX(0)`] }, { easing: 'linear' }),
-        { target: this, offset: ['start end', 'end start'] }
-      );
+  init() {
+    !Shopify.designMode &&
+      window.removeEventListener("tickerLoaded", this.initfunction);
+    var translate = (1.5 * 100) / (1 + 1.5);
+    if (this.dataset.direction == "right") {
+      translate = translate * -1;
+    }
+    Motion.scroll(
+      Motion.animate(
+        this,
+        { transform: [`translateX(${translate}%)`, `translateX(0)`] },
+        { easing: "linear" },
+      ),
+      { target: this, offset: ["start end", "end start"] },
+    );
   }
-  resizeHandler(){
-    if(this.width == window.innerWidth) return;
-	  this.width = window.innerWidth;
+  resizeHandler() {
+    if (this.width == window.innerWidth) return;
+    this.width = window.innerWidth;
     const container = this.closest(".ticker-section__container");
     const local_width = container.offsetWidth;
     const tickerWidth = this.ticker.offsetWidth;
 
-    this.ticker.classList.remove('ticker--animation');
-    var boxes = this.querySelectorAll('.ticker--clone');
-    if(boxes.length){
-      boxes.forEach(e => e.remove());
+    this.ticker.classList.remove("ticker--animation");
+    var boxes = this.querySelectorAll(".ticker--clone");
+    if (boxes.length) {
+      boxes.forEach((e) => e.remove());
     }
 
     var length = local_width / tickerWidth;
     length = length == Infinity ? 5 : Math.ceil(length) + 1;
     const fragment = document.createDocumentFragment();
-    for(var i=0; i < length; i++){
+    for (var i = 0; i < length; i++) {
       let clone = this.ticker.cloneNode(true);
-      clone.classList.add('ticker--clone');
-      clone.classList.add('ticker--animation');
+      clone.classList.add("ticker--clone");
+      clone.classList.add("ticker--animation");
       fragment.prepend(clone);
     }
     this.prepend(fragment);
-    this.ticker.classList.add('ticker--animation');
+    this.ticker.classList.add("ticker--animation");
   }
 }
-customElements.define('component-ticker', tickerHandler);
-
-
+customElements.define("component-ticker", tickerHandler);

@@ -7,7 +7,7 @@
   assign encoded_ = _b | append: ":" | append: hmac | base64_encode
 -%}
 <script src="{{ 'tingle.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'theme.js' | asset_url }}"  defer="defer" type="module"></script>
+<script type="module" src="{{ 'theme.js' | asset_url }}"></script>
 {%- case t -%}
   {%- when 'collection' and collection.handle -%}
     <script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
